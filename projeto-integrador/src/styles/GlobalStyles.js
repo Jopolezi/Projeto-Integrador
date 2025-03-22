@@ -14,6 +14,10 @@ const GlobalStyles = createGlobalStyle`
     background-color: var(--tertiary-color);
   }
 
+  html {
+   scroll-behavior: smooth; 
+  }
+
   a {
     text-decoration: none;
     color: var(--tertiary-color);
@@ -24,13 +28,14 @@ const GlobalStyles = createGlobalStyle`
 }
 
   :root {
-    --primary-color:rgb(0, 49, 83);
+    --primary-color:#495168;
     --secondary-color: #5f6c7b;
     --tertiary-color: #f0f0f0;
     --quartenary-color: #3da9fc;
     --quinary-color: #90b4ce;
     --width: width: calc(100% - 20%);
   }
+
 `;
 
 export default GlobalStyles;

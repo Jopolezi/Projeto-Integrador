@@ -1,7 +1,11 @@
-import React from 'react';
-import './index.css';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faHome, faInfoCircle, faEnvelope, faSignInAlt, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+// import './index.css';
 
 function Navbar() {
+
   return (
     <header>
       
@@ -12,22 +16,18 @@ function Navbar() {
 function Main() {
   return (
     <main>
-      <div className="content-main">
-            <h1 className="content-main-title">Seja Bem-vindo ao Borabico</h1>
-            <p className="content-main-subtitle">Um lugar onde você encontra a sua oportunidade de emprego</p>
-            <a href="#" className="content-main-btn">Conheça sobre nós</a>
-        </div>
+      
     </main>
   );
 }
 
 function About() {
-    return (
-        <section>
-        
-        </section>
-    );
-    }
+  return (
+    <section>
+
+    </section>
+  );
+}
 
 function App() {
   return (
@@ -35,7 +35,6 @@ function App() {
       <Navbar />
       <Main />
       <About />
-      
     </div>
   );
 }
