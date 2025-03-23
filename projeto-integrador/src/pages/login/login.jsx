@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import {
+import styledComponentsLogin from './styledLogin'; 
+import './login.css'
+import ScrollRevealComponent from '../../styles/scrollReveal';
+
+const { // Importando estilizações do arquivo StyledLogin.js
   ContainerLogin,
   ContainerLeft,
   ContentLeft,
@@ -13,22 +17,24 @@ import {
   InputContainer,
   InputLabel,
   Input,
+  SubmitAdditional,
+  InputCheck,
+  SubmitCheck,
+  InputCheckLabel,
   SubmitButton,
   ForgotPassword,
   RegisterLink,
-  Divider,
   MoreInformations,
+  ImgMoreInformations,
   PrivacityPolitice,
-  TermsAndConditions
-} from './styledLogin';
-import './login.css'
-import ScrollRevealComponent from '../../styles/scrollReveal';
+  TermsAndConditions,
+} = styledComponentsLogin;
 
 function Login() {
   return (
     <>
       <ScrollRevealComponent />
-
+  
       <ContainerLogin>
 
         <ContainerLeft>
@@ -43,15 +49,24 @@ function Login() {
             <FormLogin className="reveal-fade">
               <FormTitle>Acesse sua conta</FormTitle>
               <InputContainer>
-                <InputLabel>E-mail</InputLabel>
-                <Input type="email" placeholder="Digite seu e-mail" />
+                <InputLabel>E-mail, CPF ou CNPJ</InputLabel>
+                <Input type="email" placeholder="Digite seu e-mail, CPF ou CNPJ" />
               </InputContainer>
               <InputContainer>
                 <InputLabel>Senha</InputLabel>
                 <Input type="password" placeholder="Digite sua senha" />
               </InputContainer>
-              <ForgotPassword href="#">Esqueceu a senha?</ForgotPassword>
+
+              <SubmitAdditional>
+                <SubmitCheck>
+                  <InputCheck type="checkbox" />
+                  <InputCheckLabel>Lembrar-me</InputCheckLabel>
+                </SubmitCheck>
+                <ForgotPassword href="#">Esqueceu a senha?</ForgotPassword>
+              </SubmitAdditional>
+
               <SubmitButton type="submit">Entrar</SubmitButton>
+
               <RegisterLink>
                 Não tem uma conta? <a href="#">Cadastre-se</a>
               </RegisterLink>
@@ -59,13 +74,15 @@ function Login() {
           </ContentRight>
         </ContainerRight>
 
-        
-          <MoreInformations className="reveal-fade">
-           <PrivacityPolitice href="#">Política de Privacidade</PrivacityPolitice>
-              <Divider />
-           <TermsAndConditions href="#">Termos e Condições</TermsAndConditions>
-          </MoreInformations>
-        
+
+        <MoreInformations className="reveal-fade">
+          <ImgMoreInformations src="./borabico_logo.png" />
+
+          <PrivacityPolitice href="#">Política de Privacidade</PrivacityPolitice>
+
+          <TermsAndConditions href="#">Termos e Condições</TermsAndConditions>
+        </MoreInformations>
+
 
       </ContainerLogin>
     </>
