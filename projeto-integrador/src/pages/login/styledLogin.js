@@ -254,22 +254,17 @@ export const ImgMoreInformations = styled.img`
   width: 50px;
   height: 0 auto;
   object-fit: cover;
+  transition: transform 0.5s;
+
+  &:hover{
+  transform: scale(1.05);
+  }
 `;
 
 export const PrivacityPolitice = styled.a`
 &:hover {
       text-decoration: underline;
     }
-`
-
-export const Divider = styled.hr`
-display: flex;
-justify-content: center;
-align-items: center;
-width: 5px;
-height: 5px;
-border-radius: 50%;
-border: 2px solid ${colors.white};
 `
 
 export const TermsAndConditions = styled.a`
@@ -302,7 +297,6 @@ const styledComponentsLogin = {
   ImgMoreInformations,
   PrivacityPolitice,
   TermsAndConditions,
-  Divider,
 };
 
 export default styledComponentsLogin;

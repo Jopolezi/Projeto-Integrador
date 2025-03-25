@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styledComponentsLogin from './styledLogin'; 
 import './login.css'
 import ScrollRevealComponent from '../../styles/scrollReveal';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { // Importando estilizações do arquivo StyledLogin.js
   ContainerLogin,
@@ -31,6 +33,13 @@ const { // Importando estilizações do arquivo StyledLogin.js
 } = styledComponentsLogin;
 
 function Login() {
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword); 
+  };
+
   return (
     <>
       <ScrollRevealComponent />
@@ -54,7 +63,15 @@ function Login() {
               </InputContainer>
               <InputContainer>
                 <InputLabel>Senha</InputLabel>
-                <Input type="password" placeholder="Digite sua senha" />
+                <Input 
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Digite sua senha" 
+                />
+                <FontAwesomeIcon 
+                  icon={showPassword ? faEyeSlash : faEye} 
+                  className="openEye" 
+                  onClick={togglePasswordVisibility}
+                />
               </InputContainer>
 
               <SubmitAdditional>
