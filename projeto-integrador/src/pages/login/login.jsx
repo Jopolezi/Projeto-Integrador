@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styledComponentsLogin from './styledLogin'; 
 import './login.css'
+import '../../styles/cssGlobal.css'
 import ScrollRevealComponent from '../../styles/scrollReveal';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -85,7 +87,7 @@ function Login() {
               <SubmitButton type="submit">Entrar</SubmitButton>
 
               <RegisterLink>
-                Não tem uma conta? <a href="#">Cadastre-se</a>
+                Não tem uma conta? <Link to="/register">Cadastre-se</Link>
               </RegisterLink>
             </FormLogin>
           </ContentRight>
