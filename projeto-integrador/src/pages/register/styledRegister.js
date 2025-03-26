@@ -17,11 +17,28 @@ const fonts = {
     gray: '#666666',
   };
 
+  export const SubmitEmpresaButton = styled.button`
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    background: ${colors.red};
+    color: ${colors.white};
+    font-size: 0.850rem;
+    font-weight: 600;
+    font-family: ${fonts.family.poppins};
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 12px;
+    }
+`;
+
   export const ContainerLogin = styled.div`
   display: flex;
   height: 100dvh;
   width: 100%;
-  background: url('/trabalhadores.jpg');
+  background: url('/trabalhadores.jpeg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -42,13 +59,13 @@ export const ContainerLeft = styled.div`
   height: 100dvh;
   width: 50%;
   z-index: 1;
+  padding: 50px;
 `;
 
 export const ContentLeft = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
   padding: 0 4%;
@@ -60,7 +77,7 @@ export const ContentLeftTitle = styled.h1`
   font-size: 3rem;
   font-weight: 700;
   font-family: ${fonts.family.poppins};
-  line-height: 3rem;
+  line-height: 1.850rem;
   `;
 
 export const ContentLeftSpanTitle = styled.span`
@@ -75,6 +92,7 @@ export const ContentLeftSubtitle = styled.p`
   font-family: ${fonts.family.poppins};
   text-align: justify;
   color: ${colors.offwhite};
+  padding: 3px;
   `;
 
 export const ContainerRight = styled.div`
@@ -110,6 +128,7 @@ export const FormLogin = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   align-items: center;
   width: 100%;
   max-width: 500px;
@@ -125,7 +144,7 @@ export const FormTitle = styled.h2`
   font-family: ${fonts.family.poppins};
   font-size: 1.75rem;
   font-weight: 800;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
   text-align: center;
   text-transform: uppercase;
 `;
@@ -272,6 +291,9 @@ export const TermsAndConditions = styled.a`
     }
 `
 
+
+
+
   const styledComponentsRegister = {
   ContainerLogin,
   ContainerLeft,
@@ -297,6 +319,7 @@ export const TermsAndConditions = styled.a`
   ImgMoreInformations,
   PrivacityPolitice,
   TermsAndConditions,
+  SubmitEmpresaButton,
   };
   
   export default styledComponentsRegister;

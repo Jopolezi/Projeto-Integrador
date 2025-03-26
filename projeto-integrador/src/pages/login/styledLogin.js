@@ -22,7 +22,7 @@ export const ContainerLogin = styled.div`
   display: flex;
   height: 100dvh;
   width: 100%;
-  background: url('/trabalhadores.jpg');
+  background: url('/trabalhadores.jpeg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -62,6 +62,7 @@ export const ContentLeftTitle = styled.h1`
   font-weight: 700;
   font-family: ${fonts.family.poppins};
   line-height: 3rem;
+  position: relative;
   `;
 
 export const ContentLeftSpanTitle = styled.span`
