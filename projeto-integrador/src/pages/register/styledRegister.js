@@ -1,40 +1,24 @@
 import styled from 'styled-components';
+import { ContentRight } from '../login/styledLogin';
 
 const fonts = {
-    family: {
-      poppins: "'Poppins', sans-serif",
-      boldonse: "'Boldonse', sans-serif",
-    }
-  
-  };
-  
-  const colors = {
-    red: '#FF3030',
-    darkred: '#CC0000',
-    white: '#FFFFFF',
-    offwhite: '#F7F7F7',
-    dark: '#333333',
-    gray: '#666666',
-  };
+  family: {
+    poppins: "'Poppins', sans-serif",
+    boldonse: "'Boldonse', sans-serif",
+  }
 
-  export const SubmitEmpresaButton = styled.button`
-    border: none;
-    border-radius: 12px;
-    padding: 12px;
-    background: ${colors.red};
-    color: ${colors.white};
-    font-size: 0.850rem;
-    font-weight: 600;
-    font-family: ${fonts.family.poppins};
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 12px;
-    }
-`;
+};
 
-  export const ContainerLogin = styled.div`
+const colors = {
+  red: '#FF3030',
+  darkred: '#CC0000',
+  white: '#FFFFFF',
+  offwhite: '#F7F7F7',
+  dark: '#333333',
+  gray: '#666666',
+};
+
+export const ContainerRegister = styled.div`
   display: flex;
   height: 100dvh;
   width: 100%;
@@ -59,13 +43,13 @@ export const ContainerLeft = styled.div`
   height: 100dvh;
   width: 50%;
   z-index: 1;
-  padding: 50px;
 `;
 
 export const ContentLeft = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   padding: 0 4%;
@@ -77,7 +61,9 @@ export const ContentLeftTitle = styled.h1`
   font-size: 3rem;
   font-weight: 700;
   font-family: ${fonts.family.poppins};
-  line-height: 1.850rem;
+  line-height: 3rem;
+  position: relative;
+  color: black;
   `;
 
 export const ContentLeftSpanTitle = styled.span`
@@ -92,7 +78,6 @@ export const ContentLeftSubtitle = styled.p`
   font-family: ${fonts.family.poppins};
   text-align: justify;
   color: ${colors.offwhite};
-  padding: 3px;
   `;
 
 export const ContainerRight = styled.div`
@@ -100,7 +85,7 @@ position: relative;
 display: flex;
 justify-content: center;
 align-items: center;
-width: 50%;
+width: 70%;
 height: 100dvh;
 
 
@@ -113,52 +98,85 @@ height: 100dvh;
   }
 `;
 
-export const ContentRight = styled.div`
+export const FormRegister = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  color: ${colors.white};
-  z-index: 1;
-`;
-
-export const FormLogin = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   position: relative;
-  align-items: center;
   width: 100%;
-  max-width: 500px;
+  max-width: 90%;
   height: 600px;
   padding: 4rem 2rem;
-  background: white;
+  background: ${colors.white};
   border-radius: 10px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 `;
 
-export const FormTitle = styled.h2`
-  color: ${colors.dark};
+export const ButtonViewRegister = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: ${colors.red};
+  color: ${colors.white};
   font-family: ${fonts.family.poppins};
-  font-size: 1.75rem;
-  font-weight: 800;
-  margin-bottom: 5rem;
-  text-align: center;
-  text-transform: uppercase;
+  font-size: 0.850rem;
+  font-weight: 600;
+  transition: all 0.5s;
+
+  &:hover{
+  background: none;
+  border: 2px solid ${colors.red};
+  color: ${colors.red}
+  }
 `;
 
-export const InputContainer = styled.div`
-  position: relative;
+export const TitleEnterpriseRegister = styled.h1`
+  display: flex;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size 1rem;
+  font-weight: 600;
+  font-family: ${fonts.family.poppins};
+  color: ${colors.dark};
+
+  &::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 3.5px;
+  bottom: 5px;
+  left: 0;
+
+  background: ${colors.red};
+  }
+`;
+
+export const InputsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
   width: 100%;
-  margin-bottom: 1.25rem;
+  margin-top: 1rem;
+`;
+
+
+export const InputContainer = styled.div`
+  width: calc(50% - 8px);
 `;
 
 export const InputLabel = styled.label`
-  position: absolute;
-  left: 0;
-  top: -20px;
+  display: flex;
+  align-items: center;
   color: ${colors.gray};
   font-family: ${fonts.family.poppins};
   font-size: 0.875rem;
@@ -179,147 +197,65 @@ export const Input = styled.input`
   }
 `;
 
-export const SubmitAdditional = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 1rem;
-`;
-
-export const SubmitCheck = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-`;
-
-export const InputCheck = styled.input`
-  width: 15px;
-  height: 15px;
-  accent-color: ${colors.darkred};
-  }
-
-`;
-
-export const InputCheckLabel = styled.p`
-  color: ${colors.gray};
-  font-family: ${fonts.family.poppins};
-  font-size: 0.875rem;
-  text-decoration: none;
-`;
-
-export const SubmitButton = styled.button`
+export const InputDateType = styled.input`
   width: 100%;
-  background: ${colors.red};
-  color: white;
-  font-family: ${fonts.family.poppins};
-  font-weight: 600;
   padding: 0.75rem;
-  border: none;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
-  margin-top: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-  
-  &:hover {
-    background: ${colors.darkred};
-  }
-`;
-
-export const ForgotPassword = styled.a`
-  color: ${colors.red};
   font-family: ${fonts.family.poppins};
-  font-size: 0.875rem;
-  text-decoration: none;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  color: ${colors.gray};
   
-  &:hover {
-    text-decoration: underline;
+  &:focus {
+    outline: none;
+    border-color: ${colors.red};
+  }
+
+  &::-webkit-datetime-edit-placeholder {
+    color: #999;
+    font-style: italic;
   }
 `;
 
-export const RegisterLink = styled.div`
-  color: ${colors.dark};
+export const Select = styled.select`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
   font-family: ${fonts.family.poppins};
-  font-size: 0.875rem;
-  margin-top: 1.5rem;
-  text-align: center;
-  
-  a {
-    color: ${colors.red};
-    text-decoration: none;
-    font-weight: 600;
-    
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  color: ${colors.gray};
 
-export const MoreInformations = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: ${colors.white};
-  font-family: ${fonts.family.poppins};
-  font-size: 0.850rem;
-  position: absolute;
-  padding: 12px;
-  bottom: 0;   
-  z-index: 1;
-`
-export const ImgMoreInformations = styled.img`
-  width: 50px;
-  height: 0 auto;
-  object-fit: cover;
-  transition: transform 0.5s;
+  &:focus {
+    outline: none;
+    border-color ${colors.red};
+  `;
 
-  &:hover{
-  transform: scale(1.05);
-  }
-`;
+  export const Option = styled.option`
+  color: ${colors.gray};
+  `;
 
-export const PrivacityPolitice = styled.a`
-&:hover {
-      text-decoration: underline;
-    }
-`
-
-export const TermsAndConditions = styled.a`
-&:hover {
-      text-decoration: underline;
-    }
-`
-
-
-
-
-  const styledComponentsRegister = {
-  ContainerLogin,
+const styledComponentsRegister = {
+  ContainerRegister,
   ContainerLeft,
+  ContainerRight,
   ContentLeft,
+  ContentRight,
   ContentLeftTitle,
   ContentLeftSpanTitle,
   ContentLeftSubtitle,
-  ContainerRight,
-  ContentRight,
-  FormLogin,
-  FormTitle,
+  FormRegister,
+  ButtonViewRegister,
+  TitleEnterpriseRegister,
+  InputsWrapper,
   InputContainer,
   InputLabel,
   Input,
-  SubmitAdditional,
-  InputCheck,
-  SubmitCheck,
-  InputCheckLabel,
-  SubmitButton,
-  ForgotPassword,
-  RegisterLink,
-  MoreInformations,
-  ImgMoreInformations,
-  PrivacityPolitice,
-  TermsAndConditions,
-  SubmitEmpresaButton,
-  };
-  
-  export default styledComponentsRegister;
+  InputDateType,
+  Select,
+  Option
+};
+
+export default styledComponentsRegister;

@@ -117,7 +117,7 @@ export const FormLogin = styled.form`
   max-width: 500px;
   height: 600px;
   padding: 4rem 2rem;
-  background: white;
+  background: ${colors.white};
   border-radius: 10px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 `;
