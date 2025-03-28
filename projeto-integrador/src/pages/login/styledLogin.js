@@ -22,7 +22,7 @@ export const ContainerLogin = styled.div`
   display: flex;
   height: 100dvh;
   width: 100%;
-  background: url('/trabalhadores.jpg');
+  background: url('/trabalhadores.jpeg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -62,6 +62,7 @@ export const ContentLeftTitle = styled.h1`
   font-weight: 700;
   font-family: ${fonts.family.poppins};
   line-height: 3rem;
+  position: relative;
   `;
 
 export const ContentLeftSpanTitle = styled.span`
@@ -116,7 +117,7 @@ export const FormLogin = styled.form`
   max-width: 500px;
   height: 600px;
   padding: 4rem 2rem;
-  background: white;
+  background: ${colors.white};
   border-radius: 10px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 `;
