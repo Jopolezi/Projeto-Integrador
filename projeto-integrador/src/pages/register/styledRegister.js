@@ -18,6 +18,13 @@ const colors = {
   gray: '#666666',
 };
 
+export const Flex = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const ContainerRegister = styled.div`
   display: flex;
   height: 100dvh;
@@ -41,7 +48,7 @@ export const ContainerLeft = styled.div`
   justify-content: center;
   position: relative;
   height: 100dvh;
-  width: 50%;
+  width: 40%;
   z-index: 1;
 `;
 
@@ -49,7 +56,6 @@ export const ContentLeft = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
   padding: 0 4%;
@@ -58,21 +64,31 @@ export const ContentLeft = styled.div`
 `;
 
 export const ContentLeftTitle = styled.h1`
-  font-size: 3rem;
+  position: relative;
+  font-size: 2rem;
   font-weight: 700;
   font-family: ${fonts.family.poppins};
   line-height: 3rem;
   position: relative;
-  color: black;
+  color: ${colors.white};
+
+  &::before {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 3.5px;
+  bottom: 5px;
+  left: 0;
+
+  background: ${colors.red};
+  }
   `;
 
 export const ContentLeftSpanTitle = styled.span`
   color: ${colors.red};
-  
 `;
 
 export const ContentLeftSubtitle = styled.p`
-  
   font-size: 1rem;
   font-weight: 400;
   font-family: ${fonts.family.poppins};
@@ -85,7 +101,7 @@ position: relative;
 display: flex;
 justify-content: center;
 align-items: center;
-width: 70%;
+width: 60%;
 height: 100dvh;
 
 
@@ -101,22 +117,18 @@ height: 100dvh;
 export const FormRegister = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 2rem;
   position: relative;
   width: 100%;
-  max-width: 90%;
-  height: 600px;
-  padding: 4rem 2rem;
+  max-width: 70%;
+  padding: 2rem;
   background: ${colors.white};
   border-radius: 10px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 `;
 
 export const ButtonViewRegister = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,16 +150,14 @@ export const ButtonViewRegister = styled.button`
 `;
 
 export const TitleEnterpriseRegister = styled.h1`
+  position: relative;
   display: flex;
-  position: absolute;
-  top: 10px;
-  left: 10px;
   align-items: center;
-  justify-content: center;
   font-size 1rem;
   font-weight: 600;
   font-family: ${fonts.family.poppins};
   color: ${colors.dark};
+  cursor: default;
 
   &::before {
   content: "";
@@ -161,9 +171,10 @@ export const TitleEnterpriseRegister = styled.h1`
   }
 `;
 
-export const InputsWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+export const InputsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
   justify-content: space-between; 
   width: 100%;
   margin-top: 1rem;
@@ -171,7 +182,9 @@ export const InputsWrapper = styled.div`
 
 
 export const InputContainer = styled.div`
-  width: calc(50% - 8px);
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+  flex-direction: column;
 `;
 
 export const InputLabel = styled.label`
@@ -237,6 +250,43 @@ export const Select = styled.select`
   color: ${colors.gray};
   `;
 
+  export const SubmitButton = styled.button`
+  display: flex;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: ${colors.red};
+  color: ${colors.white};
+  font-size: 1rem;
+  font-family: ${fonts.family.poppins};
+  font-weight: 800px;
+  transition: all 0.5s;
+
+  &:hover{
+  background: none;
+  border: 2px solid ${colors.red};
+  color: ${colors.red};
+  }
+  `;
+
+  export const LoginButton = styled.div`
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+  text-align: center;
+  
+  a {
+    color: ${colors.red};
+    text-decoration: none;
+    font-weight: 600;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  `;
+
 const styledComponentsRegister = {
   ContainerRegister,
   ContainerLeft,
@@ -249,13 +299,16 @@ const styledComponentsRegister = {
   FormRegister,
   ButtonViewRegister,
   TitleEnterpriseRegister,
-  InputsWrapper,
+  InputsGrid,
   InputContainer,
   InputLabel,
   Input,
   InputDateType,
   Select,
-  Option
+  Option,
+  SubmitButton,
+  LoginButton,
+  Flex
 };
 
 export default styledComponentsRegister;
