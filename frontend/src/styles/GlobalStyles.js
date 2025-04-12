@@ -27,15 +27,6 @@ const GlobalStyles = createGlobalStyle`
     list-style: none;
 }
 
-  :root {
-    --primary-color:#495168;
-    --secondary-color: #5f6c7b;
-    --tertiary-color: #f0f0f0;
-    --quartenary-color: #3da9fc;
-    --quinary-color: #90b4ce;
-    --width: width: calc(100% - 20%);
-  }
-
 `;
 
 export default GlobalStyles;

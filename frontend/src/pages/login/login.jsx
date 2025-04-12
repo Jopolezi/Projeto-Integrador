@@ -1,42 +1,36 @@
-import React, { useState } from 'react';
+// Importing React and necessary hooks for managing state and side effects --
+import React, { useState, useEffect } from 'react';
+// Importing Link from react-router-dom for navigation --
 import { Link } from 'react-router-dom';
+// Importing styles for styling the login page --
 import styledComponentsLogin from './styledLogin'; 
 import './login.css'
 import '../../styles/cssGlobal.css'
+// Importing ScrollRevealComponent for scroll animations --
 import ScrollRevealComponent from '../../styles/scrollReveal';
+// Import FontAwesome icons --
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const { // Importando estilizações do arquivo StyledLogin.js
-  ContainerLogin,
-  ContainerLeft,
-  ContentLeft,
-  ContentLeftTitle,
-  ContentLeftSpanTitle,
-  ContentLeftSubtitle,
-  ContainerRight,
-  ContentRight,
-  FormLogin,
-  FormTitle,
-  InputContainer,
-  InputLabel,
-  Input,
-  SubmitAdditional,
-  InputCheck,
-  SubmitCheck,
-  InputCheckLabel,
-  SubmitButton,
+const { // This component is used for the deconstruction of styled-components objects --
+  ContainerLogin, ContentLogin, Logo, LogoImage,
+  FormLogin, FormTitle,
+  InputContainer, InputLabel,
+  Input, InputCheck, InputCheckLabel,
+  SubmitAdditional, SubmitCheck, SubmitButton,
   ForgotPassword,
   RegisterLink,
-  MoreInformations,
-  ImgMoreInformations,
-  PrivacityPolitice,
-  TermsAndConditions,
+  ContainerInformations, Informations,
+  Flex
 } = styledComponentsLogin;
 
 function Login() {
 
-  const [showPassword, setShowPassword] = useState(false);
+  useEffect(() => { // This effect is used to update the title of the page when the component is mounted
+      document.title = "Login | BoraBico";
+    }, []);
+
+  const [showPassword, setShowPassword] = useState(false); // This state is used to control the visibility of the password input field
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword); 
@@ -44,20 +38,18 @@ function Login() {
 
   return (
     <>
-      <ScrollRevealComponent />
+      <ScrollRevealComponent /> {/* This component is used to add scroll reveal animations to the page */}
   
       <ContainerLogin>
+          
+          <Logo className="revealFade">
+            <LogoImage src="/borabico_logo.png" alt="Logo" />
+          </Logo>
 
-        <ContainerLeft>
-          <ContentLeft>
-            <ContentLeftTitle className="reveal-left">BEM-VINDO AO BORA<ContentLeftSpanTitle>BICO</ContentLeftSpanTitle></ContentLeftTitle>
-            <ContentLeftSubtitle className="reveal-left">Conectamos você às melhores oportunidades de trabalhos e bicos na sua região.</ContentLeftSubtitle>
-          </ContentLeft>
-        </ContainerLeft>
+          <ContentLogin className="revealFade">
 
-        <ContainerRight>
-          <ContentRight>
-            <FormLogin className="reveal-fade">
+            <FormLogin>
+
               <FormTitle>Acesse sua conta</FormTitle>
               <InputContainer>
                 <InputLabel>E-mail, CPF ou CNPJ</InputLabel>
@@ -90,19 +82,16 @@ function Login() {
                 Não tem uma conta? <Link to="/register">Cadastre-se</Link>
               </RegisterLink>
             </FormLogin>
-          </ContentRight>
-        </ContainerRight>
 
+            <ContainerInformations className="reveal-fade">
+              
+              <Informations> <Link to="/register">Política de Privacidade</Link> </Informations>
+              <Informations> <Link to="/register">Termos e Condições</Link> </Informations>
+              <Informations> <Link to="/register">Política de Cookies</Link> </Informations>
 
-        <MoreInformations className="reveal-fade">
-          <ImgMoreInformations src="./borabico_logo.png" />
+          </ContainerInformations>
 
-          <PrivacityPolitice href="#">Política de Privacidade</PrivacityPolitice>
-
-          <TermsAndConditions href="#">Termos e Condições</TermsAndConditions>
-        </MoreInformations>
-
-
+          </ContentLogin>
       </ContainerLogin>
     </>
   );

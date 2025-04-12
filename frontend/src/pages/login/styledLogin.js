@@ -1,0 +1,382 @@
+import styled from 'styled-components';
+
+// This object contains fonts imported for login.css --
+const fonts = {
+  family: {
+    poppins: "'Poppins', sans-serif",
+    boldonse: "'Boldonse', sans-serif",
+  }
+};
+
+// Colors used in the application --
+const colors = {
+  red: '#FF3030',
+  darkred: '#CC0000',
+  white: '#FFFFFF',
+  offwhite: '#F7F7F7',
+  dark: '#333333',
+  gray: '#666666',
+};
+
+// Breakpoints for responsive design --
+const breakpoints = {
+  xs: '320px',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  xxl: '1400px'
+};
+
+export const Flex = styled.div`
+  display: flex;
+`;
+
+export const ContainerLogin = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100dvh;
+  width: 100%;
+`;
+
+export const Logo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20dvh;
+  width: 100%;
+  overflow: hidden;
+  
+  @media (max-width: ${breakpoints.sm}) {
+    height: 15dvh;
+  }
+`;
+
+export const LogoImage = styled.img`
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  transform: scale(2);
+  
+  @media (max-width: ${breakpoints.xl}) {
+    transform: scale(1.75);
+  }
+  
+  @media (max-width: ${breakpoints.lg}) {
+    transform: scale(1.5);
+    max-width: 400px;
+  }
+  
+  @media (max-width: ${breakpoints.md}) {
+    transform: scale(1.25);
+    max-width: 350px;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    transform: scale(1);
+    max-width: 280px;
+  }
+  
+  @media (max-width: ${breakpoints.xs}) {
+    transform: scale(0.9);
+    max-width: 240px;
+  }
+`;
+
+export const ContentLogin = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80dvh;
+  color: ${colors.white};
+  z-index: 1;
+  padding: 0 1rem;
+  
+  @media (max-width: ${breakpoints.sm}) {
+    height: 85dvh;
+    padding: 0 0.5rem;
+  }
+`;
+
+export const FormLogin = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  min-height: 500px;
+  padding: 2rem;
+  border: none;
+  border-radius: 12px;
+
+  -webkit-box-shadow: 0px 3px 10px -3px rgba(0,0,0,0.65);
+  -moz-box-shadow: 0px 3px 10px -3px rgba(0,0,0,0.65);
+  box-shadow: 0px 3px 10px -3px rgba(0,0,0,0.65);
+  
+  @media (max-width: ${breakpoints.lg}) {
+    max-width: 450px;
+    padding: 1.75rem;
+  }
+  
+  @media (max-width: ${breakpoints.md}) {
+    max-width: 400px;
+    padding: 1.5rem;
+    min-height: 450px;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    max-width: 100%;
+    padding: 2rem;
+    min-height: 400px;
+  }
+  
+  @media (max-width: ${breakpoints.xs}) {
+    padding: 1rem;
+    min-height: 350px;
+  }
+`;
+
+export const FormTitle = styled.label`
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  
+  @media (max-width: ${breakpoints.lg}) {
+    font-size: 2.25rem;
+  }
+  
+  @media (max-width: ${breakpoints.md}) {
+    font-size: 2rem;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    font-size: 1.75rem;
+  }
+  
+  @media (max-width: ${breakpoints.xs}) {
+    font-size: 1.5rem;
+  }
+`;
+
+export const InputContainer = styled.div`
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  
+  @media (max-width: ${breakpoints.sm}) {
+    margin-bottom: 1rem;
+  }
+`;
+
+export const InputLabel = styled.label`
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.875rem;
+  
+  @media (max-width: ${breakpoints.sm}) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-family: ${fonts.family.poppins};
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  
+  &:focus {
+    outline: none;
+    border-color: ${colors.red};
+  }
+  
+  @media (max-width: ${breakpoints.md}) {
+    padding: 0.7rem;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    padding: 0.65rem;
+    font-size: 0.9rem;
+  }
+`;
+
+export const SubmitAdditional = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+    
+    @media (max-width: ${breakpoints.sm}) {
+      
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+`;
+
+export const SubmitCheck = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  
+  @media (max-width: ${breakpoints.sm}) {
+    width: 100%;
+    justify-content: flex-start;
+  }
+`;
+
+export const InputCheck = styled.input`
+  width: 15px;
+  height: 15px;
+  accent-color: ${colors.darkred};
+  
+  @media (max-width: ${breakpoints.xs}) {
+    width: 14px;
+    height: 14px;
+  }
+`;
+
+export const InputCheckLabel = styled.p`
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.875rem;
+  text-decoration: none;
+  
+  @media (max-width: ${breakpoints.sm}) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const SubmitButton = styled.button`
+  width: 100%;
+  background: ${colors.red};
+  color: white;
+  font-family: ${fonts.family.poppins};
+  font-weight: 600;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  
+  &:hover {
+    background: ${colors.darkred};
+  }
+  
+  @media (max-width: ${breakpoints.md}) {
+    padding: 0.7rem;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    padding: 0.65rem;
+    margin-top: 0.75rem;
+  }
+`;
+
+export const ForgotPassword = styled.a`
+  color: ${colors.red};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    font-size: 0.8rem;
+    width: 100%;
+    text-align: right;
+  }
+`;
+
+export const RegisterLink = styled.div`
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+  text-align: center;
+  
+  a {
+    color: ${colors.red};
+    text-decoration: none;
+    font-weight: 600;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    font-size: 0.8rem;
+    margin-top: 1.25rem;
+  }
+`;
+
+export const ContainerInformations = styled.div`
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.75rem;
+  
+  @media (max-width: ${breakpoints.md}) {
+    gap: 10px;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.7rem;
+  }
+`;
+
+export const Informations = styled.div`
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const styledComponentsLogin = {
+  ContainerLogin,
+  ContentLogin,
+  Logo,
+  LogoImage,
+  FormLogin,
+  FormTitle,
+  InputContainer,
+  InputLabel,
+  Input,
+  SubmitAdditional,
+  InputCheck,
+  SubmitCheck,
+  InputCheckLabel,
+  SubmitButton,
+  ForgotPassword,
+  RegisterLink,
+  ContainerInformations,
+  Informations,
+  Flex,
+};
+
+export default styledComponentsLogin;

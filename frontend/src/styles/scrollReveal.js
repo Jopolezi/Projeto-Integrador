@@ -34,11 +34,11 @@ const revealFade = {
 
 export default function ScrollRevealComponent() {
     useEffect(() => {
-        ScrollReveal().reveal('.reveal-left', revealLeft);
-        ScrollReveal().reveal('.reveal-right', revealRight);
-        ScrollReveal().reveal('.reveal-bottom', revealBottom);
-        ScrollReveal().reveal('.reveal-top', revealTop);
-        ScrollReveal().reveal('.reveal-fade', revealFade);
+        ScrollReveal().reveal('.revealLeft', revealLeft);
+        ScrollReveal().reveal('.revealRight', revealRight);
+        ScrollReveal().reveal('.revealBom', revealBottom);
+        ScrollReveal().reveal('.revealTop', revealTop);
+        ScrollReveal().reveal('.revealFade', revealFade);
     }, []);
 
     return null;
