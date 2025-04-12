@@ -130,8 +130,8 @@ function Register() {
                         rules={{ 
                           required: "Senha é obrigatória",
                           pattern: {
-                            value: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}$/,
-                            message: "A senha deve conter pelo menos 1 letra maiúscula e 1 caractere especial"
+                            value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}$/,
+                            message: "A senha deve conter pelo menos 1 letra maiúscula, 1 número e 1 caractere especial"
                           }
                         }}
                         render={({ field }) => (

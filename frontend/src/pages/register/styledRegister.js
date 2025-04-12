@@ -236,7 +236,7 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   width: 100%;
   gap: 15px;
-  margin-top: 15px;
+  margin-top: 1.85rem;
   
   @media (max-width: ${breakpoints.sm}) {
     flex-direction: column-reverse;
