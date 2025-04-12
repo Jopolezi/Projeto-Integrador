@@ -183,6 +183,7 @@ export const InputContainer = styled.div`
 `;
 
 export const InputLabel = styled.label`
+  display: block;
   color: ${colors.dark};
   font-family: ${fonts.family.poppins};
   font-size: 0.875rem;
@@ -200,6 +201,8 @@ export const Input = styled.input`
   font-family: ${fonts.family.poppins};
   font-size: 1rem;
   transition: border-color 0.2s;
+  box-sizing: border-box;
+  height: 2.5rem;
   
   &:focus {
     outline: none;
@@ -216,12 +219,24 @@ export const Input = styled.input`
   }
 `;
 
+export const ErrorMessage = styled.div`
+  position: absolute;
+  left: 0;
+  top: 100%; /* Posiciona logo abaixo do input */
+  color: ${colors.red};
+  font-size: 0.75rem;
+  font-family: ${fonts.family.poppins};
+  margin-top: 0.25rem;
+  width: 100%;
+`;
+
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   gap: 15px;
+  margin-top: 15px;
   
   @media (max-width: ${breakpoints.sm}) {
     flex-direction: column-reverse;
@@ -372,10 +387,10 @@ const styledComponentsRegister = {
   ContainerRegister, ContentRegister,
   Logo, LogoImage,
   FormRegister, FormContainer, FormTitle,
-  InputContainer, InputLabel, Input,
+  InputContainer, InputLabel, Input, ErrorMessage,
   Button, ButtonContainer, ButtonPrevious,
   LoginLink,
-  ContainerInformations, InformationLabel, Informations,
+  ContainerInformations, InformationLabel, Informations, 
 };
 
 export default styledComponentsRegister;

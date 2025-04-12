@@ -15,6 +15,7 @@
     "motion-utils": "^12.6.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.55.0",
     "react-number-format": "^5.4.3",
     "react-router-dom": "^7.5.0",
     "scheduler": "^0.26.0",
