@@ -30,6 +30,8 @@ const breakpoints = {
 
 export const Flex = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;  
 `;
 
 export const ContainerLogin = styled.div`
@@ -337,6 +339,7 @@ export const ContainerInformations = styled.div`
   color: ${colors.dark};
   font-family: ${fonts.family.poppins};
   font-size: 0.75rem;
+  font-weight: 500;
   
   @media (max-width: ${breakpoints.md}) {
     gap: 10px;
@@ -347,6 +350,11 @@ export const ContainerInformations = styled.div`
     gap: 5px;
     font-size: 0.7rem;
   }
+`;
+
+export const InformationLabel = styled.p`
+  cursor: default;
+  font-weight: 600;
 `;
 
 export const Informations = styled.div`
@@ -376,6 +384,7 @@ const styledComponentsLogin = {
   RegisterLink,
   ContainerInformations,
   Informations,
+  InformationLabel,
   Flex,
 };
 
