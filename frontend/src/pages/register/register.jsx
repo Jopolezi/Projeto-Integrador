@@ -1,7 +1,7 @@
 // Importing React and necessary hooks for managing state and side effects --
 import React, { useEffect } from 'react';
 // Importing Link from react-router-dom for navigation --
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // Importing useForm and FormProvider from react-hook-form --
 import { useForm, FormProvider, Controller } from 'react-hook-form';
 // Importing styles for styling the register page --
@@ -26,6 +26,7 @@ const { // This component is used for the deconstruction of styled-components ob
   Button, ButtonContainer, ButtonPrevious,
   LoginLink,
   ContainerInformations, InformationLabel, Informations,
+  SuccessAlert, ErrorAlert,
 } = styledComponentsRegister;
 
 function Register() {
@@ -33,8 +34,14 @@ function Register() {
     document.title = "Cadastro | BoraBico";
   }, []);
 
-  const [etapa, setEtapa] = React.useState(1);
-  
+  const navigate = useNavigate(); // Used this navigate for the login page
+
+  const [step, setStep] = React.useState(1);
+  const [CadastroSucesso, setCadastroSucesso] = React.useState(false);
+  const [CadastroErro, setCadastroErro] = React.useState(false);
+  const [userName, setUserName] = React.useState('');
+
+
   // Configs React Hook Form
   const methods = useForm({
     mode: 'onChange', // Real time validation
@@ -50,8 +57,8 @@ function Register() {
 
   const { control, handleSubmit, formState: { errors, isValid } } = methods;
 
-  const verificarEtapaValida = () => {
-    switch (etapa) {
+  const verifyStepValid = () => {
+    switch (step) {
       case 1:
         return !errors.email && !errors.senha && methods.getValues('email') && methods.getValues('senha');
       case 2:
@@ -63,266 +70,322 @@ function Register() {
     }
   };
 
-  const proximaEtapa = () => {
-    if (verificarEtapaValida()) {
-      setEtapa(etapa + 1);
+  const nextStep = () => {
+    if (verifyStepValid()) {
+      setStep(step + 1);
     }
   };
-  
-  const etapaAnterior = () => setEtapa(etapa - 1);
 
-  const onSubmit = (data) => {
-    console.log('Dados enviados:', data);
-    // the fetch is here
+  const previousStep = () => setStep(step - 1);
+
+  const onSubmit = async (data) => {
+
+    try {
+
+      const userData = {
+        name: data.nome,
+        sobrenome: data.sobrenome,
+        email: data.email,
+        cpf: data.cpf.replace(/\D/g, ''),
+        telefone: data.telefone,
+        password: data.senha
+      }
+
+      const response = await fetch('http://localhost:3000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.message || 'Erro ao cadastrar usuário');
+      }
+
+      setCadastroSucesso(true);
+      setUserName(data.nome);
+
+      setTimeout(() => {
+        navigate('/login')
+      }, 3000);
+
+    } catch (error) {
+      setUserName(data.nome);
+      setCadastroErro(true);
+
+      setTimeout(() => {
+        setCadastroErro(false);
+      }, 3000);
+    }
   };
 
   return (
-    <FormProvider {...methods}>
-      <ContainerRegister className="revealFade">
-        <Logo className="revealFade">
-          <LogoImage src="/borabico_logo.png" alt="Logo" />
-        </Logo>
+    // This line add styles for pop-up sucessful or unsucessful register
+    <>
+      {CadastroSucesso && (
+        <SuccessAlert>
+        Parabéns, {userName} seu cadastro foi realizado com sucesso!
+        </SuccessAlert>
+      )}
 
-        <ContentRegister>
-          <FormRegister onSubmit={handleSubmit(onSubmit)}>
-            <AnimatePresence mode="wait">
-              {etapa === 1 && (
-                <motion.div
-                  key="etapa1"
-                  initial={slideVariants.initial}
-                  animate={slideVariants.animate}
-                  exit={slideVariants.exit}
-                  transition={slideVariants.transition}
-                >
-                  <FormContainer>
-                    <FormTitle>E-mail e Senha</FormTitle>
+      {CadastroErro && (
+        <ErrorAlert>
+        Erro ao cadastrar o seu usuário, {userName}!
+        </ErrorAlert>
+      )}
 
-                    <InputContainer>
-                      <InputLabel>E-mail</InputLabel>
-                      <Controller
-                        name="email"
-                        control={control}
-                        rules={{ 
-                          required: "Email é obrigatório", 
-                          pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: "Formato de email inválido"
-                          }
-                        }}
-                        render={({ field }) => (
-                          <>
-                            <Input
-                              type="email"
-                              placeholder="Email"
-                              {...field}
-                            />
-                            {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-                          </>
-                        )}
-                      />
-                    </InputContainer>
 
-                    <InputContainer>
-                      <InputLabel>Senha</InputLabel>
-                      <Controller
-                        name="senha"
-                        control={control}
-                        rules={{ 
-                          required: "Senha é obrigatória",
-                          pattern: {
-                            value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}$/,
-                            message: "A senha deve conter pelo menos 1 letra maiúscula, 1 número e 1 caractere especial"
-                          }
-                        }}
-                        render={({ field }) => (
-                          <>
-                            <Input
-                              type="password"
-                              placeholder="Senha"
-                              {...field}
-                            />
-                            {errors.senha && <ErrorMessage>{errors.senha.message}</ErrorMessage>}
-                          </>
-                        )}
-                      />
-                    </InputContainer>
+      <FormProvider {...methods}>
+        <ContainerRegister className="revealFade">
+          <Logo className="revealFade">
+            <LogoImage src="/borabico_logo.png" alt="Logo" />
+          </Logo>
 
-                    <ButtonContainer>
-                      <Button
-                        type="button" 
-                        onClick={proximaEtapa}
-                        disabled={!verificarEtapaValida()}
-                      >
-                        Próxima
-                      </Button>
-                    </ButtonContainer>
-                  </FormContainer>
-                </motion.div>
-              )}
+          <ContentRegister>
+            <FormRegister onSubmit={handleSubmit(onSubmit)}>
+              <AnimatePresence mode="wait">
+                {step === 1 && (
+                  <motion.div
+                    key="etapa1"
+                    initial={slideVariants.initial}
+                    animate={slideVariants.animate}
+                    exit={slideVariants.exit}
+                    transition={slideVariants.transition}
+                  >
+                    <FormContainer>
+                      <FormTitle>E-mail e Senha</FormTitle>
 
-              {etapa === 2 && (
-                <motion.div
-                  key="etapa2"
-                  initial={slideVariants.initial}
-                  animate={slideVariants.animate}
-                  exit={slideVariants.exit}
-                  transition={slideVariants.transition}
-                >
-                  <FormContainer>
-                    <FormTitle>Nome e Sobrenome</FormTitle>
+                      <InputContainer>
+                        <InputLabel>E-mail</InputLabel>
+                        <Controller
+                          name="email"
+                          control={control}
+                          rules={{
+                            required: "Email é obrigatório",
+                            pattern: {
+                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                              message: "Formato de email inválido"
+                            }
+                          }}
+                          render={({ field }) => (
+                            <>
+                              <Input
+                                type="email"
+                                placeholder="Email"
+                                {...field}
+                              />
+                              {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+                            </>
+                          )}
+                        />
+                      </InputContainer>
 
-                    <InputContainer>
-                      <InputLabel>Nome</InputLabel>
-                      <Controller
-                        name="nome"
-                        control={control}
-                        rules={{ required: "Nome é obrigatório" }}
-                        render={({ field }) => (
-                          <>
-                            <Input
-                              type="text"
-                              placeholder="Nome"
-                              {...field}
-                            />
-                            {errors.nome && <ErrorMessage>{errors.nome.message}</ErrorMessage>}
-                          </>
-                        )}
-                      />
-                    </InputContainer>
+                      <InputContainer>
+                        <InputLabel>Senha</InputLabel>
+                        <Controller
+                          name="senha"
+                          control={control}
+                          rules={{
+                            required: "Senha é obrigatória",
+                            pattern: {
+                              value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}$/,
+                              message: "A senha deve conter pelo menos 1 letra maiúscula, 1 número e 1 caractere especial"
+                            }
+                          }}
+                          render={({ field }) => (
+                            <>
+                              <Input
+                                type="password"
+                                placeholder="Senha"
+                                {...field}
+                              />
+                              {errors.senha && <ErrorMessage>{errors.senha.message}</ErrorMessage>}
+                            </>
+                          )}
+                        />
+                      </InputContainer>
 
-                    <InputContainer>
-                      <InputLabel>Sobrenome</InputLabel>
-                      <Controller
-                        name="sobrenome"
-                        control={control}
-                        rules={{ required: "Sobrenome é obrigatório" }}
-                        render={({ field }) => (
-                          <>
-                            <Input
-                              type="text"
-                              placeholder="Sobrenome"
-                              {...field}
-                            />
-                            {errors.sobrenome && <ErrorMessage>{errors.sobrenome.message}</ErrorMessage>}
-                          </>
-                        )}
-                      />
-                    </InputContainer>
+                      <ButtonContainer>
+                        <Button
+                          type="button"
+                          onClick={nextStep}
+                          disabled={!verifyStepValid()}
+                        >
+                          Próxima
+                        </Button>
+                      </ButtonContainer>
+                    </FormContainer>
+                  </motion.div>
+                )}
 
-                    <ButtonContainer>
-                      <ButtonPrevious type="button" onClick={etapaAnterior}>Voltar</ButtonPrevious>
-                      <Button 
-                        type="button" 
-                        onClick={proximaEtapa}
-                        disabled={!verificarEtapaValida()}
-                      >
-                        Próxima
-                      </Button>
-                    </ButtonContainer>
-                  </FormContainer>
-                </motion.div>
-              )}
+                {step === 2 && (
+                  <motion.div
+                    key="etapa2"
+                    initial={slideVariants.initial}
+                    animate={slideVariants.animate}
+                    exit={slideVariants.exit}
+                    transition={slideVariants.transition}
+                  >
+                    <FormContainer>
+                      <FormTitle>Nome e Sobrenome</FormTitle>
 
-              {etapa === 3 && (
-                <motion.div
-                  key="etapa3"
-                  initial={slideVariants.initial}
-                  animate={slideVariants.animate}
-                  exit={slideVariants.exit}
-                  transition={slideVariants.transition}
-                >
-                  <FormContainer>
-                    <FormTitle>CPF e Telefone</FormTitle>
+                      <InputContainer>
+                        <InputLabel>Nome</InputLabel>
+                        <Controller
+                          name="nome"
+                          control={control}
+                          rules={{ required: "Nome é obrigatório" }}
+                          render={({ field }) => (
+                            <>
+                              <Input
+                                type="text"
+                                placeholder="Nome"
+                                {...field}
+                              />
+                              {errors.nome && <ErrorMessage>{errors.nome.message}</ErrorMessage>}
+                            </>
+                          )}
+                        />
+                      </InputContainer>
 
-                    <InputContainer>
-                      <InputLabel>CPF</InputLabel>
-                      <Controller
-                        name="cpf"
-                        control={control}
-                        rules={{ 
-                          required: "CPF é obrigatório",
-                          minLength: {
-                            value: 11,
-                            message: "CPF deve ter 11 dígitos"
-                          }
-                        }}
-                        render={({ field: { onChange, value } }) => (
-                          <>
-                            <PatternFormat
-                              format="###.###.###-##"
-                              mask="_"
-                              value={value}
-                              onValueChange={(values) => onChange(values.value)}
-                              customInput={Input}
-                              allowEmptyFormatting={true}
-                            />
-                            {errors.cpf && <ErrorMessage>{errors.cpf.message}</ErrorMessage>}
-                          </>
-                        )}
-                      />
-                    </InputContainer>
+                      <InputContainer>
+                        <InputLabel>Sobrenome</InputLabel>
+                        <Controller
+                          name="sobrenome"
+                          control={control}
+                          rules={{ required: "Sobrenome é obrigatório" }}
+                          render={({ field }) => (
+                            <>
+                              <Input
+                                type="text"
+                                placeholder="Sobrenome"
+                                {...field}
+                              />
+                              {errors.sobrenome && <ErrorMessage>{errors.sobrenome.message}</ErrorMessage>}
+                            </>
+                          )}
+                        />
+                      </InputContainer>
 
-                    <InputContainer>
-                      <InputLabel>Telefone</InputLabel>
-                      <Controller
-                        name="telefone"
-                        control={control}
-                        rules={{ 
-                          required: "Telefone é obrigatório",
-                          minLength: {
-                            value: 11,
-                            message: "Telefone deve ter 11 dígitos"
-                          }
-                        }}
-                        render={({ field: { onChange, value } }) => (
-                          <>
-                            <PatternFormat
-                              format="(##) #####-####"
-                              mask="_"
-                              value={value}
-                              onValueChange={(values) => onChange(values.value)}
-                              customInput={Input}
-                              allowEmptyFormatting={true}
-                            />
-                            {errors.telefone && <ErrorMessage>{errors.telefone.message}</ErrorMessage>}
-                          </>
-                        )}
-                      />
-                    </InputContainer>
+                      <ButtonContainer>
+                        <ButtonPrevious type="button" onClick={previousStep}>Voltar</ButtonPrevious>
+                        <Button
+                          type="button"
+                          onClick={nextStep}
+                          disabled={!verifyStepValid()}
+                        >
+                          Próxima
+                        </Button>
+                      </ButtonContainer>
+                    </FormContainer>
+                  </motion.div>
+                )}
 
-                    <ButtonContainer>
-                      <ButtonPrevious type="button" onClick={etapaAnterior}>Voltar</ButtonPrevious>
-                      <Button 
-                        type="submit"
-                        disabled={!verificarEtapaValida()}
-                      >
-                        Finalizar
-                      </Button>
-                    </ButtonContainer>
-                  </FormContainer>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                {step === 3 && (
+                  <motion.div
+                    key="etapa3"
+                    initial={slideVariants.initial}
+                    animate={slideVariants.animate}
+                    exit={slideVariants.exit}
+                    transition={slideVariants.transition}
+                  >
+                    <FormContainer>
+                      <FormTitle>CPF e Telefone</FormTitle>
 
-            <LoginLink>
-              Já tem uma conta? <Link to="/login">Entre aqui</Link>
-            </LoginLink>
-          </FormRegister>
+                      <InputContainer>
+                        <InputLabel>CPF</InputLabel>
+                        <Controller
+                          name="cpf"
+                          control={control}
+                          rules={{
+                            required: "CPF é obrigatório",
+                            minLength: {
+                              value: 11,
+                              message: "CPF deve ter 11 dígitos"
+                            }
+                          }}
+                          render={({ field: { onChange, value } }) => (
+                            <>
+                              <PatternFormat
+                                format="###.###.###-##"
+                                mask="_"
+                                value={value}
+                                onValueChange={(values) => onChange(values.value)}
+                                customInput={Input}
+                                allowEmptyFormatting={true}
+                              />
+                              {errors.cpf && <ErrorMessage>{errors.cpf.message}</ErrorMessage>}
+                            </>
+                          )}
+                        />
+                      </InputContainer>
 
-          <ContainerInformations className="reveal-fade">
-            <Flex>
-              <img src="/borabico_logo.png" width="50px" height="50px" />
-              <InformationLabel>© Copyright 2025</InformationLabel>
-            </Flex>
-            <Informations> <Link to="/register">Política de Privacidade</Link> </Informations>
-            <Informations> <Link to="/register">Termos e Condições</Link> </Informations>
-            <Informations> <Link to="/register">Política de Cookies</Link> </Informations>
-          </ContainerInformations>
-        </ContentRegister>
+                      <InputContainer>
+                        <InputLabel>Telefone</InputLabel>
+                        <Controller
+                          name="telefone"
+                          control={control}
+                          rules={{
+                            required: "Telefone é obrigatório",
+                            minLength: {
+                              value: 11,
+                              message: "Telefone deve ter 11 dígitos"
+                            }
+                          }}
+                          render={({ field: { onChange, value } }) => (
+                            <>
+                              <PatternFormat
+                                format="(##) #####-####"
+                                mask="_"
+                                value={value}
+                                onValueChange={(values) => onChange(values.value)}
+                                customInput={Input}
+                                allowEmptyFormatting={true}
+                              />
+                              {errors.telefone && <ErrorMessage>{errors.telefone.message}</ErrorMessage>}
+                            </>
+                          )}
+                        />
+                      </InputContainer>
 
-        <ScrollRevealComponent />
-      </ContainerRegister>
-    </FormProvider>
+                      <ButtonContainer>
+                        <ButtonPrevious type="button" onClick={previousStep}>Voltar</ButtonPrevious>
+                        <Button
+                          type="submit"
+                          disabled={!verifyStepValid()}
+                        >
+                          Finalizar
+                        </Button>
+                      </ButtonContainer>
+                    </FormContainer>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <LoginLink>
+                Já tem uma conta? <Link to="/login">Entre aqui</Link>
+              </LoginLink>
+            </FormRegister>
+
+            <ContainerInformations className="reveal-fade">
+              <Flex>
+                <img src="/borabico_logo.png" width="50px" height="50px" />
+                <InformationLabel>© Copyright 2025</InformationLabel>
+              </Flex>
+              <Informations> <Link to="/register">Política de Privacidade</Link> </Informations>
+              <Informations> <Link to="/register">Termos e Condições</Link> </Informations>
+              <Informations> <Link to="/register">Política de Cookies</Link> </Informations>
+            </ContainerInformations>
+          </ContentRegister>
+
+          <ScrollRevealComponent />
+        </ContainerRegister>
+      </FormProvider>
+
+    </>
   );
 }
 

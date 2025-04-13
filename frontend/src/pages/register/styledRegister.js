@@ -12,6 +12,7 @@ const fonts = {
 const colors = {
   red: '#FF3030',
   darkred: '#CC0000',
+  green: '#28D728',
   white: '#FFFFFF',
   offwhite: '#F7F7F7',
   dark: '#333333',
@@ -382,6 +383,62 @@ export const Informations = styled.div`
   }
 `;
 
+export const SuccessAlert = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 12px;
+  padding: 20px;
+  background-color: ${colors.green};
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: ${fonts.family.poppins};
+  z-index: 100;
+  animation: fadeIn 0.3s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+export const ErrorAlert = styled.div` 
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 12px;
+  padding: 20px;
+  background-color: ${colors.red};
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: ${fonts.family.poppins};
+  z-index: 100;
+  animation: fadeIn 0.3s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
 const styledComponentsRegister = {
   Flex,
   ContainerRegister, ContentRegister,
@@ -391,6 +448,7 @@ const styledComponentsRegister = {
   Button, ButtonContainer, ButtonPrevious,
   LoginLink,
   ContainerInformations, InformationLabel, Informations, 
+  SuccessAlert, ErrorAlert,
 };
 
 export default styledComponentsRegister;
