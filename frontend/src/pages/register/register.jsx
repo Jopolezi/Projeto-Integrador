@@ -19,7 +19,7 @@ import slideVariants from './transictions'
 
 const { // This component is used for the deconstruction of styled-components objects
   Flex,
-  ContainerRegister, ContentRegister,
+  ContainerRegister, ContentRegister, ContentRegisterTitle,
   Logo, LogoImage,
   FormRegister, FormContainer, FormTitle,
   InputContainer, InputLabel, Input, ErrorMessage,
@@ -127,13 +127,13 @@ function Register() {
     <>
       {CadastroSucesso && (
         <SuccessAlert>
-        Parabéns, {userName} seu cadastro foi realizado com sucesso!
+          Parabéns, {userName} seu cadastro foi realizado com sucesso!
         </SuccessAlert>
       )}
 
       {CadastroErro && (
         <ErrorAlert>
-        Erro ao cadastrar o seu usuário, {userName}!
+          Erro ao cadastrar o seu usuário, {userName}!
         </ErrorAlert>
       )}
 
@@ -145,6 +145,9 @@ function Register() {
           </Logo>
 
           <ContentRegister>
+
+            <ContentRegisterTitle>CADASTRE O SEU USUÁRIO</ContentRegisterTitle>
+
             <FormRegister onSubmit={handleSubmit(onSubmit)}>
               <AnimatePresence mode="wait">
                 {step === 1 && (
@@ -237,13 +240,26 @@ function Register() {
                         <Controller
                           name="nome"
                           control={control}
-                          rules={{ required: "Nome é obrigatório" }}
+                          rules={{
+                            required: "Nome é obrigatório",
+                            minLength: {
+                              value: 2,
+                              message: "O nome deve ter pelo menos 2 caracteres"
+                            },
+                            pattern: {
+                              value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/,
+                              message: "O nome não pode conter números ou caracteres especiais"
+                            }
+                          }}
                           render={({ field }) => (
                             <>
                               <Input
                                 type="text"
                                 placeholder="Nome"
                                 {...field}
+                                onInput={(e) => {
+                                  e.target.value = e.target.value.replace(/\d/g, '');
+                                }}
                               />
                               {errors.nome && <ErrorMessage>{errors.nome.message}</ErrorMessage>}
                             </>
@@ -256,13 +272,26 @@ function Register() {
                         <Controller
                           name="sobrenome"
                           control={control}
-                          rules={{ required: "Sobrenome é obrigatório" }}
+                          rules={{
+                            required: "Sobrenome é obrigatório",
+                            minLength: {
+                              value: 2,
+                              message: "O sobrenome deve ter pelo menos 2 caracteres"
+                            },
+                            pattern: {
+                              value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s']+$/,
+                              message: "O sobrenome não pode conter números ou caracteres especiais"
+                            }
+                          }}
                           render={({ field }) => (
                             <>
                               <Input
                                 type="text"
                                 placeholder="Sobrenome"
                                 {...field}
+                                onInput={(e) => {
+                                  e.target.value = e.target.value.replace(/\d/g, '');
+                                }}
                               />
                               {errors.sobrenome && <ErrorMessage>{errors.sobrenome.message}</ErrorMessage>}
                             </>
