@@ -248,7 +248,7 @@ function Register() {
                             },
                             pattern: {
                               value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/,
-                              message: "O nome não pode conter números ou caracteres especiais"
+                              message: "O nome não pode conter caracteres especiais"
                             }
                           }}
                           render={({ field }) => (
@@ -280,7 +280,7 @@ function Register() {
                             },
                             pattern: {
                               value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s']+$/,
-                              message: "O sobrenome não pode conter números ou caracteres especiais"
+                              message: "O sobrenome não pode conter caracteres especiais"
                             }
                           }}
                           render={({ field }) => (
