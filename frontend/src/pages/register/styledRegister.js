@@ -388,7 +388,7 @@ export const SuccessAlert = styled.div`
   top: 0;
   right: 0;
   margin: 12px;
-  padding: 20px;
+  padding: 12px;
   background-color: ${colors.green};
   color: white;
   border-radius: 12px;
@@ -416,7 +416,7 @@ export const ErrorAlert = styled.div`
   top: 0;
   right: 0;
   margin: 12px;
-  padding: 20px;
+  padding: 12px;
   background-color: ${colors.red};
   color: white;
   border-radius: 12px;

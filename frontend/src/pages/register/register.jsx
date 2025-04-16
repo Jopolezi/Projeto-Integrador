@@ -19,7 +19,7 @@ import slideVariants from './transictions'
 
 const { // This component is used for the deconstruction of styled-components objects
   Flex,
-  ContainerRegister, ContentRegister, ContentRegisterTitle,
+  ContainerRegister, ContentRegister,
   Logo, LogoImage,
   FormRegister, FormContainer, FormTitle,
   InputContainer, InputLabel, Input, ErrorMessage,
@@ -127,13 +127,13 @@ function Register() {
     <>
       {CadastroSucesso && (
         <SuccessAlert>
-          Parabéns, {userName} seu cadastro foi realizado com sucesso!
+          Parabéns, {userName}, seu cadastro foi realizado com sucesso.
         </SuccessAlert>
       )}
 
       {CadastroErro && (
         <ErrorAlert>
-          Erro ao cadastrar o seu usuário, {userName}!
+          Erro ao cadastrar o seu usuário, tente novamente.
         </ErrorAlert>
       )}
 
@@ -145,9 +145,6 @@ function Register() {
           </Logo>
 
           <ContentRegister>
-
-            <ContentRegisterTitle>CADASTRE O SEU USUÁRIO</ContentRegisterTitle>
-
             <FormRegister onSubmit={handleSubmit(onSubmit)}>
               <AnimatePresence mode="wait">
                 {step === 1 && (
@@ -247,8 +244,8 @@ function Register() {
                               message: "O nome deve ter pelo menos 2 caracteres"
                             },
                             pattern: {
-                              value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/,
-                              message: "O nome não pode conter caracteres especiais"
+                              value: /^[A-Za-zà-öø-ÿ][A-Za-zà-öø-ÿ\s'-]*$/,
+                              message: "Nome não deve conter números ou símbolos especiais"
                             }
                           }}
                           render={({ field }) => (
@@ -258,7 +255,10 @@ function Register() {
                                 placeholder="Nome"
                                 {...field}
                                 onInput={(e) => {
-                                  e.target.value = e.target.value.replace(/\d/g, '');
+                                  e.target.value = e.target.value
+                                    .replace(/\d/g, '')
+                                    .replace(/[@$%&*(){}[\]|\\/<>?!:;,+=#^~`]/g, '')
+                                    .replace(/\s{2,}/g, ' ');
                                 }}
                               />
                               {errors.nome && <ErrorMessage>{errors.nome.message}</ErrorMessage>}
@@ -279,8 +279,8 @@ function Register() {
                               message: "O sobrenome deve ter pelo menos 2 caracteres"
                             },
                             pattern: {
-                              value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s']+$/,
-                              message: "O sobrenome não pode conter caracteres especiais"
+                              value: /^[A-Za-zà-öø-ÿ][A-Za-zà-öø-ÿ\s'-]*$/,
+                              message: "O sobrenome não deve conter números ou símbolos especiais"
                             }
                           }}
                           render={({ field }) => (
@@ -290,7 +290,10 @@ function Register() {
                                 placeholder="Sobrenome"
                                 {...field}
                                 onInput={(e) => {
-                                  e.target.value = e.target.value.replace(/\d/g, '');
+                                  e.target.value = e.target.value
+                                    .replace(/\d/g, '')
+                                    .replace(/[@$%&*(){}[\]|\\/<>?!:;,+=#^~`]/g, '')
+                                    .replace(/\s{2,}/g, ' ');
                                 }}
                               />
                               {errors.sobrenome && <ErrorMessage>{errors.sobrenome.message}</ErrorMessage>}

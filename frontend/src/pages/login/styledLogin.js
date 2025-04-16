@@ -365,6 +365,62 @@ export const Informations = styled.div`
   }
 `;
 
+export const SuccessAlert = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 12px;
+  padding: 12px;
+  background-color: ${colors.green};
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: ${fonts.family.poppins};
+  z-index: 100;
+  animation: fadeIn 0.3s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+export const ErrorAlert = styled.div` 
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 12px;
+  padding: 12px;
+  background-color: ${colors.red};
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: ${fonts.family.poppins};
+  z-index: 100;
+  animation: fadeIn 0.3s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
 const styledComponentsLogin = {
   ContainerLogin,
   ContentLogin,
@@ -386,6 +442,7 @@ const styledComponentsLogin = {
   Informations,
   InformationLabel,
   Flex,
+  SuccessAlert, ErrorAlert
 };
 
 export default styledComponentsLogin;
