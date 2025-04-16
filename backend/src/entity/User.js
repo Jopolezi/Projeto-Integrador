@@ -42,5 +42,10 @@ module.exports = new EntitySchema({
         length: 45, // Comprimento adequado para telefone
         nullable: true, // Permite telefone nulo
       },
+      NumeroPica: {
+        type: "varchar",
+        length: 45, // Comprimento adequado para telefone
+        nullable: true, // Permite telefone nulo
+      },
     },
   });
