@@ -28,7 +28,7 @@ module.exports = new EntitySchema({
       cpf: {
         type: "varchar",
         length: 45, // Comprimento adequado para CPF
-        nullable: true, // Permite CPF nulo
+        nullable: false, // Permite CPF nulo
         unique: true, // Garantir que o CPF seja único
       },
       cnpj: {

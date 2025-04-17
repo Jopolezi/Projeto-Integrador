@@ -11,6 +11,7 @@ const fonts = {
 // Colors used in the application --
 const colors = {
   red: '#FF3030',
+  green: '#28D728',
   darkred: '#CC0000',
   white: '#FFFFFF',
   offwhite: '#F7F7F7',
@@ -111,8 +112,6 @@ export const FormLogin = styled.form`
   justify-content: center;
   width: 100%;
   max-width: 500px;
-  height: auto;
-  min-height: 500px;
   padding: 2rem;
   border: none;
   border-radius: 12px;
@@ -172,7 +171,7 @@ export const FormTitle = styled.label`
 export const InputContainer = styled.div`
   position: relative;
   width: 100%;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   
   @media (max-width: ${breakpoints.sm}) {
     margin-bottom: 1rem;
@@ -331,7 +330,7 @@ export const RegisterLink = styled.div`
 
 export const ContainerInformations = styled.div`
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import styledComponentsLogin from './styledLogin';
 import './login.css'
 import '../../styles/cssGlobal.css'
@@ -35,8 +34,8 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [LoginSucesso, setLoginSucesso] = React.useState(false);
-  const [LoginErro, setLoginErro] = React.useState(false);
+  const [LoginSucesso, setLoginSucesso] = useState(false);
+  const [LoginErro, setLoginErro] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -67,11 +66,12 @@ function Login() {
       if (!response.ok) {
         throw new Error(responseData.message || 'Erro ao fazer o login');
       } else {
-        // Sucesso no login
+        // Ativa o popup de sucesso primeiro
         setLoginSucesso(true);
         
+        // Espera 3 segundos antes de redirecionar
         setTimeout(() => {
-          navigate('/')
+          navigate('/');
         }, 3000);
       }
     } catch (error) {
@@ -90,16 +90,15 @@ function Login() {
     <>
       {LoginSucesso && (
         <SuccessAlert>
-        Login realizado com sucesso, redirecionando para a página inicial.
+          Login realizado com sucesso, redirecionando para a página inicial.
         </SuccessAlert>
       )}
 
       {LoginErro && (
         <ErrorAlert>
-        Erro ao efetuar o login, tente novamente.
+          Erro ao efetuar o login, tente novamente.
         </ErrorAlert>
       )}
-
 
       <ScrollRevealComponent />
 
