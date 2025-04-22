@@ -4,11 +4,11 @@ const { generateToken } = require("../middlewares/authMiddleware");
 const User = require("../entity/User");
 
 class userController {
-  async criarUser(req, res) {
+  async createUser(req, res) {
     try {
       const { name, sobrenome, email, cpf, telefone, password } = req.body;
 
-      if (!name || !sobrenome || !email || !cpf || !telefone || !password) {
+      if (!(email||cpf) || !password) {
         return res.status(400).json({
           success: false,
           message: "Campos obrigatórios não fornecidos",
@@ -28,7 +28,7 @@ class userController {
       const nomeCompleto = `${name} ${sobrenome}`;
       const senhaCriptografada = await bcrypt.hash(password, 10);
 
-      const novoUsuario = userRepository.create({
+      const newUser = userRepository.create({
         name: nomeCompleto,
         email,
         cpf,
@@ -36,7 +36,7 @@ class userController {
         password: senhaCriptografada,
       });
 
-      await userRepository.save(novoUsuario);
+      await userRepository.save(newUser);
 
       return res.status(201).json({
         success: true,
@@ -51,11 +51,12 @@ class userController {
     }
   }
 
-  async logarUser(req, res) {
+  async loginUser(req, res) {
     try {
-      const { email, cpf, cnpj, password } = req.body;
+      const { identificator, password } = req.body;
 
-      if (!(email || cpf || cnpj) || !password) {
+
+      if (!identificator || !password) {
         return res.status(400).json({
           success: false,
           message: "Campos obrigatórios não fornecidos",
@@ -63,12 +64,14 @@ class userController {
       }
 
       const userRepository = AppDataSource.getRepository("User");
-
       let user;
-      if (email) user = await userRepository.findOneBy({ email });
-      else if (cpf) user = await userRepository.findOneBy({ cpf });
-      else if (cnpj) user = await userRepository.findOneBy({ cnpj });
 
+      // Se contém "@" é um e-mail, senão tenta como CPF
+      if (identificator.includes("@")) {
+        user = await userRepository.findOneBy({ email: identificator });
+      } else {
+        user = await userRepository.findOneBy({ cpf: identificator });
+      }
       if (!user) {
         return res.status(400).json({
           success: false,

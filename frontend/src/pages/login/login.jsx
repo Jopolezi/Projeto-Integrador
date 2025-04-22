@@ -31,6 +31,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [cpf, setCpf] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -47,7 +48,8 @@ function Login() {
     setError('');
   
     const userData = {
-      email: email,
+      
+      identificator: email, // esse campo pode ser um e-mail ou um CPF
       password: password,
       rememberMe: rememberMe
     };
@@ -57,7 +59,7 @@ function Login() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
+        },  
         body: JSON.stringify(userData)
       });
   
@@ -117,7 +119,7 @@ function Login() {
                 type="text" 
                 placeholder="Digite seu e-mail, CPF ou CNPJ" 
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value) || setCpf(e.target.value)}
                 required
               />
             </InputContainer>
