@@ -1,50 +1,36 @@
-// Importing React and necessary hooks for managing state and side effects --
 import React, { useEffect } from 'react';
-// Importing Link from react-router-dom for navigation --
 import { Link, useNavigate } from 'react-router-dom';
-// Importing useForm and FormProvider from react-hook-form --
 import { useForm, FormProvider, Controller } from 'react-hook-form';
-// Importing styles for styling the register page --
 import styledComponentsRegister from './styledRegister';
 import './register.css';
 import '../../styles/cssGlobal.css';
-// Importing ScrollRevealComponent for scroll animations --
 import ScrollRevealComponent from '../../styles/scrollReveal';
-// Importing animated's effects from framer-motion lib --
-import { motion, AnimatePresence } from 'framer-motion';
-// Importing Formatation Numeric from react-number-format lib --
-import { PatternFormat } from 'react-number-format';
-// Importing slideVariants from transictions archive --
-import slideVariants from './transictions'
+import { Step1, Step2, Step3 } from './steps';
 
-const { // This component is used for the deconstruction of styled-components objects
+const {
   Flex,
   ContainerRegister, ContentRegister,
   Logo, LogoImage,
-  FormRegister, FormContainer, FormTitle,
-  InputContainer, InputLabel, Input, ErrorMessage,
-  Button, ButtonContainer, ButtonPrevious,
+  FormRegister,
   LoginLink,
   ContainerInformations, InformationLabel, Informations,
   SuccessAlert, ErrorAlert,
 } = styledComponentsRegister;
 
 function Register() {
-  useEffect(() => { // This effect is used to update the title of the page when the component is mounted
+  useEffect(() => {
     document.title = "Cadastro | BoraBico";
   }, []);
 
-  const navigate = useNavigate(); // Used this navigate for the login page
+  const navigate = useNavigate();
 
   const [step, setStep] = React.useState(1);
   const [CadastroSucesso, setCadastroSucesso] = React.useState(false);
   const [CadastroErro, setCadastroErro] = React.useState(false);
   const [userName, setUserName] = React.useState('');
 
-
-  // Configs React Hook Form
   const methods = useForm({
-    mode: 'onChange', // Real time validation
+    mode: 'onChange',
     defaultValues: {
       email: '',
       senha: '',
@@ -123,7 +109,6 @@ function Register() {
   };
 
   return (
-    // This line add styles for pop-up sucessful or unsucessful register
     <>
       {CadastroSucesso && (
         <SuccessAlert>
@@ -146,256 +131,31 @@ function Register() {
 
           <ContentRegister>
             <FormRegister onSubmit={handleSubmit(onSubmit)}>
-              <AnimatePresence mode="wait">
-                {step === 1 && (
-                  <motion.div
-                    key="etapa1"
-                    initial={slideVariants.initial}
-                    animate={slideVariants.animate}
-                    exit={slideVariants.exit}
-                    transition={slideVariants.transition}
-                  >
-                    <FormContainer>
-                      <FormTitle>E-mail e Senha</FormTitle>
+                
+                  {step === 1 && 
+                  <Step1 
+                  control={control} 
+                  errors={errors} 
+                  nextStep={nextStep}
+                  verifyStepValid={verifyStepValid}
+                  />}
 
-                      <InputContainer>
-                        <InputLabel>E-mail</InputLabel>
-                        <Controller
-                          name="email"
-                          control={control}
-                          rules={{
-                            required: "Email é obrigatório",
-                            pattern: {
-                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                              message: "Formato de email inválido"
-                            }
-                          }}
-                          render={({ field }) => (
-                            <>
-                              <Input
-                                type="email"
-                                placeholder="Email"
-                                {...field}
-                              />
-                              {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-                            </>
-                          )}
-                        />
-                      </InputContainer>
-
-                      <InputContainer>
-                        <InputLabel>Senha</InputLabel>
-                        <Controller
-                          name="senha"
-                          control={control}
-                          rules={{
-                            required: "Senha é obrigatória",
-                            pattern: {
-                              value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}$/,
-                              message: "A senha deve conter pelo menos 1 letra maiúscula, 1 número e 1 caractere especial"
-                            }
-                          }}
-                          render={({ field }) => (
-                            <>
-                              <Input
-                                type="password"
-                                placeholder="Senha"
-                                {...field}
-                              />
-                              {errors.senha && <ErrorMessage>{errors.senha.message}</ErrorMessage>}
-                            </>
-                          )}
-                        />
-                      </InputContainer>
-
-                      <ButtonContainer>
-                        <Button
-                          type="button"
-                          onClick={nextStep}
-                          disabled={!verifyStepValid()}
-                        >
-                          Próxima
-                        </Button>
-                      </ButtonContainer>
-                    </FormContainer>
-                  </motion.div>
-                )}
-
-                {step === 2 && (
-                  <motion.div
-                    key="etapa2"
-                    initial={slideVariants.initial}
-                    animate={slideVariants.animate}
-                    exit={slideVariants.exit}
-                    transition={slideVariants.transition}
-                  >
-                    <FormContainer>
-                      <FormTitle>Nome e Sobrenome</FormTitle>
-
-                      <InputContainer>
-                        <InputLabel>Nome</InputLabel>
-                        <Controller
-                          name="nome"
-                          control={control}
-                          rules={{
-                            required: "Nome é obrigatório",
-                            minLength: {
-                              value: 2,
-                              message: "O nome deve ter pelo menos 2 caracteres"
-                            },
-                            pattern: {
-                              value: /^[A-Za-zà-öø-ÿ][A-Za-zà-öø-ÿ\s'-]*$/,
-                              message: "Nome não deve conter números ou símbolos especiais"
-                            }
-                          }}
-                          render={({ field }) => (
-                            <>
-                              <Input
-                                type="text"
-                                placeholder="Nome"
-                                {...field}
-                                onInput={(e) => {
-                                  e.target.value = e.target.value
-                                    .replace(/\d/g, '')
-                                    .replace(/[@$%&*(){}[\]|\\/<>?!:;,+=#^~`]/g, '')
-                                    .replace(/\s{2,}/g, ' ');
-                                }}
-                              />
-                              {errors.nome && <ErrorMessage>{errors.nome.message}</ErrorMessage>}
-                            </>
-                          )}
-                        />
-                      </InputContainer>
-
-                      <InputContainer>
-                        <InputLabel>Sobrenome</InputLabel>
-                        <Controller
-                          name="sobrenome"
-                          control={control}
-                          rules={{
-                            required: "Sobrenome é obrigatório",
-                            minLength: {
-                              value: 2,
-                              message: "O sobrenome deve ter pelo menos 2 caracteres"
-                            },
-                            pattern: {
-                              value: /^[A-Za-zà-öø-ÿ][A-Za-zà-öø-ÿ\s'-]*$/,
-                              message: "O sobrenome não deve conter números ou símbolos especiais"
-                            }
-                          }}
-                          render={({ field }) => (
-                            <>
-                              <Input
-                                type="text"
-                                placeholder="Sobrenome"
-                                {...field}
-                                onInput={(e) => {
-                                  e.target.value = e.target.value
-                                    .replace(/\d/g, '')
-                                    .replace(/[@$%&*(){}[\]|\\/<>?!:;,+=#^~`]/g, '')
-                                    .replace(/\s{2,}/g, ' ');
-                                }}
-                              />
-                              {errors.sobrenome && <ErrorMessage>{errors.sobrenome.message}</ErrorMessage>}
-                            </>
-                          )}
-                        />
-                      </InputContainer>
-
-                      <ButtonContainer>
-                        <ButtonPrevious type="button" onClick={previousStep}>Voltar</ButtonPrevious>
-                        <Button
-                          type="button"
-                          onClick={nextStep}
-                          disabled={!verifyStepValid()}
-                        >
-                          Próxima
-                        </Button>
-                      </ButtonContainer>
-                    </FormContainer>
-                  </motion.div>
-                )}
-
-                {step === 3 && (
-                  <motion.div
-                    key="etapa3"
-                    initial={slideVariants.initial}
-                    animate={slideVariants.animate}
-                    exit={slideVariants.exit}
-                    transition={slideVariants.transition}
-                  >
-                    <FormContainer>
-                      <FormTitle>CPF e Telefone</FormTitle>
-
-                      <InputContainer>
-                        <InputLabel>CPF</InputLabel>
-                        <Controller
-                          name="cpf"
-                          control={control}
-                          rules={{
-                            required: "CPF é obrigatório",
-                            minLength: {
-                              value: 11,
-                              message: "CPF deve ter 11 dígitos"
-                            }
-                          }}
-                          render={({ field: { onChange, value } }) => (
-                            <>
-                              <PatternFormat
-                                format="###.###.###-##"
-                                mask="_"
-                                value={value}
-                                onValueChange={(values) => onChange(values.value)}
-                                customInput={Input}
-                                allowEmptyFormatting={true}
-                              />
-                              {errors.cpf && <ErrorMessage>{errors.cpf.message}</ErrorMessage>}
-                            </>
-                          )}
-                        />
-                      </InputContainer>
-
-                      <InputContainer>
-                        <InputLabel>Telefone</InputLabel>
-                        <Controller
-                          name="telefone"
-                          control={control}
-                          rules={{
-                            required: "Telefone é obrigatório",
-                            minLength: {
-                              value: 11,
-                              message: "Telefone deve ter 11 dígitos"
-                            }
-                          }}
-                          render={({ field: { onChange, value } }) => (
-                            <>
-                              <PatternFormat
-                                format="(##) #####-####"
-                                mask="_"
-                                value={value}
-                                onValueChange={(values) => onChange(values.value)}
-                                customInput={Input}
-                                allowEmptyFormatting={true}
-                              />
-                              {errors.telefone && <ErrorMessage>{errors.telefone.message}</ErrorMessage>}
-                            </>
-                          )}
-                        />
-                      </InputContainer>
-
-                      <ButtonContainer>
-                        <ButtonPrevious type="button" onClick={previousStep}>Voltar</ButtonPrevious>
-                        <Button
-                          type="submit"
-                          disabled={!verifyStepValid()}
-                        >
-                          Finalizar
-                        </Button>
-                      </ButtonContainer>
-                    </FormContainer>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  {step === 2 && 
+                  <Step2
+                  control={control} 
+                  errors={errors} 
+                  nextStep={nextStep} 
+                  previousStep={previousStep} 
+                  verifyStepValid={verifyStepValid}
+                  />}
+                  {step === 3 && 
+                  <Step3 
+                  control={control} 
+                  errors={errors} 
+                  onSubmit={onSubmit} 
+                  previousStep={previousStep} 
+                  verifyStepValid={verifyStepValid}
+                  />}
 
               <LoginLink>
                 Já tem uma conta? <Link to="/login">Entre aqui</Link>
