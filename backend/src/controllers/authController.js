@@ -6,7 +6,7 @@ const User = require("../entity/User");
 class userController {
   async createUser(req, res) {
     try {
-      const { name, sobrenome, email, cpf, telefone, password } = req.body;
+      const { name, surname, email, cpf, number, password } = req.body;
 
       if (!(email||cpf) || !password) {
         return res.status(400).json({
@@ -25,14 +25,14 @@ class userController {
         });
       }
 
-      const nomeCompleto = `${name} ${sobrenome}`;
+      const completeName = `${name} ${surname}`;
       const senhaCriptografada = await bcrypt.hash(password, 10);
 
       const newUser = userRepository.create({
-        name: nomeCompleto,
+        name: completeName,
         email,
         cpf,
-        telefone,
+        number,
         password: senhaCriptografada,
       });
 
