@@ -1,25 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styledComponentsLogin from './styledLogin';
+import * as S from './styledLogin';
 import './login.css'
 import '../../styles/cssGlobal.css'
 import ScrollRevealComponent from '../../styles/scrollReveal';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-const {
-  ContainerLogin, ContentLogin, Logo, LogoImage,
-  FormLogin, FormTitle,
-  InputContainer, InputLabel,
-  Input, InputCheck, InputCheckLabel,
-  SubmitAdditional, SubmitCheck, SubmitButton,
-  ForgotPassword,
-  RegisterLink,
-  ContainerInformations, Informations, InformationLabel,
-  Flex,
-  SuccessAlert, ErrorAlert
-} = styledComponentsLogin;
-
 
 function Login() {
   useEffect(() => {
@@ -90,43 +76,43 @@ function Login() {
 
   return (
     <>
-      {LoginSucesso && (
-        <SuccessAlert>
+      {S.LoginSucesso && (
+        <S.SuccessAlert>
           Login realizado com sucesso, redirecionando para a página inicial.
-        </SuccessAlert>
+        </S.SuccessAlert>
       )}
 
-      {LoginErro && (
-        <ErrorAlert>
+      {S.LoginErro && (
+        <S.ErrorAlert>
           Erro ao efetuar o login, tente novamente.
         </ErrorAlert>
       )}
 
       <ScrollRevealComponent />
 
-      <ContainerLogin>
-        <Logo className="revealFade">
-          <LogoImage src="/borabico_logo.png" alt="Logo" />
-        </Logo>
+      <S.ContainerLogin>
+        <S.Logo className="revealFade">
+          <S.LogoImage src="/borabico_logo.png" alt="Logo" />
+        </S.Logo>
 
-        <ContentLogin className="revealFade">
-          <FormLogin onSubmit={handleSubmit}>
-            <FormTitle>Acesse sua conta</FormTitle>
+        <S.ContentLogin className="revealFade">
+          <S.FormLogin onSubmit={handleSubmit}>
+            <S.FormTitle>Acesse sua conta</S.FormTitle>
                       
-            <InputContainer>
-              <InputLabel>E-mail, CPF ou CNPJ</InputLabel>
-              <Input 
+            <S.InputContainer>
+              <S.InputLabel>E-mail, CPF ou CNPJ</S.InputLabel>
+              <S.Input 
                 type="text" 
                 placeholder="Digite seu e-mail, CPF ou CNPJ" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value) || setCpf(e.target.value)}
                 required
               />
-            </InputContainer>
+            </S.InputContainer>
             
-            <InputContainer>
-              <InputLabel>Senha</InputLabel>
-              <Input
+            <S.InputContainer>
+              <S.InputLabel>Senha</S.InputLabel>
+              <S.Input
                 type={showPassword ? "text" : "password"}
                 placeholder="Digite sua senha"
                 value={password}
@@ -138,40 +124,40 @@ function Login() {
                 className="openEye"
                 onClick={togglePasswordVisibility}
               />
-            </InputContainer>
+            </S.InputContainer>
 
-            <SubmitAdditional>
-              <SubmitCheck>
-                <InputCheck 
+            <S.SubmitAdditional>
+              <S.SubmitCheck>
+                <S.InputCheck 
                   type="checkbox" 
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                 />
-                <InputCheckLabel>Lembrar-me</InputCheckLabel>
-              </SubmitCheck>
-              <ForgotPassword href="#">Esqueceu a senha?</ForgotPassword>
-            </SubmitAdditional>
+                <S.InputCheckLabel>Lembrar-me</S.InputCheckLabel>
+              </S.SubmitCheck>
+              <S.ForgotPassword href="#">Esqueceu a senha?</S.ForgotPassword>
+            </S.SubmitAdditional>
 
-            <SubmitButton type="submit" disabled={loading}>
+            <S.SubmitButton type="submit" disabled={loading}>
               {loading ? 'Processando...' : 'Entrar'}
-            </SubmitButton>
+            </S.SubmitButton>
 
-            <RegisterLink>
+            <S.RegisterLink>
               Não tem uma conta? <Link to="/register">Cadastre-se</Link>
-            </RegisterLink>
-          </FormLogin>
+            </S.RegisterLink>
+          </S.FormLogin>
 
-          <ContainerInformations className="reveal-fade">
-            <Flex>
+          <S.ContainerInformations className="reveal-fade">
+            <S.Flex>
               <img src="/borabico_logo.png" width="50px" height="50px" alt="Logo" />
-              <InformationLabel>© Copyright 2025</InformationLabel>
-            </Flex>
-            <Informations> <Link to="/register">Política de Privacidade</Link> </Informations>
-            <Informations> <Link to="/register">Termos e Condições</Link> </Informations>
-            <Informations> <Link to="/register">Política de Cookies</Link> </Informations>
-          </ContainerInformations>
-        </ContentLogin>
-      </ContainerLogin>
+              <S.InformationLabel>© Copyright 2025</S.InformationLabel>
+            </S.Flex>
+            <S.Informations> <Link to="/register">Política de Privacidade</Link> </S.Informations>
+            <S.Informations> <Link to="/register">Termos e Condições</Link> </S.Informations>
+            <S.Informations> <Link to="/register">Política de Cookies</Link> </S.Informations>
+          </S.ContainerInformations>
+        </S.ContentLogin>
+      </S.ContainerLogin>
     </>
   );
 }
