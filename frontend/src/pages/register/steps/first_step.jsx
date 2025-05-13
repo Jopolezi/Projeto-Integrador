@@ -38,7 +38,7 @@ const Step1 = ({ control, errors, nextStep, verifyStepValid }) => {
       <InputContainer>
         <InputLabel>Senha</InputLabel>
         <Controller
-          name="senha"
+          name="password"
           control={control}
           rules={{
             required: "Senha é obrigatória",
@@ -50,7 +50,7 @@ const Step1 = ({ control, errors, nextStep, verifyStepValid }) => {
           render={({ field }) => (
             <>
               <Input type="password" placeholder="Senha" {...field} />
-              {errors.senha && <ErrorMessage>{errors.senha.message}</ErrorMessage>}
+              {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
             </>
           )}
         />

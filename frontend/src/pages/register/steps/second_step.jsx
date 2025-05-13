@@ -18,7 +18,7 @@ const Step2 = ({ control, errors, nextStep, previousStep, verifyStepValid }) => 
                 <InputContainer>
                     <InputLabel>Nome</InputLabel>
                     <Controller
-                        name="nome"
+                        name="name"
                         control={control}
                         rules={{
                             required: "Nome é obrigatório",
@@ -44,7 +44,7 @@ const Step2 = ({ control, errors, nextStep, previousStep, verifyStepValid }) => 
                                             .replace(/\s{2,}/g, ' ');
                                     }}
                                 />
-                                {errors.nome && <ErrorMessage>{errors.nome.message}</ErrorMessage>}
+                                {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
                             </>
                         )}
                     />
@@ -53,7 +53,7 @@ const Step2 = ({ control, errors, nextStep, previousStep, verifyStepValid }) => 
                 <InputContainer>
                     <InputLabel>Sobrenome</InputLabel>
                     <Controller
-                        name="sobrenome"
+                        name="surname"
                         control={control}
                         rules={{
                             required: "Sobrenome é obrigatório",
@@ -79,7 +79,7 @@ const Step2 = ({ control, errors, nextStep, previousStep, verifyStepValid }) => 
                                             .replace(/\s{2,}/g, ' ');
                                     }}
                                 />
-                                {errors.sobrenome && <ErrorMessage>{errors.sobrenome.message}</ErrorMessage>}
+                                {errors.surname && <ErrorMessage>{errors.surname.message}</ErrorMessage>}
                             </>
                         )}
                     />

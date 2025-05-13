@@ -35,8 +35,8 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [LoginSucesso, setLoginSucesso] = useState(false);
-  const [LoginErro, setLoginErro] = useState(false);
+  const [LoginSucess, setLoginSucesso] = useState(false);
+  const [LoginError, setLoginErro] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -90,13 +90,13 @@ function Login() {
 
   return (
     <>
-      {LoginSucesso && (
+      {LoginSucess && (
         <SuccessAlert>
           Login realizado com sucesso, redirecionando para a página inicial.
         </SuccessAlert>
       )}
 
-      {LoginErro && (
+      {LoginError && (
         <ErrorAlert>
           Erro ao efetuar o login, tente novamente.
         </ErrorAlert>

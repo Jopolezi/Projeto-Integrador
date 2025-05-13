@@ -15,7 +15,8 @@ class userController {
         });
       }
 
-      const userRepository = AppDataSource.getRepository("User");
+      const userRepository = AppDataSource.getRepository(User);
+
 
       const existingUser = await userRepository.findOneBy({ email });
       if (existingUser) {
