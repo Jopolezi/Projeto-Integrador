@@ -47,7 +47,7 @@ const Step3 = ({ control, errors, previousStep, verifyStepValid}) => {
                       <InputContainer>
                         <InputLabel>Telefone</InputLabel>
                         <Controller
-                          name="telefone"
+                          name="tel"
                           control={control}
                           rules={{
                             required: "Telefone é obrigatório",
@@ -66,7 +66,7 @@ const Step3 = ({ control, errors, previousStep, verifyStepValid}) => {
                                 customInput={Input}
                                 allowEmptyFormatting={true}
                               />
-                              {errors.telefone && <ErrorMessage>{errors.telefone.message}</ErrorMessage>}
+                              {errors.tel && <ErrorMessage>{errors.tel.message}</ErrorMessage>}
                             </>
                           )}
                         />

@@ -25,19 +25,19 @@ function Register() {
   const navigate = useNavigate();
 
   const [step, setStep] = React.useState(1);
-  const [CadastroSucesso, setCadastroSucesso] = React.useState(false);
-  const [CadastroErro, setCadastroErro] = React.useState(false);
+  const [RegisterSucess, setRegisterSucess] = React.useState(false);
+  const [RegisterError, setRegisterError] = React.useState(false);
   const [userName, setUserName] = React.useState('');
 
   const methods = useForm({
     mode: 'onChange',
     defaultValues: {
       email: '',
-      senha: '',
-      nome: '',
-      sobrenome: '',
+      password: '',
+      name: '',
+      surname: '',
       cpf: '',
-      telefone: '',
+      tel: '',
     }
   });
 
@@ -46,11 +46,11 @@ function Register() {
   const verifyStepValid = () => {
     switch (step) {
       case 1:
-        return !errors.email && !errors.senha && methods.getValues('email') && methods.getValues('senha');
+        return !errors.email && !errors.password && methods.getValues('email') && methods.getValues('password');
       case 2:
-        return !errors.nome && !errors.sobrenome && methods.getValues('nome') && methods.getValues('sobrenome');
+        return !errors.name && !errors.surname && methods.getValues('name') && methods.getValues('surname');
       case 3:
-        return !errors.cpf && !errors.telefone && methods.getValues('cpf') && methods.getValues('telefone');
+        return !errors.cpf && !errors.tel && methods.getValues('cpf') && methods.getValues('tel');
       default:
         return false;
     }
@@ -69,12 +69,12 @@ function Register() {
     try {
 
       const userData = {
-        name: data.nome,
-        sobrenome: data.sobrenome,
+        name: data.name,
+        sobrenome: data.surname,
         email: data.email,
         cpf: data.cpf.replace(/\D/g, ''),
-        telefone: data.telefone,
-        password: data.senha
+        telefone: data.tel,
+        password: data.password
       }
 
       const response = await fetch('http://localhost:3000/api/auth/register', {
@@ -91,7 +91,7 @@ function Register() {
         throw new Error(responseData.message || 'Erro ao cadastrar usuário');
       }
 
-      setCadastroSucesso(true);
+      setRegisterSucess(true);
       setUserName(data.nome);
 
       setTimeout(() => {
@@ -100,23 +100,23 @@ function Register() {
 
     } catch (error) {
       setUserName(data.nome);
-      setCadastroErro(true);
+      setRegisterError(true);
 
       setTimeout(() => {
-        setCadastroErro(false);
+        setRegisterError(false);
       }, 3000);
     }
   };
 
   return (
     <>
-      {CadastroSucesso && (
+      {RegisterSucess && (
         <SuccessAlert>
           Parabéns, {userName}, seu cadastro foi realizado com sucesso.
         </SuccessAlert>
       )}
 
-      {CadastroErro && (
+      {RegisterError && (
         <ErrorAlert>
           Erro ao cadastrar o seu usuário, tente novamente.
         </ErrorAlert>
