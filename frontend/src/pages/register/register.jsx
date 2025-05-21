@@ -3,8 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm, FormProvider, Controller } from 'react-hook-form';
 import styledComponentsRegister from './styledRegister';
 import './register.css';
-import '../../styles/cssGlobal.css';
-import ScrollRevealComponent from '../../styles/scrollReveal';
 import { Step1, Step2, Step3 } from './steps';
 
 const {
@@ -172,8 +170,6 @@ function Register() {
               <Informations> <Link to="/register">Política de Cookies</Link> </Informations>
             </ContainerInformations>
           </ContentRegister>
-
-          <ScrollRevealComponent />
         </ContainerRegister>
       </FormProvider>
 

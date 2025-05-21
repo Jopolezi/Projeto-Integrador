@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 5000",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -22,7 +22,8 @@
     "react-number-format": "^5.4.4",
     "react-router-dom": "^7.4.0",
     "scrollreveal": "^4.0.9",
-    "styled-components": "^6.1.16"
+    "styled-components": "^6.1.16",
+    "swiper": "^11.2.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

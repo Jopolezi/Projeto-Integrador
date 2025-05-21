@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styledComponentsLogin from './styledLogin';
 import './login.css'
-import '../../styles/cssGlobal.css'
-import ScrollRevealComponent from '../../styles/scrollReveal';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -101,8 +99,6 @@ function Login() {
           Erro ao efetuar o login, tente novamente.
         </ErrorAlert>
       )}
-
-      <ScrollRevealComponent />
 
       <ContainerLogin>
         <Logo className="revealFade">
