@@ -1,3 +1,5 @@
+const path = require('path');
+const dirname = __dirname;
 require('dotenv').config();
 require('reflect-metadata');
 const { DataSource } = require('typeorm');
@@ -12,7 +14,14 @@ const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true, // cria tabelas automaticamente com base nas entidades
   logging: false,
-  entities: [__dirname + '/../entity/*.js'], // caminho para entidades
+  entities: [
+    path.join(dirname, '../entity/User.js'),
+    path.join(dirname, '../entity/Company.js'),
+    path.join(dirname, '../entity/Job.js'),
+    path.join(dirname, '../entity/Application.js'),
+    path.join(__dirname, '../entity/Avaliacao.js')
+  ],
+
 });
 
 module.exports = {
