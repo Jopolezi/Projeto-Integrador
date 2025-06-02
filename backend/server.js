@@ -1,10 +1,11 @@
-require('dotenv').config(); 
-require('reflect-metadata'); // Necessário para TypeORM
-const { AppDataSource } = require('./src/config/db'); // Conexão TypeORM
-
+const cors = require("cors");
 const express = require("express");
 const app = express();
-const cors = require("cors");
+
+require('dotenv').config(); 
+require('reflect-metadata'); 
+const bodyParser = require('body-parser');
+const { AppDataSource } = require('./src/config/db'); 
 
 app.use(cors());
 app.use(express.json());
@@ -14,10 +15,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const testRoutes = require("./src/routes/testRoute");
 const authRoute = require("./src/routes/authRoute");
+const postRoute = require("./src/routes/postRoute")
 
 
 app.use("/", testRoutes);
 app.use("/api/auth", authRoute);
+app.use("/api/post", postRoute)
 
 
 AppDataSource.initialize()
