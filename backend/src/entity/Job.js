@@ -18,7 +18,7 @@ module.exports = new EntitySchema({
       type: "many-to-one",
       target: "User",
       inverseSide: "jobs",
-      joinColumn: { name: "userId" } // correto!
+      joinColumn: { name: "userId" }
     },
     company: {
       type: "many-to-one",
