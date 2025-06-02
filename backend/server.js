@@ -1,25 +1,32 @@
 require('dotenv').config();
 require('reflect-metadata'); // Necessário para TypeORM
 const { AppDataSource } = require('./src/config/db'); // Conexão TypeORM
-
+const cors = require("cors"); // Importação do cors
 const express = require("express");
+
 const app = express();
-const cors = require("cors");
+
+// Não precisa mais destas duplicatas aqui:
+// require('dotenv').config();
+// require('reflect-metadata');
+// const bodyParser = require('body-parser'); // bodyParser não está sendo usado, pode remover
+// const { AppDataSource } = require('./src/config/db');
 
 app.use(cors());
 app.use(express.json()); // Já lida com JSON payloads
-// Adicione esta linha se você também precisar lidar com dados de formulário URL-encoded
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); // Para dados de formulário URL-encoded
 
-// Remova estas linhas, pois bodyParser não está definido e express.json/urlencoded já cobrem
+// As linhas comentadas do bodyParser estão corretas (não são necessárias)
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 const testRoutes = require("./src/routes/testRoute");
 const authRoute = require("./src/routes/authRoute");
+const postRoute = require("./src/routes/postRoute");
 
 app.use("/", testRoutes);
 app.use("/api/auth", authRoute);
+app.use("/api/post", postRoute);
 
 AppDataSource.initialize()
   .then(() => {

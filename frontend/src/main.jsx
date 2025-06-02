@@ -8,16 +8,15 @@ import GlobalStyles from './styles/GlobalStyles';
 
 const root = createRoot(document.getElementById('root'));
 
-
 root.render(
   <StrictMode>
     <Router>
+    <GlobalStyles />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
-    <GlobalStyles />
   </StrictMode>
 );

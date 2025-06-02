@@ -17,7 +17,7 @@ const {
 
 function Register() {
   useEffect(() => {
-    document.title = "Cadastro | BoraBico";
+    document.title = "Cadastro";
   }, []);
 
   const navigate = useNavigate();

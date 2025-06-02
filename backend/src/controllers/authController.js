@@ -1,6 +1,6 @@
 const { AppDataSource } = require("../config/db")
 const bcrypt = require("bcrypt");
-const { generateToken } = require("../middlewares/authMiddleware");
+const { generateToken } = require("../middlewares/authJWT");
 const User = require("../entity/User");
 
 class userController {
