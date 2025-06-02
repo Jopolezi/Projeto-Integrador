@@ -16,7 +16,7 @@ const isPostOwner = async (req, res, next) => {
     const jobRepository = AppDataSource.getRepository(Job);
     const post = await jobRepository.findOne({
       where: { id: parseInt(id) },
-      relations: ["user"]  // buscar a relação com o usuário
+      relations: ["user"]  
     });
 
     if (!post) {
@@ -33,7 +33,6 @@ const isPostOwner = async (req, res, next) => {
       });
     }
 
-    // Salva o post para uso posterior no controller
     req.post = post;
     next();
   } catch (error) {

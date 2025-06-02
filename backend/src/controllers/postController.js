@@ -123,14 +123,13 @@ class PostController {
  async updatePost(req, res) {
   try {
     const { id } = req.params;
-    const userId = req.user.id;  // <-- pegar o id do usuário autenticado
+    const userId = req.user.id;  
     const { titulo, descricao, localizacao, requisitos, tipoContrato, salario } = req.body;
 
     const jobRepository = AppDataSource.getRepository(Job);
-    // Buscar o post incluindo o usuário dono (relation)
     const post = await jobRepository.findOne({
       where: { id: parseInt(id) },
-      relations: ["user"]  // importante para acessar post.user.id
+      relations: ["user"] 
     });
 
     if (!post) {
@@ -147,7 +146,6 @@ class PostController {
       });
     }
 
-    // Atualizar campos
     if (titulo) post.titulo = titulo;
     if (descricao) post.descricao = descricao;
     if (localizacao !== undefined) post.localizacao = localizacao;
