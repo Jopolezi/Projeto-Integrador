@@ -16,11 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const testRoutes = require("./src/routes/testRoute");
 const authRoute = require("./src/routes/authRoute");
 const postRoute = require("./src/routes/postRoute")
+const ratingRoute = require("./src/routes/ratingRoute")
 
 
 app.use("/", testRoutes);
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute)
+app.use("/api/ratings",ratingRoute )
 
 
 AppDataSource.initialize()
