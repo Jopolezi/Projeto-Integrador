@@ -14,4 +14,4 @@ router.post('/', verifyToken, postController.createPost.bind(postController));
 router.put('/:id', verifyToken, isPostOwner, postController.updatePost.bind(postController));
 router.delete('/:id', verifyToken, isPostOwner, postController.deletePost.bind(postController));
 
-module.exports = router;
+module.exports = router;  
