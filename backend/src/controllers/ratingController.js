@@ -18,7 +18,7 @@ class RatingController {
             });
         }
 
-         const allowedOrigens = ["usuario_para_empresa", "empresa_para_usuario"];
+         const allowedOrigens = ["usuario_para_empresa", "empresa_para_usuario", "usuario_para_usuario"];
          if (!allowedOrigens.includes(origem)) {
          return res.status(400).json({
             success: false,
@@ -57,7 +57,7 @@ class RatingController {
         }
     }
 
-async getAverageFirmRatings(req, res) {
+async getAverageCompanyRatings(req, res) {
     const { userId } = req.params;
     if (!userId) {
         return res.status(400).json({ message: "ID da empresa obrigatório" });
@@ -97,6 +97,84 @@ async getAverageFirmRatings(req, res) {
         });
     }
 }
+
+    async getAverageEmployeeRatings(req, res) {
+        const {userId} = req.params
+
+        if (!userId) {
+            return res.status(400).json({ message: "ID do usuario (empregado) é obrigatorio."});
+        }
+        try {
+            const ratingRepository = AppDataSource.getRepository(Avaliacao)
+
+            const result = await ratingRepository.createQueryBuilder("avaliacao")
+
+            .select("AVG(avaliacao.nota)", "averageRating")
+            .where("avaliacao.avaliadoId = :id", {id: parseInt(userId)})
+            .andWhere("avaliacao.origem = :origemTipo", {origemTipo: "empresa_para_usuario"})
+            .getRawOne()
+
+        const averageRating = result && result.averageRating ? parseFloat(result.averageRating) : 0;
+
+        if (!result || result.averageRating === null) {
+            return res.status(200).json({
+                message: `nenhuma avaliacao como empregado (feita por empresa) emcontrada para o usuario com ID ${userId}`,
+                averageRating: 0
+            })
+        }
+            res.status(200).json({
+                message: `Média de notas do empregado (usuário ID ${userId}) calculada com sucesso.`,
+                averageRating: averageRating
+            });
+        } catch (error) {
+            console.error("Erro ao calcular a média de notas do empregado:", error);
+            res.status(500).json({
+                message: "Erro interno do servidor ao calcular a média de notas do empregado.",
+                error: error.message
+            });
+        }
+    }
+
+     async getAverageUserToUserRating(req, res) {
+        const { userId } = req.params;
+
+        if (!userId) {
+            return res.status(400).json({ message: "ID do usuário é obrigatório." });
+        }
+
+        try {
+            const ratingRepository = AppDataSource.getRepository(Avaliacao);
+
+            const result = await ratingRepository.createQueryBuilder("avaliacao")
+                .select("AVG(avaliacao.nota)", "averageRating") 
+                .where("avaliacao.avaliadoId = :id", { id: parseInt(userId) })
+                .andWhere("avaliacao.origem = :origemTipo", { origemTipo: "usuario_para_usuario" })
+                .getRawOne();
+
+            const averageRating = result && result.averageRating ? parseFloat(result.averageRating) : 0;
+
+            if (!result || result.averageRating === null) {
+                return res.status(200).json({
+                    message: `Nenhuma avaliação de 'usuário para usuário' encontrada para o usuário com ID ${userId}.`,
+                    averageRating: 0
+                });
+            }
+
+            res.status(200).json({
+                message: `Média de notas de 'usuário para usuário' para o usuário ID ${userId} calculada com sucesso.`,
+                averageRating: averageRating
+            });
+
+        } catch (error) {
+            console.error("Erro ao calcular a média de notas 'usuário para usuário':", error);
+            res.status(500).json({
+                message: "Erro interno do servidor ao calcular a média de notas 'usuário para usuário'.",
+                error: error.message
+            });
+        }
+    }
 }
+
+
 
 module.exports = RatingController
