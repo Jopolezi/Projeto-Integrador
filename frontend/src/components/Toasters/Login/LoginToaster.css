@@ -1,0 +1,31 @@
+.Toastify__toast {
+  background-color: #fff;
+  color: #111;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 0 20px;
+  max-width: 600px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.Toastify__progress-bar {
+  background: #f00;
+}
+
+@media (max-width: 768px) {
+  .Toastify__toast {
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 0 14px;
+    max-width: 300px;
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .Toastify__progress-bar {
+    height: 5px;
+  }
+}
