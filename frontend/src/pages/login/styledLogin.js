@@ -26,9 +26,9 @@ export const Container = styled.div`
 export const Header = styled.header`
   width: 100%;
   max-width: 100%;
-  padding: 20px 4%;
-  height: 80px;
-  position: fixed;
+  padding: 10px 4%;
+  height: 20px;
+
 `;
 
 export const ContainerLogo = styled(Link)`
@@ -197,11 +197,8 @@ export const Footer = styled.footer`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: ${C.colors.white};
+  background: ${C.colors.offwhite};
   color: ${C.colors.gray};
-  position: fixed;
-  inset-block-end: 0;
-  inset-inline-start: 0;
 
   @media ${S.device.tablet} {
     flex-direction: column;

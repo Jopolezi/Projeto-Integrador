@@ -35,45 +35,40 @@ function BicoPosting() {
   });
 
   const workModel = watch('workModel');
-  const contactPhone = watch('contactPhone');
-  const contactEmail = watch('contactEmail');
 
   useEffect(() => {
-    document.title = "Publicar Bico - BORABICO";
+    document.title = "Publicar Bico - BORABICO"
   }, []);
 
   const onSubmit = async (data) => {
-    setIsSubmitting(true);
     
     try {
-      const response = await axios.post('caminho', data);
+      const response = await axios.post('caminho', data)
       
-      console.log('Bico publicado com sucesso:', response.data);
-      alert('Bico publicado com sucesso!');
+      console.log('Bico publicado com sucesso:', response.data)
+      alert('Bico publicado com sucesso!')
       reset()
       
     } catch (error) {
-      console.error('Erro ao publicar bico:', error);
+      console.error('Erro ao publicar bico:', error)
       
       if (error.response?.status === 400) {
-        const validationErrors = error.response.data.errors;
+        const validationErrors = error.response.data.errors
         if (validationErrors) {
           Object.keys(validationErrors).forEach(field => {
             setError(field, {
               type: 'server',
               message: validationErrors[field]
-            });
-          });
+            })
+          })
         }
       } else if (error.response?.status === 422) {
-        alert('Dados inválidos. Verifique as informações e tente novamente.');
+        alert('Dados inválidos. Verifique as informações e tente novamente.')
       } else if (error.response?.status >= 500) {
-        alert('Erro interno do servidor. Tente novamente mais tarde.');
+        alert('Erro interno do servidor. Tente novamente mais tarde.')
       } else {
-        alert('Erro ao publicar bico. Tente novamente.');
+        alert('Erro ao publicar bico. Tente novamente.')
       }
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -343,8 +338,8 @@ function BicoPosting() {
                 </S.RememberCheckboxText>
               </S.CheckboxContainer>
 
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Publicando...' : 'Publicar Bico'}
+              <Button type="submit">
+                PUBLICAR BICO
               </Button>
             </S.Form>
           </S.Content>

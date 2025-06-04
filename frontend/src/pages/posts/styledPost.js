@@ -1,15 +1,5 @@
-import styled from 'styled-components';
-
-// Colors
-export const colors = {
-  dark: '#2c3e50',
-  darkGray: '#34495e',
-  gray: '#7f8c8d',
-  lightgray: '#bdc3c7',
-  red: '#e74c3c',
-  white: '#ffffff',
-  offwhite: '#f8f9fa'
-};
+import styled from 'styled-components'
+import * as C from '../../styles/colors'
 
 export const Container = styled.div`
   display: flex;
@@ -18,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  background: ${colors.offwhite};
+  background: ${C.colors.offwhite};
   padding-top: 80px;
   padding-bottom: 80px;
 `;
@@ -26,13 +16,9 @@ export const Container = styled.div`
 export const Header = styled.header`
   width: 100%;
   max-width: 100%;
-  padding: 20px 4%;
-  height: 80px;
-  position: fixed;
-  top: 0;
-  background: ${colors.white};
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 100;
+  padding: 10px 4%;
+  height: 20px;
+  background: ${C.colors.white};
 `;
 
 export const ContainerLogo = styled.div`
@@ -52,7 +38,7 @@ export const LogoText = styled.h2`
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
   font-size: 1.5rem;
-  color: ${colors.dark};
+  color: ${C.colors.dark};
   margin: 0;
   pointer-events: none;
   user-select: none;
@@ -71,11 +57,11 @@ export const Content = styled.div`
 `;
 
 export const Title = styled.h1`    
-  align-self: flex-start;
+  align-self: flex-center;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 2.5rem;
-  color: ${colors.darkGray};
+  color: ${C.colors.dark};
   margin-bottom: 1rem;
 `;
 
@@ -84,7 +70,7 @@ export const Form = styled.form`
   flex-direction: column;
   width: 100%;
   max-width: 800px;
-  background: ${colors.white};
+  background: ${C.colors.white};
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -114,7 +100,7 @@ export const InputTitle = styled.label`
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
   font-size: 1rem;
-  color: ${colors.dark};
+  color: ${C.colors.dark};
   margin-bottom: 0.5rem;
 `;
 
@@ -124,13 +110,13 @@ export const Select = styled.select`
   border-radius: 8px;
   font-size: 16px;
   font-family: 'Poppins', sans-serif;
-  background: ${colors.white};
+  background: ${C.colors.white};
   cursor: pointer;
   transition: all 0.3s ease;
   
   &:focus {
     outline: none;
-    border-color: ${colors.red};
+    border-color: ${C.colors.red};
   }
 `;
 
@@ -146,11 +132,11 @@ export const TextArea = styled.textarea`
   
   &:focus {
     outline: none;
-    border-color: ${colors.red};
+    border-color: ${C.colors.red};
   }
   
   &::placeholder {
-    color: ${colors.gray};
+    color: ${C.colors.gray};
   }
 `;
 
@@ -158,7 +144,7 @@ export const InputError = styled.p`
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
   font-size: 0.85rem;
-  color: ${colors.red};
+  color: ${C.colors.red};
   margin-top: 0.25rem;
 `;
 
@@ -167,7 +153,7 @@ export const CheckboxContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-  margin: 10px 0;
+  margin: 5px 0;
 `;
 
 export const RememberCheckbox = styled.input`
@@ -176,11 +162,11 @@ export const RememberCheckbox = styled.input`
   justify-content: center;
   width: 20px;
   height: 20px;
-  accent-color: ${colors.red};
+  accent-color: ${C.colors.red};
 `;
 
 export const RememberCheckboxText = styled.p`
-  color: ${colors.gray};
+  color: ${C.colors.gray};
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 500;
@@ -196,11 +182,8 @@ export const Footer = styled.footer`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: ${colors.white};
-  color: ${colors.gray};
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  background: ${C.colors.offwhite};
+  color: ${C.colors.gray};
 `;
 
 export const FooterText = styled.p`
@@ -218,7 +201,7 @@ export const FooterLinks = styled.div`
   gap: 20px;
 
   a {
-    color: ${colors.gray};
+    color: ${C.colors.gray};
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
@@ -226,7 +209,7 @@ export const FooterLinks = styled.div`
     cursor: pointer;
 
     &:hover {
-      color: ${colors.dark};
+      color: ${C.colors.dark};
     }
   }
 `;

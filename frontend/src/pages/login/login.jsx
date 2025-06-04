@@ -56,7 +56,7 @@ function Login() {
         
         console.error('Erro do servidor:', error.response.data.message)
       } else {
-        toast.error('Erro de conexão. Verifique sua internet.', {
+        toast.error('Erro de conexão. Tente novamente.', {
           position: "top-right",
           autoClose: 4000
         });
