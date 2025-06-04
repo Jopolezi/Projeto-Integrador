@@ -16,6 +16,7 @@ function BicoPosting() {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
     clearErrors,
     setError
   } = useForm({
@@ -45,21 +46,16 @@ function BicoPosting() {
     setIsSubmitting(true);
     
     try {
-      const response = await axios.post('/api/bicos', data);
+      const response = await axios.post('caminho', data);
       
-      // Sucesso - você pode fazer o que quiser aqui
       console.log('Bico publicado com sucesso:', response.data);
       alert('Bico publicado com sucesso!');
-      
-      // Opcional: limpar o formulário ou redirecionar
-      // reset();
+      reset()
       
     } catch (error) {
       console.error('Erro ao publicar bico:', error);
       
-      // Tratar diferentes tipos de erro
       if (error.response?.status === 400) {
-        // Erros de validação do servidor
         const validationErrors = error.response.data.errors;
         if (validationErrors) {
           Object.keys(validationErrors).forEach(field => {
@@ -70,13 +66,10 @@ function BicoPosting() {
           });
         }
       } else if (error.response?.status === 422) {
-        // Erro de dados inválidos
         alert('Dados inválidos. Verifique as informações e tente novamente.');
       } else if (error.response?.status >= 500) {
-        // Erro do servidor
         alert('Erro interno do servidor. Tente novamente mais tarde.');
       } else {
-        // Outros erros
         alert('Erro ao publicar bico. Tente novamente.');
       }
     } finally {
