@@ -1,4 +1,4 @@
-const { Await } = require("react-router-dom")
+
 const {AppDataSource} = require("../config/db")
 const Avaliacao = require("../entity/Avaliacao")
 const rating = require("../entity/Avaliacao")
