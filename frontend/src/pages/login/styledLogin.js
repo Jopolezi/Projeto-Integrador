@@ -27,8 +27,7 @@ export const Header = styled.header`
   width: 100%;
   max-width: 100%;
   padding: 10px 4%;
-  height: 20px;
-
+  background: ${C.colors.offwhite};
 `;
 
 export const ContainerLogo = styled(Link)`

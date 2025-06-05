@@ -24,8 +24,6 @@ app.use("/api/post", postRoute)
 app.use("/api/ratings",ratingRoute )
 
 
-const postRoute = require("./src/routes/postRoute");
-
 app.use("/", testRoutes);
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
