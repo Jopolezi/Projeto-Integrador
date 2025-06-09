@@ -22,7 +22,13 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', data)
+
+      const userData = {
+        identificator: data.email,
+        password: data.password,
+      }
+
+      const response = await axios.post('http://localhost:3000/api/auth/login', userData)
 
       const { token } = response.data
 
