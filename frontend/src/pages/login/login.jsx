@@ -30,7 +30,7 @@ function Login() {
     try {
 
       const userData = {
-        identificator: data.email,
+        identificator: data.user,
         password: data.password,
       }
 
@@ -41,7 +41,7 @@ function Login() {
       toast.success('Bem-vindo de volta!', {
         position: "top-right",
         autoClose: 2000
-      });
+      })
 
       localStorage.setItem('token', token)
 
@@ -101,24 +101,23 @@ function Login() {
           <S.Content>
             <S.Form onSubmit={handleSubmit(onSubmit)}>
               <S.Title>Entrar</S.Title>
-              <S.InputTitle>Email</S.InputTitle>
+              <S.InputTitle>Email ou CPF</S.InputTitle>
               <Input
-                {...register("email", {
+                {...register("user", {
                   required: "Este campo é obrigatório.",
                   pattern: {
-                    value: /^[A-Za-z0-9._-]+@[A-Za-z]+(\.[A-Za-z]+)+$/,
-                    message: "Email inválido."
+                    message: "Email ou CPF inválido."
                   },
                   maxLength: {
                     value: 100,
                     message: "Email não pode ter mais de 100 caracteres."
                   }
                 })}
-                type="email"
-                placeholder="Email"
+                type="text"
+                placeholder="Email ou CPF"
                 name="email"
               />
-              {errors.email && <S.InputError>{errors.email.message}</S.InputError>}
+              {errors.user && <S.InputError>{errors.user.message}</S.InputError>}
 
               <S.InputTitle>Senha</S.InputTitle>
               <Input
