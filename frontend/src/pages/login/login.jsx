@@ -115,7 +115,7 @@ function Login() {
                 })}
                 type="text"
                 placeholder="Email ou CPF"
-                name="email"
+                name="user"
               />
               {errors.user && <S.InputError>{errors.user.message}</S.InputError>}
 
