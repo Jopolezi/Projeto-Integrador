@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,18 +9,24 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Buttons/button';
 import { motion } from 'framer-motion';
 
+
 function Login() {
+
   useEffect(() => {
     document.title = "Entrar";
   }, []);
 
+  const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm(
     { mode: 'onChange' }
   );
 
+
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+
+    setIsLoading(true)
     try {
 
       const userData = {
@@ -36,7 +42,7 @@ function Login() {
         position: "top-right",
         autoClose: 2000
       });
-      
+
       localStorage.setItem('token', token)
 
       setTimeout(() => {
@@ -46,7 +52,7 @@ function Login() {
     } catch (error) {
       if (error.response) {
         let errorMessage = 'Não foi possível realizar o login.';
-        
+
         if (error.response.status === 401) {
           errorMessage = 'Email ou senha incorretos.';
         } else if (error.response.status === 429) {
@@ -54,27 +60,29 @@ function Login() {
         } else if (error.response.status === 500) {
           errorMessage = 'Erro interno do servidor. Tente novamente.';
         }
-        
+
         toast.error(errorMessage, {
           position: "top-right",
           autoClose: 4000
         });
-        
+
         console.error('Erro do servidor:', error.response.data.message)
       } else {
         toast.error('Erro de conexão. Tente novamente.', {
           position: "top-right",
           autoClose: 4000
         });
-        
+
         console.error('Erro de rede:', error.message)
       }
+    } finally {
+      setIsLoading(false)
     }
   };
 
   return (
     <>
-    <LoginToaster />
+      <LoginToaster />
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -127,9 +135,9 @@ function Login() {
               />
               {errors.password && <S.InputError>{errors.password.message}</S.InputError>}
 
-              <Button type="submit">
-                Entrar
-              </Button>
+              <S.LoginButton type="submit" disabled={isLoading}>
+                {isLoading ? "Entrando..." : "Entrar"}
+              </S.LoginButton>
 
               <S.MoreOptionsContainer>
                 <S.RememberContainer>

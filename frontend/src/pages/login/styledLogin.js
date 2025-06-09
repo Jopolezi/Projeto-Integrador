@@ -4,6 +4,7 @@ import * as D from '../../styles/styledComponents'
 import * as C from '../../styles/colors'
 import * as S from '../../styles/styledComponents'
 import '../../assets/fonts/fonts.css'
+import Button from '../../components/Buttons/button'
 
 export const OpenEye = css`
     width: 30px;
@@ -14,6 +15,15 @@ export const OpenEye = css`
     padding: 12px;
     cursor: pointer;
 `
+
+export const LoginButton = styled(Button)`
+background: ${props => props.disabled ? C.colors.gray : C.colors.red} !important;
+
+&:hover {
+ background: ${props => props.disabled ? C.colors.gray : C.colors.darkRed} !important;
+}
+
+`;
 
 export const Container = styled.div`
   ${S.flexCenter};
