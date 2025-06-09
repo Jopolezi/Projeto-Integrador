@@ -98,7 +98,7 @@ export const InputTitle = styled.label`
   font-weight: 500;
   font-size: 1rem;
   color: ${C.colors.dark};
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.15rem;
 `;
 
 export const InputError = styled.p`
