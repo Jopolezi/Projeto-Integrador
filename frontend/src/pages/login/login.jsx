@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import LoginToaster from '../../components/Toasters/Login/LoginToaster';
 import * as S from './styledLogin';
 import Input from '../../components/Input/Input';
-import Button from '../../components/Buttons/button';
+import Button from '../../components/Buttons/button'; // Note que você importou como 'button' minúsculo
 import { motion } from 'framer-motion';
 
 
@@ -16,45 +16,43 @@ function Login() {
     document.title = "Entrar";
   }, []);
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm(
     { mode: 'onChange' }
   );
 
-
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-
-    setIsLoading(true)
+    setIsLoading(true);
     try {
+      // O objeto 'data' do react-hook-form agora virá como { identificator: "...", password: "..." }
+      // então podemos passá-lo diretamente para o axios.
+      const response = await axios.post('http://localhost:3000/api/auth/login', data);
 
-      const userData = {
-        identificator: data.email,
-        password: data.password,
-      }
-
-      const response = await axios.post('http://localhost:3000/api/auth/login', userData)
-
-      const { token } = response.data
+      const { token } = response.data;
 
       toast.success('Bem-vindo de volta!', {
         position: "top-right",
         autoClose: 2000
       });
 
-      localStorage.setItem('token', token)
+      localStorage.setItem('token', token);
 
       setTimeout(() => {
-        navigate('/')
-      }, 2500)
+        navigate('/');
+      }, 2500);
 
     } catch (error) {
       if (error.response) {
         let errorMessage = 'Não foi possível realizar o login.';
 
+        // A mensagem de erro para 401 pode ser mais genérica
         if (error.response.status === 401) {
-          errorMessage = 'Email ou senha incorretos.';
+          errorMessage = 'Email/CPF ou senha incorretos.';
+        } else if (error.response.status === 400) {
+            // Tratando o erro 400 que você estava recebendo
+            errorMessage = error.response.data.message || 'Dados inválidos.';
         } else if (error.response.status === 429) {
           errorMessage = 'Muitas tentativas. Aguarde alguns minutos.';
         } else if (error.response.status === 500) {
@@ -66,17 +64,17 @@ function Login() {
           autoClose: 4000
         });
 
-        console.error('Erro do servidor:', error.response.data.message)
+        console.error('Erro do servidor:', error.response.data.message);
       } else {
-        toast.error('Erro de conexão. Tente novamente.', {
+        toast.error('Erro de conexão. Verifique sua internet.', {
           position: "top-right",
           autoClose: 4000
         });
 
-        console.error('Erro de rede:', error.message)
+        console.error('Erro de rede:', error.message);
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -101,24 +99,28 @@ function Login() {
           <S.Content>
             <S.Form onSubmit={handleSubmit(onSubmit)}>
               <S.Title>Entrar</S.Title>
-              <S.InputTitle>Email</S.InputTitle>
+              {/* --- INÍCIO DAS MUDANÇAS --- */}
+              <S.InputTitle>Email ou CPF</S.InputTitle>
               <Input
-                {...register("email", {
+                {...register("identificator", { // 1. Nome do campo alterado
                   required: "Este campo é obrigatório.",
-                  pattern: {
-                    value: /^[A-Za-z0-9._-]+@[A-Za-z]+(\.[A-Za-z]+)+$/,
-                    message: "Email inválido."
-                  },
-                  maxLength: {
-                    value: 100,
-                    message: "Email não pode ter mais de 100 caracteres."
+                  validate: (value) => { // 2. Validação customizada para email OU CPF
+                    const isEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
+                    const isCpf = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/.test(value);
+
+                    if (isEmail || isCpf) {
+                      return true; // Validação OK
+                    }
+                    return "Email ou CPF inválido."; // Mensagem de erro
                   }
                 })}
-                type="email"
-                placeholder="Email"
-                name="email"
+                type="text" // 3. Tipo alterado para texto
+                placeholder="Digite seu email ou CPF"
+                name="identificator" // 4. Name do input alterado
               />
-              {errors.email && <S.InputError>{errors.email.message}</S.InputError>}
+              {/* 5. Erro agora verifica 'identificator' */}
+              {errors.identificator && <S.InputError>{errors.identificator.message}</S.InputError>}
+              {/* --- FIM DAS MUDANÇAS --- */}
 
               <S.InputTitle>Senha</S.InputTitle>
               <Input
@@ -135,9 +137,10 @@ function Login() {
               />
               {errors.password && <S.InputError>{errors.password.message}</S.InputError>}
 
-              <S.LoginButton type="submit" disabled={isLoading}>
+              {/* Assumi que seu componente de botão se chama 'Button' e não 'S.LoginButton' */}
+              <Button type="submit" disabled={isLoading}>
                 {isLoading ? "Entrando..." : "Entrar"}
-              </S.LoginButton>
+              </Button>
 
               <S.MoreOptionsContainer>
                 <S.RememberContainer>

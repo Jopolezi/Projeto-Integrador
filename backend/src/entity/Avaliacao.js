@@ -8,7 +8,10 @@ module.exports = new EntitySchema({
     id: { primary: true, type: "int", generated: true },
     nota: { type: "int", nullable: false },
     comentario: { type: "text", nullable: true },
-    origem: { type: "enum", enum: ["usuario_para_empresa", "empresa_para_usuario"], nullable: false },
+    // No seu schema da entidade Avaliacao
+origem: {
+  type: "enum",
+  enum: ["usuario_para_empresa", "empresa_para_usuario", "usuario_para_usuario"], nullable: false },
     data: { type: "datetime", createDate: true }
   },
   relations: {
