@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
-import * as D from '../../styles/styledComponents'
 import * as C from '../../styles/colors'
 import * as S from '../../styles/styledComponents'
 import '../../assets/fonts/fonts.css'
@@ -22,7 +21,6 @@ background: ${props => props.disabled ? C.colors.gray : C.colors.red} !important
 &:hover {
  background: ${props => props.disabled ? C.colors.gray : C.colors.darkRed} !important;
 }
-
 `;
 
 export const Container = styled.div`
@@ -244,36 +242,4 @@ export const FooterLinks = styled.div`
       color: ${C.colors.dark};
     }
   }
-`;
-
-export const SucessAlert = styled.div`
-position: absolute;
-  top: 0;
-  right: 0;
-  margin: 12px;
-  padding: 12px;
-  background-color: ${C.colors.white};
-  color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  font-size: 1rem;
-  font-weight: 400;
-  font-family: "Poppins", sans-serif;
-  z-index: 100;
-`;
-
-export const ErrorAlert = styled.div`
-position: absolute;
-  top: 0;
-  right: 0;
-  margin: 12px;
-  padding: 12px;
-  background-color: ${C.colors.red};
-  color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  font-size: 1rem;
-  font-weight: 400;
-  font-family: "Poppins", sans-serif;
-  z-index: 100;
 `;
