@@ -1,106 +1,118 @@
 import styled from 'styled-components';
+<<<<<<< Updated upstream
 import * as C from '../../styles/colors';
 import * as S from '../../styles/styledComponents';
+=======
+>>>>>>> Stashed changes
 import { Link } from 'react-router-dom';
 
 export const HeaderContainer = styled.header`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 100%;
-  height: 80px;
-  padding: 0 4%;
-  background-color: ${C.colors.red};
-  font-family: 'Poppins', sans-serif;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  position: fixed;
+  align-items: center;
+  padding: 1.2rem 3rem;
+  background: linear-gradient(135deg, #FF3333 0%, #e62e2e 100%);
+  position: sticky;
   top: 0;
-  z-index: 999;
-
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
   @media (max-width: 768px) {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0 2%;
+    padding: 1rem 1.5rem;
   }
 `;
 
-export const Logo = styled.h1`
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: ${C.colors.white};
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
-`;
-
-export const Nav = styled.nav`
-  display: flex;
-  gap: 32px;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-export const NavItem = styled.a`
-  font-size: 1rem;
-  font-weight: 500;
-  color: ${C.colors.white};
-  text-decoration: none;
-  transition: color 0.3s ease;
-
+export const Logo = styled.div`
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
+  letter-spacing: -0.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  
   &:hover {
-    color: ${C.colors.offwhite};
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
   }
 `;
 
 export const AuthButtons = styled.div`
   display: flex;
-  gap: 16px;
-
+  gap: 1.2rem;
+  align-items: center;
+  
   @media (max-width: 768px) {
-    display: none;
+    gap: 1rem;
   }
 `;
 
-export const LoginLink = styled(Link)`
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: ${C.colors.red};
-  background-color: ${C.colors.white};
-  border: 2px solid transparent;
-  border-radius: 12px;
-  cursor: pointer;
-  text-decoration: none;
+const BaseButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s ease, color 0.3s ease;
-
-  &:hover {
-    border: 2px solid ${C.colors.white};
-    background-color: ${C.colors.red};
-    color: ${C.colors.white};
+  padding: 0.9rem 1.8rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 85px;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.8rem 1.4rem;
+    font-size: 0.9rem;
+    min-width: 75px;
   }
 `;
 
-export const RegisterLink = styled(Link)`
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: ${C.colors.white};
-  background-color: transparent;
-  border: 2px solid ${C.colors.white};
-  border-radius: 12px;
-  cursor: pointer;
-  text-decoration: none;
-  ${S.flexCenter};
-  transition: background 0.3s ease, color 0.3s ease;
-
+export const LoginLink = styled(BaseButton)`
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  
   &:hover {
-    background-color: ${C.colors.white};
-    color: ${C.colors.red};
+    background: rgba(255, 255, 255, 0.95);
+    color: #FF3333;
+    border-color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+`;
+
+export const RegisterLink = styled(BaseButton)`
+  background: rgba(255, 255, 255, 0.95);
+  color: #FF3333;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+  
+  &:hover {
+    background: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 `;
