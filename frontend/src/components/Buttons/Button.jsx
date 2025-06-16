@@ -5,7 +5,7 @@ import '../../assets/fonts/fonts.css'
 
 const ButtonComponent = styled.button`
     width: 100%;
-    background: ${C.colors.red};
+    background: ${({ loading }) => loading ? C.colors.gray : C.colors.red};
     color: ${C.colors.white};
     font-family: "Poppins", sans-serif;
     font-size: 1rem;
@@ -15,20 +15,26 @@ const ButtonComponent = styled.button`
     border: none;
     border-radius: 4px;
     margin-top: 1rem;
-    cursor: pointer;
+    cursor: ${({ loading }) => loading ? 'not-allowed' : 'pointer'};
     transition: background 0.2s;
   
     &:hover {
-        background: ${C.colors.darkred};
+        background: ${({ loading }) => loading ? C.colors.gray : C.colors.darkred};
     }
-    `
+    
+    &:disabled {
+        opacity: 0.7;
+    }
+`
 
-const Button = ( { type, loading, children }) => {
+const Button = ({ type, loading, children }) => {
   return (
     <ButtonComponent 
-    type={type}
-    disabled={loading}>
-    {children}
+      type={type}
+      loading={loading}
+      disabled={loading}
+    >
+      {children}
     </ButtonComponent>
   )
 }

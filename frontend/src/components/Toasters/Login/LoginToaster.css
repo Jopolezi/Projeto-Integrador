@@ -15,6 +15,10 @@
   background: #f00;
 }
 
+.Toastify__progress-bar--success {
+  background: #008000;
+}
+
 @media (max-width: 768px) {
   .Toastify__toast {
     margin-top: 10px;

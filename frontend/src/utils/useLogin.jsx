@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
@@ -6,12 +7,14 @@ import { toast } from 'react-toastify';
 function useLogin() {
 const { register, handleSubmit, formState: { errors } } = useForm(
     { mode: 'onChange' }
-);
+)
 
-const navigate = useNavigate();
+const navigate = useNavigate()
+const [loading, setLoading] = useState(false)
 
 const onSubmit = async (data) => {
     try {
+        setLoading(true)
         const response = await axios.post('http://localhost:3000/api/auth/login', data)
 
         const { token } = response.data
@@ -52,7 +55,9 @@ const onSubmit = async (data) => {
             });
 
             console.error('Erro de rede:', error.message)
-        }
+        } 
+    } finally {
+        setLoading(false)
     }
 }
 
@@ -60,7 +65,8 @@ return {
     register,
     handleSubmit,
     errors,
-    onSubmit
+    onSubmit,
+    loading
 }
 }
 
