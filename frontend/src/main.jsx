@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home/home';
 import Login from './pages/login/login';
 import Register from './pages/register/register';
+import Politices from './pages/policy/Policy';
 import BicoPosting from './pages/posts/jobPost';
 import GlobalStyles from './styles/GlobalStyles';
 
@@ -18,6 +19,7 @@ root.render(
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/publicar-vaga" element={<BicoPosting />} />
+        <Route path="/politicas" element={<Politices />} />
       </Routes>
     </Router>
   </StrictMode>
