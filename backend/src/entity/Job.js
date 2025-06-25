@@ -1,4 +1,3 @@
-
 const { EntitySchema } = require("typeorm");
 
 module.exports = new EntitySchema({
@@ -6,24 +5,24 @@ module.exports = new EntitySchema({
   tableName: "jobs",
   columns: {
     id: { primary: true, type: "int", generated: true },
-    titulo: { type: "varchar", length: 100, nullable: false },
-    descricao: { type: "text", nullable: false},
+    titulo: { type: "varchar", length: 100 },
+    descricao: { type: "text" },
     requisitos: { type: "text", nullable: true },
     localizacao: { type: "varchar", length: 100, nullable: true },
-    tipoContrato: { type: "enum", enum: ["CLT", "PJ", "Freelancer", "Estágio"], nullable: true  },
+    tipo_contrato: {
+      type: "enum",
+      enum: ["CLT", "PJ", "Freelancer", "EstÃ¡gio"],
+      nullable: true
+    },
     salario: { type: "decimal", precision: 10, scale: 2, nullable: true },
-    dataPublicacao: { type: "datetime", default: () => "CURRENT_TIMESTAMP"}
-  }, relations: {
+    data_publicacao: { type: "datetime", default: () => "CURRENT_TIMESTAMP" }
+  },
+  relations: {
     user: {
       type: "many-to-one",
       target: "User",
       inverseSide: "jobs",
-      joinColumn: { name: "userId" }
-    },
-    company: {
-      type: "many-to-one",
-      target: "Company",
-      inverseSide: "jobs"
+      joinColumn: { name: "user_id" }
     },
     applications: {
       type: "one-to-many",

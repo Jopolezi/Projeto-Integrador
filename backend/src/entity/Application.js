@@ -1,4 +1,3 @@
-
 const { EntitySchema } = require("typeorm");
 
 module.exports = new EntitySchema({
@@ -12,12 +11,14 @@ module.exports = new EntitySchema({
     vaga: {
       type: "many-to-one",
       target: "Job",
-      inverseSide: "applications"
+      inverseSide: "applications",
+      joinColumn: { name: "vaga_id" }
     },
     usuario: {
       type: "many-to-one",
       target: "User",
-      inverseSide: "applications"
+      inverseSide: "applications",
+      joinColumn: { name: "user_id" }
     }
   }
 });
