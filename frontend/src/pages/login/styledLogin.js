@@ -4,7 +4,6 @@ import * as D from '../../styles/styledComponents'
 import * as C from '../../styles/colors'
 import * as S from '../../styles/styledComponents'
 import '../../assets/fonts/fonts.css'
-import Button from '../../components/Buttons/button'
 
 
 export const OpenEye = css`
@@ -43,6 +42,8 @@ export const ContainerLogo = styled(Link)`
   display: flex;
   align-items: center;
   gap: 5px;
+  color: ${C.colors.dark};
+  text-decoration: none;
 `;
 
 export const Logo = styled.img`

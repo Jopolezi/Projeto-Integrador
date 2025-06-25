@@ -1,454 +1,275 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
+import * as D from '../../styles/styledComponents'
+import * as C from '../../styles/colors'
+import * as S from '../../styles/styledComponents'
+import '../../assets/fonts/fonts.css'
 
-// This object contains fonts imported for register.css --
-const fonts = {
-  family: {
-    poppins: "'Poppins', sans-serif",
-    boldonse: "'Boldonse', sans-serif",
-  }
-};
 
-// Colors used in the application --
-const colors = {
-  red: '#FF3030',
-  darkred: '#CC0000',
-  green: '#28D728',
-  white: '#FFFFFF',
-  offwhite: '#F7F7F7',
-  dark: '#333333',
-  gray: '#666666',
-  black: '#010100',
-};
+export const OpenEye = css`
+    width: 30px;
+    height: 30px;
+    color: ${C.colors.gray};
+    position: absolute;
+    right: 0;
+    padding: 12px;
+    cursor: pointer;
+`
 
-// Breakpoints for responsive design --
-const breakpoints = {
-  xs: '320px',
-  sm: '576px',
-  md: '768px',
-  lg: '992px',
-  xl: '1200px',
-  xxl: '1400px'
-};
-
-export const Flex = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const ContainerRegister = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: 100dvh;
+  max-height: 100dvh;
   width: 100%;
+  background: ${C.colors.offwhite};
+  overflow: hidden; 
 `;
 
-export const Logo = styled.div`
+export const Header = styled.header`
+  width: 100%;
+  max-width: 100%;
+  padding: 0 4%;
+  background: ${C.colors.offwhite};
+  flex-shrink: 0; 
+  
+  @media ${S.device.mobile} {
+    padding: 4px 4%;
+  }
+`;
+
+export const ContainerLogo = styled(Link)`
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 20dvh;
-  width: 100%;
-  overflow: hidden;
+  gap: 5px;
+  color: ${C.colors.dark};
+  text-decoration: none;
+`;
+
+export const Logo = styled.img`
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
   
-  @media (max-width: ${breakpoints.sm}) {
-    height: 15dvh;
+  @media ${S.device.mobile} {
+    width: 56px;
+    height: 56px;
   }
 `;
 
-export const LogoImage = styled.img`
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
-  transform: scale(2);
-  
-  @media (max-width: ${breakpoints.xl}) {
-    transform: scale(1.75);
-  }
-  
-  @media (max-width: ${breakpoints.lg}) {
-    transform: scale(1.5);
-    max-width: 400px;
-  }
-  
-  @media (max-width: ${breakpoints.md}) {
-    transform: scale(1.25);
-    max-width: 350px;
-  }
-  
-  @media (max-width: ${breakpoints.sm}) {
-    transform: scale(1);
-    max-width: 280px;
-  }
-  
-  @media (max-width: ${breakpoints.xs}) {
-    transform: scale(0.9);
-    max-width: 240px;
-  }
-`;
-
-export const ContentRegister = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 80dvh;
-  color: ${colors.white};
-  z-index: 1;
-  padding: 0 1rem;
-  
-  @media (max-width: ${breakpoints.sm}) {
-    height: 85dvh;
-    padding: 0 0.5rem;
-  }
-`;
-
-export const FormRegister = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 500px;
-  padding: 2rem;
-  border: none;
-  border-radius: 12px;
-
-  -webkit-box-shadow: 0px 3px 10px -3px rgba(0,0,0,0.65);
-  -moz-box-shadow: 0px 3px 10px -3px rgba(0,0,0,0.65);
-  box-shadow: 0px 3px 10px -3px rgba(0,0,0,0.65);
-  
-  @media (max-width: ${breakpoints.lg}) {
-    max-width: 450px;
-    padding: 1.75rem;
-  }
-  
-  @media (max-width: ${breakpoints.md}) {
-    max-width: 400px;
-    padding: 1.5rem;
-  }
-  
-  @media (max-width: ${breakpoints.sm}) {
-    max-width: 100%;
-    padding: 2rem;
-  }
-  
-  @media (max-width: ${breakpoints.xs}) {
-    padding: 1rem;
-  }
-`;
-
-export const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-`;
-
-export const FormTitle = styled.label`
-  color: ${colors.dark};
-  font-family: ${fonts.family.poppins};
-  font-size: 2.5rem;
+export const LogoText = styled.h2`
+  font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  text-align: center;
-  text-transform: uppercase;
+  font-size: 1.1rem;
+  color: ${C.colors.dark};
+  margin: 0;
+  pointer-events: none;
+  user-select: none;
   
-  @media (max-width: ${breakpoints.lg}) {
-    font-size: 2.25rem;
-  }
-  
-  @media (max-width: ${breakpoints.md}) {
+  @media ${S.device.mobile} {
     font-size: 2rem;
   }
+`;
+
+export const Content = styled.div`
+  ${S.flexCenter};
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 4%;
+  flex: 1; 
+  min-height: 0;   
+  justify-content: center;
+`;
+
+export const Title = styled.h1`    
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: ${C.colors.darkGray};
+  margin: 0 0 0.5rem 0;
   
-  @media (max-width: ${breakpoints.sm}) {
-    font-size: 1.75rem;
+  @media ${S.device.tablet} {
+    font-size: 1.6rem;
   }
   
-  @media (max-width: ${breakpoints.xs}) {
-    font-size: 1.5rem;
+  @media ${S.device.mobile} {
+    font-size: 2rem;
+  }
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  background: ${C.colors.white};
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  gap: 0.5rem; 
+
+  @media ${S.device.tablet} {
+    padding: 0.875rem;
+    max-width: 90%;
+  }
+  
+  @media ${S.device.mobile} {
+    padding: 0.75rem;
+    gap: 0.375rem;
   }
 `;
 
 export const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 1.25rem;
-  
-  @media (max-width: ${breakpoints.sm}) {
-    margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+
+  @media ${S.device.mobile} {
+    grid-template-columns: 1fr;
   }
 `;
 
-export const InputLabel = styled.label`
-  display: block;
-  color: ${colors.dark};
-  font-family: ${fonts.family.poppins};
-  font-size: 0.875rem;
-  
-  @media (max-width: ${breakpoints.sm}) {
-    font-size: 0.8rem;
-  }
-`;
-
-export const Input = styled.input`
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  font-family: ${fonts.family.poppins};
-  font-size: 1rem;
-  transition: border-color 0.2s;
-  box-sizing: border-box;
-  height: 2.5rem;
-  
-  &:focus {
-    outline: none;
-    border-color: ${colors.red};
-  }
-  
-  @media (max-width: ${breakpoints.md}) {
-    padding: 0.7rem;
-  }
-  
-  @media (max-width: ${breakpoints.sm}) {
-    padding: 0.65rem;
-    font-size: 0.9rem;
-  }
-`;
-
-export const ErrorMessage = styled.div`
-  position: absolute;
-  left: 0;
-  top: 100%; /* Posiciona logo abaixo do input */
-  color: ${colors.red};
-  font-size: 0.75rem;
-  font-family: ${fonts.family.poppins};
-  margin-top: 0.25rem;
+export const InputContent = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
 `;
 
-export const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 15px;
-  margin-top: 1.85rem;
-  
-  @media (max-width: ${breakpoints.sm}) {
-    flex-direction: column-reverse;
-    gap: 10px;
-  }
-`;
-
-export const Button = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 150px;
-  padding: 12px;
-  border: none;
-  border-radius: 16px;
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: ${fonts.family.poppins};
-  background: ${colors.red};
-  color: ${colors.white};
-  cursor: pointer;
-  transition: all 0.5s;
-  
-  @media (max-width: ${breakpoints.lg}) {
-    width: 140px;
-    padding: 11px;
-  }
-  
-  @media (max-width: ${breakpoints.md}) {
-    width: 130px;
-    padding: 10px;
-    font-size: 0.95rem;
-  }
-  
-  @media (max-width: ${breakpoints.sm}) {
-    width: 100%;
-    padding: 10px;
-    font-size: 0.9rem;
-    border-radius: 12px;
-  }
-  
-  @media (max-width: ${breakpoints.xs}) {
-    padding: 9px;
-    border-radius: 10px;
-  }
-`;
-
-export const ButtonPrevious = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 150px;
-  padding: 12px;
-  border: none;
-  border-radius: 16px;
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: ${fonts.family.poppins};
-  background: ${colors.dark};
-  color: ${colors.white};
-  cursor: pointer;
-  
-  @media (max-width: ${breakpoints.lg}) {
-    width: 140px;
-    padding: 11px;
-  }
-  
-  @media (max-width: ${breakpoints.md}) {
-    width: 130px;
-    padding: 10px;
-    font-size: 0.95rem;
-  }
-  
-  @media (max-width: ${breakpoints.sm}) {
-    width: 100%;
-    padding: 10px;
-    font-size: 0.9rem;
-    border-radius: 12px;
-  }
-  
-  @media (max-width: ${breakpoints.xs}) {
-    padding: 9px;
-    border-radius: 10px;
-  }
-`;
-
-export const LoginLink = styled.div`
-  color: ${colors.dark};
-  font-family: ${fonts.family.poppins};
-  font-size: 0.875rem;
-  margin-top: 1.5rem;
-  text-align: center;
-  
-  a {
-    color: ${colors.red};
-    text-decoration: none;
-    font-weight: 600;
-    
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  
-  @media (max-width: ${breakpoints.sm}) {
-    font-size: 0.8rem;
-    margin-top: 1.25rem;
-  }
-`;
-
-export const ContainerInformations = styled.div`
-  position: absolute;
-  bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  color: ${colors.dark};
-  font-family: ${fonts.family.poppins};
-  font-size: 0.75rem;
+export const InputTitle = styled.label`
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
+  font-size: 0.85rem;
+  color: ${C.colors.dark};
+  margin-bottom: 0.125rem;
   
-  @media (max-width: ${breakpoints.md}) {
-    gap: 10px;
+  @media ${S.device.mobile} {
+    font-size: 1rem;
   }
+`;
+
+export const InputError = styled.p`
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: ${C.colors.red};
+  margin: 0.1rem 0 0 0;
   
-  @media (max-width: ${breakpoints.sm}) {
-    flex-direction: column;
-    gap: 5px;
+  @media ${S.device.mobile} {
     font-size: 0.7rem;
   }
 `;
 
-export const InformationLabel = styled.p`
-  cursor: default;
-  font-weight: 600;
-`;
-
-export const Informations = styled.div`
-  text-decoration: none;
+export const AndContainer = styled.div`
+  display: flex; 
+  align-items: center; 
+  text-align: center; 
+  margin: 0.5rem 0; 
+  color: ${C.colors.gray}; 
+  font-size: 0.75rem; 
+  gap: 8px;
   
-  &:hover {
-    text-decoration: underline;
+  @media ${S.device.mobile} {
+    margin: 0.375rem 0;
+    font-size: 0.7rem;
   }
 `;
 
-export const SuccessAlert = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 12px;
-  padding: 12px;
-  background-color: ${colors.green};
-  color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: ${fonts.family.poppins};
-  z-index: 100;
-  animation: fadeIn 0.3s ease-in;
+export const Line = styled.div`
+  flex-grow: 1;
+  height: 1.5px;
+  background: ${C.colors.lightgray};
+`;
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+export const AndText = styled.span`
+  white-space: nowrap; 
+`;
+
+export const LoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.25rem;
+`;
+
+export const LoginTitle = styled.p`
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: ${C.colors.dark};
+  margin: 0;
+  text-align: center;
+  
+  @media ${S.device.mobile} {
+    font-size: 0.75rem;
   }
 `;
 
-export const ErrorAlert = styled.div` 
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 12px;
-  padding: 12px;
-  background-color: ${colors.red};
-  color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: ${fonts.family.poppins};
-  z-index: 100;
-  animation: fadeIn 0.3s ease-in;
+export const Login = styled(Link)`
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: ${C.colors.red};
+  text-decoration: underline;
+`;
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+export const Footer = styled.footer`
+  width: 100%;
+  min-height: 40px;
+  max-width: 100%;
+  padding: 8px 4%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: ${C.colors.offwhite};
+  color: ${C.colors.gray};
+  flex-shrink: 0; 
+  
+  @media ${S.device.tablet} {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    padding: 6px 4%;
+    min-height: 35px;
+  }
+  
+  @media ${S.device.mobile} {
+    padding: 4px 4%;
+    min-height: 30px;
   }
 `;
 
-const styledComponentsRegister = {
-  Flex,
-  ContainerRegister, ContentRegister,
-  Logo, LogoImage,
-  FormRegister, FormContainer, FormTitle,
-  InputContainer, InputLabel, Input, ErrorMessage,
-  Button, ButtonContainer, ButtonPrevious,
-  LoginLink,
-  ContainerInformations, InformationLabel, Informations, 
-  SuccessAlert, ErrorAlert,
-};
+export const FooterText = styled.p`
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 0.65rem; 
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+  
+  @media ${S.device.mobile} {
+    font-size: 0.6rem;
+  }
+`;
 
-export default styledComponentsRegister;
+export const FooterLinks = styled.div`
+  font-size: 0.65rem;
+  display: flex;
+  gap: 12px;
+
+  @media ${S.device.mobile} {
+    gap: 8px;
+    font-size: 0.6rem;
+  }
+
+  a {
+    color: ${C.colors.gray};
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    transition: color 0.55s ease;
+
+    &:hover {
+      color: ${C.colors.dark};
+    }
+  }
+`;

@@ -1,6 +1,6 @@
   import React, { useEffect } from 'react';
-  import { Link, useNavigate } from 'react-router-dom';
-  import LoginToaster from '../../components/Toasters/Login/LoginToaster';
+  import { Link } from 'react-router-dom';
+  import Toaster from '../../components/Toasters/Toaster';
   import * as S from './styledLogin';
   import Input from '../../components/Input/Input';
   import Button from '../../components/Buttons/button';
@@ -22,7 +22,7 @@
 
     return (
       <>
-      <LoginToaster />
+      <Toaster />
 
         <motion.div
           initial={{ opacity: 0 }}
