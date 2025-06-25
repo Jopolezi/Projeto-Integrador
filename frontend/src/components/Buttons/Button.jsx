@@ -27,15 +27,16 @@ const ButtonComponent = styled.button`
     }
 `
 
-const Button = ({ type, loading, children }) => {
+const Button = ( { type, loading, children, ...props }) => {
   return (
     <ButtonComponent 
-      type={type}
-      loading={loading}
-      disabled={loading}
-    >
-      {children}
+    type={type}
+    disabled={loading}
+    {...props}>
+
+    {children}
     </ButtonComponent>
+
   )
 }
 

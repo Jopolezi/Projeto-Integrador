@@ -81,7 +81,7 @@ const Profile = () => {
 
           <FormGroup>
             <Label>Telefone</Label>
-            <Input placeholder="(11)99999-9999" value={data.phone} onChange={(e) => handlePhone(e.target.value)} />
+            <Input placeholder="(11) 99999-9999" value={data.phone} onChange={(e) => handlePhone(e.target.value)} />
           </FormGroup>
 
           <FormGroup>

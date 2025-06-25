@@ -1,4 +1,3 @@
-
 const { EntitySchema } = require("typeorm");
 
 module.exports = new EntitySchema({
@@ -10,7 +9,6 @@ module.exports = new EntitySchema({
     email: { type: "varchar", unique: true },
     cpf: { type: "varchar", length: 14, unique: true },
     password: { type: "varchar", length: 255 },
-    tipoConta: { type: "enum", enum: ["usuario", "empresa"], default: "usuario" },
     created_at: { type: "datetime", createDate: true },
     updated_at: { type: "datetime", updateDate: true }
   },
@@ -20,11 +18,10 @@ module.exports = new EntitySchema({
       target: "Job",
       inverseSide: "user"
     },
-    company: {
-      type: "one-to-one",
-      target: "Company",
-      inverseSide: "user",
-      cascade: true
+    applications: {
+      type: "one-to-many",
+      target: "Application",
+      inverseSide: "usuario"
     },
     avaliacoesFeitas: {
       type: "one-to-many",
