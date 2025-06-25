@@ -12,6 +12,16 @@ const InputComponent = styled.input`
     font-family: "Poppins", sans-serif;
     font-size: 1rem;
     transition: border-color 0.55s ease;
+
+    input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    }
+
+    input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+}
   
     &:focus {
         outline: none;
@@ -19,13 +29,13 @@ const InputComponent = styled.input`
     }
 `
 
-const Input = ( {type, placeholder, onChange, ...rest} ) => {
+const Input = ({ type, placeholder, onChange, ...rest }) => {
   return (
-    <InputComponent 
-    type={type}
-    placeholder={placeholder}
-    onChange={onChange}
-    {...rest} />
+    <InputComponent
+      type={type}
+      placeholder={placeholder}
+      onChange={onChange}
+      {...rest} />
   )
 }
 

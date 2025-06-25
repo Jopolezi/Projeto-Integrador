@@ -185,58 +185,6 @@ export const RememberCheckboxText = styled.p`
   }
 `;
 
-export const AndContainer = styled.div`
-  display: flex; 
-  align-items: center; 
-  text-align: center; 
-  margin: 0.75rem 0; 
-  color: ${C.colors.gray}; 
-  font-size: 0.75rem; 
-  gap: 8px;
-  
-  @media ${S.device.mobile} {
-    margin: 0.5rem 0;
-    font-size: 0.7rem;
-  }
-`;
-
-export const Line = styled.div`
-  flex-grow: 1;
-  height: 1.5px;
-  background: ${C.colors.lightgray};
-`;
-
-export const AndText = styled.span`
-  white-space: nowrap; 
-`;
-
-export const RegisterContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0.25rem;
-`;
-
-export const RegisterTitle = styled.p`
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 0.8rem;
-  color: ${C.colors.dark};
-  margin: 0;
-  text-align: center;
-  
-  @media ${S.device.mobile} {
-    font-size: 0.75rem;
-  }
-`;
-
-export const Register = styled(Link)`
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  color: ${C.colors.red};
-  text-decoration: underline;
-`;
-
 export const Footer = styled.footer`
   width: 100%;
   min-height: 40px;

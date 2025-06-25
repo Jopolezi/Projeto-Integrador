@@ -25,6 +25,7 @@ function useRegister() {
 
             setTimeout(() => {
                 navigate('/entrar');
+                
             }, 2500);
 
         } catch (error) {

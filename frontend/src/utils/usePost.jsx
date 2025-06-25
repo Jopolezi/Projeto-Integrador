@@ -7,22 +7,6 @@ import { toast } from 'react-toastify';
 const usePost = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: 'onChange',
-        defaultValues: {
-            title: '',
-            category: '',
-            duration: '',
-            urgency: '',
-            workModel: '',
-            location: '',
-            budget: '',
-            paymentType: '',
-            contactPhone: '',
-            contactEmail: '',
-            description: '',
-            requirements: '',
-            acceptTerms: false,
-            featuredAd: false
-        }
     });
 
     const navigate = useNavigate();
@@ -32,7 +16,7 @@ const usePost = () => {
         try {
             setLoading(true);
             
-            const response = await axios.post('http://localhost:3000/api/posts/create', data);
+            const response = await axios.post('http://localhost:3000/api/post', data);
 
             toast.success('Bico publicado com sucesso!', {
                 position: "top-right",
