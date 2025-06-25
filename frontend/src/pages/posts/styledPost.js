@@ -1,68 +1,92 @@
-import styled from 'styled-components'
-import * as C from '../../styles/colors'
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
+import * as C from '../../styles/colors';
+import * as S from '../../styles/styledComponents';
+import '../../assets/fonts/fonts.css';
 
 export const Container = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   width: 100%;
-  background: ${C.colors.offwhite};
-  padding-top: 80px;
-  padding-bottom: 80px;
+  background: ${C.colors?.offwhite || '#F9FAFB'};
+  overflow: hidden; 
 `;
 
 export const Header = styled.header`
   width: 100%;
   max-width: 100%;
-  padding: 10px 4%;
-  height: 20px;
-  background: ${C.colors.white};
+  padding: 0 4%;
+  background: ${C.colors?.offwhite || '#F9FAFB'};
+  flex-shrink: 0; 
+  
+  @media ${S.device.mobile} {
+    padding: 4px 4%;
+  }
 `;
 
-export const ContainerLogo = styled.div`
+export const ContainerLogo = styled(Link)`
   display: flex;
   align-items: center;
   gap: 5px;
-  cursor: pointer;
+  color: ${C.colors?.dark || '#1F2937'};
+  text-decoration: none;
 `;
 
 export const Logo = styled.img`
   width: 50px;
   height: 50px;
   object-fit: cover;
+  
+  @media ${S.device.mobile} {
+    width: 56px;
+    height: 56px;
+  }
 `;
 
 export const LogoText = styled.h2`
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   color: ${C.colors.dark};
   margin: 0;
   pointer-events: none;
   user-select: none;
+  
+  @media ${S.device.mobile} {
+    font-size: 2rem;
+  }
 `;
 
 export const Content = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${S.flexCenter};
   flex-direction: column;
   width: 100%;
   max-width: 100%;
   padding: 0 4%;
-  gap: 10px;
-  flex-grow: 1;
+  flex: 1; 
+  min-height: 0;   
+  justify-content: flex-start;
+  overflow-y: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 `;
 
 export const Title = styled.h1`    
-  align-self: flex-center;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 2.5rem;
-  color: ${C.colors.dark};
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: ${C.colors.darkGray};
+  margin: 0 0 0.5rem 0;
+  
+  @media ${S.device.tablet} {
+    font-size: 1.6rem;
+  }
+  
+  @media ${S.device.mobile} {
+    font-size: 2rem;
+  }
 `;
 
 export const Form = styled.form`
@@ -71,134 +95,196 @@ export const Form = styled.form`
   width: 100%;
   max-width: 800px;
   background: ${C.colors.white};
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  gap: 1rem;
-`;
+  gap: 0.75rem; 
 
-export const FormGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  @media ${S.device.tablet} {
+    padding: 1.25rem;
+    max-width: 90%;
+  }
   
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+  @media ${S.device.mobile} {
+    padding: 1rem;
+    gap: 0.5rem;
   }
 `;
 
-export const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
+export const InputContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+
+  @media ${S.device.mobile} {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 `;
 
-export const FormGroupFull = styled(FormGroup)`
-  grid-column: 1 / -1;
+export const InputContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 export const InputTitle = styled.label`
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: ${C.colors.dark};
-  margin-bottom: 0.5rem;
-`;
-
-export const Select = styled.select`
-  padding: 12px 16px;
-  border: 2px solid ${({ hasError }) => hasError ? colors.red : colors.lightgray};
-  border-radius: 8px;
-  font-size: 16px;
-  font-family: 'Poppins', sans-serif;
-  background: ${C.colors.white};
-  cursor: pointer;
-  transition: all 0.3s ease;
+  margin-bottom: 0.25rem;
   
-  &:focus {
-    outline: none;
-    border-color: ${C.colors.red};
-  }
-`;
-
-export const TextArea = styled.textarea`
-  padding: 12px 16px;
-  border: 2px solid ${({ hasError }) => hasError ? colors.red : colors.lightgray};
-  border-radius: 8px;
-  font-size: 16px;
-  font-family: 'Poppins', sans-serif;
-  min-height: 120px;
-  resize: vertical;
-  transition: all 0.3s ease;
-  
-  &:focus {
-    outline: none;
-    border-color: ${C.colors.red};
-  }
-  
-  &::placeholder {
-    color: ${C.colors.gray};
+  @media ${S.device.mobile} {
+    font-size: 1rem;
   }
 `;
 
 export const InputError = styled.p`
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: ${C.colors.red};
-  margin-top: 0.25rem;
+  margin: 0.1rem 0 0 0;
+  
+  @media ${S.device.mobile} {
+    font-size: 0.7rem;
+  }
 `;
 
-export const CheckboxContainer = styled.div`
+export const RememberContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-  margin: 5px 0;
+  margin-top: 0.5rem;
 `;
 
 export const RememberCheckbox = styled.input`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
+  ${S.flexCenter};
+  width: 18px;
+  height: 18px;
   accent-color: ${C.colors.red};
+
+  @media ${S.device.mobile} {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export const RememberCheckboxText = styled.p`
   color: ${C.colors.gray};
   font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 500;
   text-decoration: none;
   margin: 0;
+  
+  @media ${S.device.mobile} {
+    font-size: 0.8rem;
+  }
+`;
+
+export const AndContainer = styled.div`
+  display: flex; 
+  align-items: center; 
+  text-align: center; 
+  margin: 0.75rem 0; 
+  color: ${C.colors.gray}; 
+  font-size: 0.75rem; 
+  gap: 8px;
+  
+  @media ${S.device.mobile} {
+    margin: 0.5rem 0;
+    font-size: 0.7rem;
+  }
+`;
+
+export const Line = styled.div`
+  flex-grow: 1;
+  height: 1.5px;
+  background: ${C.colors.lightgray};
+`;
+
+export const AndText = styled.span`
+  white-space: nowrap; 
+`;
+
+export const RegisterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.25rem;
+`;
+
+export const RegisterTitle = styled.p`
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: ${C.colors.dark};
+  margin: 0;
+  text-align: center;
+  
+  @media ${S.device.mobile} {
+    font-size: 0.75rem;
+  }
+`;
+
+export const Register = styled(Link)`
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: ${C.colors.red};
+  text-decoration: underline;
 `;
 
 export const Footer = styled.footer`
   width: 100%;
-  height: 80px;
+  min-height: 40px;
   max-width: 100%;
-  padding: 20px 4%;
+  padding: 8px 4%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background: ${C.colors.offwhite};
   color: ${C.colors.gray};
+  flex-shrink: 0; 
+  
+  @media ${S.device.tablet} {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    padding: 6px 4%;
+    min-height: 35px;
+  }
+  
+  @media ${S.device.mobile} {
+    padding: 4px 4%;
+    min-height: 30px;
+  }
 `;
 
 export const FooterText = styled.p`
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  font-size: 0.75rem; 
+  font-size: 0.65rem; 
   pointer-events: none;
   user-select: none;
   margin: 0;
+  
+  @media ${S.device.mobile} {
+    font-size: 0.6rem;
+  }
 `;
 
 export const FooterLinks = styled.div`
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   display: flex;
-  gap: 20px;
+  gap: 12px;
+
+  @media ${S.device.mobile} {
+    gap: 8px;
+    font-size: 0.6rem;
+  }
 
   a {
     color: ${C.colors.gray};
@@ -206,37 +292,9 @@ export const FooterLinks = styled.div`
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     transition: color 0.55s ease;
-    cursor: pointer;
 
     &:hover {
       color: ${C.colors.dark};
-    }
-  }
-`;
-
-export const SuccessAlert = styled.div`
-  position: fixed;
-  top: 100px;
-  right: 20px;
-  padding: 12px 20px;
-  background-color: #27ae60;
-  color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: "Poppins", sans-serif;
-  z-index: 1000;
-  animation: slideIn 0.3s ease-out;
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
     }
   }
 `;

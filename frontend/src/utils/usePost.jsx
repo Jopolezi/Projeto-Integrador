@@ -4,9 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-function useRegister() {
-    const { register, handleSubmit, control, formState: { errors } } = useForm({
-        mode: 'onChange'
+const usePost = () => {
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        mode: 'onChange',
+        defaultValues: {
+            title: '',
+            category: '',
+            duration: '',
+            urgency: '',
+            workModel: '',
+            location: '',
+            budget: '',
+            paymentType: '',
+            contactPhone: '',
+            contactEmail: '',
+            description: '',
+            requirements: '',
+            acceptTerms: false,
+            featuredAd: false
+        }
     });
 
     const navigate = useNavigate();
@@ -16,25 +32,29 @@ function useRegister() {
         try {
             setLoading(true);
             
-            const response = await axios.post('http://localhost:3000/api/auth/register', data);
+            const response = await axios.post('http://localhost:3000/api/posts/create', data);
 
-            toast.success('Cadastro realizado com sucesso!', {
+            toast.success('Bico publicado com sucesso!', {
                 position: "top-right",
                 autoClose: 2000
             });
 
+            reset();
+
             setTimeout(() => {
-                navigate('/entrar');
+                navigate('/dashboard');
             }, 2500);
 
         } catch (error) {
             if (error.response) {
-                let errorMessage = 'Não foi possível realizar o cadastro.';
+                let errorMessage = 'Não foi possível publicar o bico.';
 
                 if (error.response.status === 400) {
                     errorMessage = 'Preencha todos os campos corretamente.';
-                } else if (error.response.status === 409) {
-                    errorMessage = 'Email, CPF ou telefone já cadastrados.';
+                } else if (error.response.status === 401) {
+                    errorMessage = 'Você precisa estar logado para publicar.';
+                } else if (error.response.status === 422) {
+                    errorMessage = 'Dados inválidos. Verifique as informações.';
                 } else if (error.response.status === 500) {
                     errorMessage = 'Erro interno do servidor. Tente novamente.';
                 }
@@ -63,9 +83,8 @@ function useRegister() {
         handleSubmit,
         errors,
         onSubmit,
-        control,
         loading
     };
-}
+};
 
-export default useRegister;
+export default usePost;

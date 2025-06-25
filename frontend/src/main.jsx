@@ -1,26 +1,13 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/home/home';
-import Login from './pages/login/login';
-import Register from './pages/register/register';
-import Politices from './pages/policy/Policy';
-import BicoPosting from './pages/posts/jobPost';
-import GlobalStyles from './styles/GlobalStyles';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/route"
+import GlobalStyles from "./styles/GlobalStyles"
 
-const root = createRoot(document.getElementById('root'));
 
-root.render(
-  <StrictMode>
-    <Router>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
     <GlobalStyles />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/publicar-vaga" element={<BicoPosting />} />
-        <Route path="/politicas" element={<Politices />} />
-      </Routes>
-    </Router>
-  </StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );

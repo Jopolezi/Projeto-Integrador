@@ -97,7 +97,7 @@
                 <S.RegisterContainer>
                   <S.RegisterTitle>
                     Não possui uma conta? &nbsp;
-                    <S.Register to="/register">Cadastre-se agora</S.Register>
+                    <S.Register to="/cadastrar">Cadastre-se agora</S.Register>
                   </S.RegisterTitle>
                 </S.RegisterContainer>
               </S.Form>

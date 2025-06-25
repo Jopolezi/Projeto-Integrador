@@ -189,7 +189,7 @@ function Register() {
               <S.LoginContainer>
                 <S.LoginTitle>
                   Já possui uma conta? &nbsp;
-                  <S.Login to="/login">Entre agora</S.Login>
+                  <S.Login to="/entrar">Entre agora</S.Login>
                 </S.LoginTitle>
               </S.LoginContainer>
             </S.Form>
