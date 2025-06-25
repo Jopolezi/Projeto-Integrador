@@ -1,8 +1,8 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './LoginToaster.css';
+import './Toaster.css';
 
-export default function LoginToaster() {
+export default function Toaster() {
   return (
     <ToastContainer
       position="bottom-center"

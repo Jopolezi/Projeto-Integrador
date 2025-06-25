@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../components/header/header';
+import CarrouselHome from '../../components/CarrouselHome/CarrouselHome';
 import Footer from '../../components/Footer/footer';
-import CarrouselHome from '../../components/CarrouselHome/CarrouselHome'
 
 function Home() {
 

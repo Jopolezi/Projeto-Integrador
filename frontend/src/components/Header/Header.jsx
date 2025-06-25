@@ -10,10 +10,10 @@ function Header() {
       </S.Logo>
       
       <S.AuthButtons>
-        <S.LoginLink to="/login">
+        <S.LoginLink to="/entrar">
           Login
         </S.LoginLink>
-        <S.RegisterLink to="/register">
+        <S.RegisterLink to="/cadastrar">
           Cadastrar
         </S.RegisterLink>
       </S.AuthButtons>

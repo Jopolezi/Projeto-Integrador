@@ -1,9 +1,6 @@
 import styled from 'styled-components';
-<<<<<<< Updated upstream
 import * as C from '../../styles/colors';
 import * as S from '../../styles/styledComponents';
-=======
->>>>>>> Stashed changes
 import { Link } from 'react-router-dom';
 
 export const HeaderContainer = styled.header`
