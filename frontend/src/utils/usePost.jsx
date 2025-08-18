@@ -23,7 +23,6 @@ const usePost = () => {
                 autoClose: 2000
             });
 
-            reset();
 
             setTimeout(() => {
                 navigate('/dashboard');

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Toaster from '../../components/Toasters/Toaster';
 import * as S from './styledPost';
 import Input from '../../components/Input/Input';
-import Select from '../../components/Select/Select';
 import Button from '../../components/Buttons/button';
 import TxtArea from '../../components/Textarea/Textarea';
 import { motion } from 'framer-motion';
@@ -48,7 +47,7 @@ const Post = () => {
                 <S.InputContent>
                   <S.InputTitle>Título do Bico</S.InputTitle>
                   <Input
-                    {...register("title", {
+                    {...register("titulo", {
                       required: "Este campo é obrigatório.",
                       minLength: {
                         value: 5,
@@ -61,15 +60,15 @@ const Post = () => {
                     })}
                     type="text"
                     placeholder="Ex: Preciso de pintor para quarto"
-                    name="title"
+                    name="titulo"
                   />
-                  {errors.title && <S.InputError>{errors.title.message}</S.InputError>}
+                  {errors.titulo && <S.InputError>{errors.titulo.message}</S.InputError>}
                 </S.InputContent>
 
                 <S.InputContent>
                   <S.InputTitle>Localização</S.InputTitle>
                   <Input
-                    {...register("location", {
+                    {...register("localizacao", {
                       required: "Este campo é obrigatório.",
                       maxLength: {
                         value: 100,
@@ -78,15 +77,15 @@ const Post = () => {
                     })}
                     type="text"
                     placeholder="Ex: Vila Madalena, São Paulo"
-                    name="location"
+                    name="localizacao"
                   />
-                  {errors.location && <S.InputError>{errors.location.message}</S.InputError>}
+                  {errors.localizacao && <S.InputError>{errors.localizacao.message}</S.InputError>}
                 </S.InputContent>
 
                 <S.InputContent>
                   <S.InputTitle>Salário (R$)</S.InputTitle>
                   <Input
-                    {...register("budget", {
+                    {...register("salario", {
                       required: "Este campo é obrigatório.",
                       min: {
                         value: 0.01,
@@ -97,18 +96,17 @@ const Post = () => {
                     placeholder="Ex: 150"
                     min="0"
                     step="0.01"
-                    name="budget"
+                    name="salario"
                   />
-                  {errors.budget && <S.InputError>{errors.budget.message}</S.InputError>}
+                  {errors.salario && <S.InputError>{errors.salario.message}</S.InputError>}
                 </S.InputContent>
 
               </S.InputContainer>
 
-
               <S.InputContent>
                 <S.InputTitle>Descrição do Trabalho</S.InputTitle>
                 <TxtArea
-                  {...register("description", {
+                  {...register("descricao", {
                     required: "Este campo é obrigatório.",
                     minLength: {
                       value: 30,
@@ -116,17 +114,17 @@ const Post = () => {
                     }
                   })}
                   placeholder="Descreva detalhadamente o que precisa ser feito..."
-                  name="description"
+                  name="descricao"
                 />
-                {errors.description && <S.InputError>{errors.description.message}</S.InputError>}
+                {errors.descricao && <S.InputError>{errors.descricao.message}</S.InputError>}
               </S.InputContent>
 
               <S.InputContent>
                 <S.InputTitle>Requisitos Específicos</S.InputTitle>
                 <TxtArea
-                  {...register("requirements")}
+                  {...register("requisitos")}
                   placeholder="Ex: Experiência comprovada, ferramentas próprias..."
-                  name="requirements"
+                  name="requisitos"
                 />
               </S.InputContent>
 
@@ -143,7 +141,7 @@ const Post = () => {
               </S.RememberContainer>
               {errors.acceptTerms && <S.InputError>{errors.acceptTerms.message}</S.InputError>}
 
-              <Button type="submit" onSubmit={handleSubmit(onSubmit)} loading={loading}>
+              <Button type="submit" loading={loading}>
                 {loading ? "Publicando..." : "Publicar Bico"}
               </Button>
             </S.Form>

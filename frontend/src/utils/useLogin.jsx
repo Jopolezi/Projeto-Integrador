@@ -15,14 +15,10 @@ const [loading, setLoading] = useState(false)
 const onSubmit = async (data) => {
     try {
 
-        const userData = {
-            identificator: data.user,
-            password: data.password
-        }
         setLoading(true)
-        const response = await axios.post('http://localhost:3000/api/auth/login', userData)
+        const response = await axios.post('http://localhost:3000/api/auth/login', data)
 
-        const { token } = response.userData
+        const { token } = response.data
 
         toast.success('Bem-vindo de volta!', {
             position: "top-right",

@@ -6,12 +6,11 @@ import Login from "../pages/login/login";
 import Profile from "../pages/profile/profile"
 import Politices from "../pages/policy/Policy";
 import Post from "../pages/posts/Post";
+import useLogin from "../utils/useLogin";
 
-const ProtectedRoute = ({ children }) => {
-    const token = localStorage.getItem('token');
-    
-    return token ? children : <Navigate to="/entrar" replace />;
-};
+const RequireAuth = ({ children }) => {
+    // Aqui ficará a rota protegida OU usarei context provider para fazê-la
+}
 
 const router = createBrowserRouter([
     { path: "/", element: <Home /> },
@@ -20,18 +19,14 @@ const router = createBrowserRouter([
     { 
         path: "/perfil", 
         element: (
-            <ProtectedRoute>
                 <Profile />
-            </ProtectedRoute>
         )
     },
     { path: "/politicas", element: <Politices /> },
     { 
         path: "/publicar", 
         element: (
-            <ProtectedRoute>
                 <Post />
-            </ProtectedRoute>
         )
     },
 ]);

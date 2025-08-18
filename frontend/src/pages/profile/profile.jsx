@@ -55,7 +55,7 @@ const Profile = () => {
           
           <ProfileImageContainer>
             <ProfileImage>
-              {data.profileImage ? <img src={data.profileImage} alt="Perfil" /> : <div className="placeholder">👤</div>}
+              {data.profileImage ? <img src={data.profileImage} alt="Perfil" /> : <div className="placeholder"></div>}
             </ProfileImage>
             <input type="file" id="img" accept="image/*" style={{ display: 'none' }} onChange={handleImage} />
             <Button outline onClick={() => document.getElementById('img').click()}>Alterar Foto</Button>

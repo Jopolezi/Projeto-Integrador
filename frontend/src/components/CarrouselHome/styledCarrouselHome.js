@@ -31,13 +31,6 @@ export const CarrouselContainer = styled.div`
   .swiper-button-next,
   .swiper-button-prev {
     color: #ffffff;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    backdrop-filter: blur(10px);
-    
-    &:hover {
-      background: rgba(0, 0, 0, 0.5);
-    }
   }
   
   @media (max-width: 768px) {

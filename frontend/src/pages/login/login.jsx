@@ -43,7 +43,7 @@
                 <S.Title>Entrar</S.Title>
                 <S.InputTitle>Email</S.InputTitle>
                 <Input
-                  {...register("email", {
+                  {...register("identificator", {
                     required: "Este campo é obrigatório.",
                     pattern: {
                       value: /^[A-Za-z0-9._-]+@[A-Za-z]+(\.[A-Za-z]+)+$/,
@@ -54,9 +54,9 @@
                       message: "Email não pode ter mais de 100 caracteres."
                     }
                   })}
-                  type="email"
+                  type="text"
                   placeholder="Email"
-                  name="email"
+                  name="identificator"
                 />
                 {errors.email && <S.InputError>{errors.email.message}</S.InputError>}
 
