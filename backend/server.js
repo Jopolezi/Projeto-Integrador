@@ -1,33 +1,23 @@
-require('dotenv').config();
+require('dotenv').config(); // Carrega as variáveis do .env
 require('reflect-metadata'); // Necessário para TypeORM
 const { AppDataSource } = require('./src/config/db'); // Conexão TypeORM
-const cors = require("cors"); // Importação do cors
-const express = require("express");
 
+const express = require("express");
 const app = express();
+const cors = require("cors");
 
 app.use(cors());
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
 
-
+// Importando as rotas
 const testRoutes = require("./src/routes/testRoute");
 const authRoute = require("./src/routes/authRoute");
 
-const postRoute = require("./src/routes/postRoute")
-const ratingRoute = require("./src/routes/ratingRoute")
-
-
+// Usando as rotas
 app.use("/", testRoutes);
 app.use("/api/auth", authRoute);
-app.use("/api/post", postRoute)
-app.use("/api/ratings",ratingRoute )
 
-
-app.use("/", testRoutes);
-app.use("/api/auth", authRoute);
-app.use("/api/post", postRoute);
-
+// Inicializa a conexão com o banco de dados e só depois sobe o servidor
 AppDataSource.initialize()
   .then(() => {
     console.log("📦 Banco de dados conectado com sucesso!");

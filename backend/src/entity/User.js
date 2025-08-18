@@ -1,37 +1,46 @@
-const { EntitySchema } = require("typeorm");
+const { EntitySchema } = require('typeorm');
 
+// Define a entidade "User"
 module.exports = new EntitySchema({
-  name: "User",
-  tableName: "users",
+  name: 'User', // nome da entidade
+  tableName: 'users', // nome da tabela no banco
   columns: {
-    id: { primary: true, type: "int", generated: true },
-    name: { type: "varchar", length: 100 },
-    email: { type: "varchar", unique: true },
-    cpf: { type: "varchar", length: 14, unique: true },
-    password: { type: "varchar", length: 255 },
-    created_at: { type: "datetime", createDate: true },
-    updated_at: { type: "datetime", updateDate: true }
-  },
-  relations: {
-    jobs: {
-      type: "one-to-many",
-      target: "Job",
-      inverseSide: "user"
+    id: {
+        primary: true, // Defina a chave primária
+        type: "int", // Tipo de dado inteiro
+        generated: true, // Gerar automaticamente
+      },
+      name: {
+        type: "varchar",
+        length: 50, // Definindo o tamanho do campo de nome
+        nullable: true, // Permite que o campo seja nulo
+      },
+      password: {
+        type: "varchar",
+        length: 255, // O tamanho adequado para armazenar senhas criptografadas
+        nullable: true, // Permite que o campo seja nulo (caso o usuário não tenha senha)
+      },
+      email: {
+        type: "varchar",
+        unique: true, // Garante que o e-mail seja único
+        nullable: false, // O e-mail é obrigatório
+      },
+      cpf: {
+        type: "varchar",
+        length: 45, // Comprimento adequado para CPF
+        nullable: true, // Permite CPF nulo
+        unique: true, // Garantir que o CPF seja único
+      },
+      cnpj: {
+        type: "varchar",
+        length: 45, // Comprimento adequado para CNPJ
+        nullable: true, // Permite CNPJ nulo
+        unique: true, // Garante que o CNPJ seja único
+      },
+      telefone: {
+        type: "varchar",
+        length: 45, // Comprimento adequado para telefone
+        nullable: true, // Permite telefone nulo
+      },
     },
-    applications: {
-      type: "one-to-many",
-      target: "Application",
-      inverseSide: "usuario"
-    },
-    avaliacoesFeitas: {
-      type: "one-to-many",
-      target: "Avaliacao",
-      inverseSide: "avaliador"
-    },
-    avaliacoesRecebidas: {
-      type: "one-to-many",
-      target: "Avaliacao",
-      inverseSide: "avaliado"
-    }
-  }
-});
+  });

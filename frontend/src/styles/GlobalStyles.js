@@ -18,6 +18,15 @@ const GlobalStyles = createGlobalStyle`
    scroll-behavior: smooth; 
   }
 
+  a {
+    text-decoration: none;
+    color: var(--tertiary-color);
+  }
+
+  li {
+    list-style: none;
+}
+
 `;
 
 export default GlobalStyles;
