@@ -67,7 +67,6 @@ class userController {
       const userRepository = AppDataSource.getRepository("User");
       let user;
 
-      // Se contém "@" é um e-mail, senão tenta como CPF
       if (identificator.includes("@")) {
         user = await userRepository.findOneBy({ email: identificator });
       } else {

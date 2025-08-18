@@ -1,3 +1,6 @@
+# Ignora o arquivo de variáveis de ambiente
+.env
+
 # Logs
 logs
 *.log
