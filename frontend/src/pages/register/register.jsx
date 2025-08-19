@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useForm, FormProvider, Controller } from 'react-hook-form'
+import * as S from './styledRegister'
+import { motion } from 'framer-motion';
+import Input from '../../components/Input/Input';
+=======
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, FormProvider, Controller } from 'react-hook-form';
@@ -16,14 +24,74 @@ const {
   ContainerInformations, InformationLabel, Informations,
   SuccessAlert, ErrorAlert,
 } = styledComponentsRegister;
+>>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
 
 function Register() {
   useEffect(() => {
     document.title = "Cadastro | BoraBico";
   }, []);
 
-  const navigate = useNavigate();
+  // const [isLoading, setIsLoading] = useState(false)
 
+<<<<<<< HEAD
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        exit={{ duration: 1 }}
+      >
+
+        <S.Header>
+          <S.ContainerLogo to="/">
+            <S.Logo src="/BORABICO.png" alt="Logo" />
+            <S.LogoText>BORABICO</S.LogoText>
+          </S.ContainerLogo>
+        </S.Header>
+
+        <S.Container>
+          <S.Content>
+            <S.Form>
+              <S.Title>Cadastrar</S.Title>
+
+              <S.FieldsGroup>
+                <S.InputContainer>
+                  <S.InputTitle>Nome <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
+
+                <S.InputContainer>
+                  <S.InputTitle>Sobrenome <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
+
+                <S.InputContainer>
+                  <S.InputTitle>Endereço de email (válido) <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
+
+                <S.InputContainer>
+                  <S.InputTitle>CPF <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
+
+                <S.InputContainer>
+                  <S.InputTitle>Senha <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
+
+                <S.InputContainer>
+                  <S.InputTitle>Confirmar Senha <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
+              </S.FieldsGroup>
+
+              <S.RegisterButton type="submit">
+                Cadastrar
+              </S.RegisterButton>
+=======
   const [step, setStep] = React.useState(1);
   const [CadastroSucesso, setCadastroSucesso] = React.useState(false);
   const [CadastroErro, setCadastroErro] = React.useState(false);
@@ -121,47 +189,20 @@ function Register() {
           Erro ao cadastrar o seu usuário, tente novamente.
         </ErrorAlert>
       )}
+>>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
 
 
-      <FormProvider {...methods}>
-        <ContainerRegister className="revealFade">
-          <Logo className="revealFade">
-            <LogoImage src="/borabico_logo.png" alt="Logo" />
-          </Logo>
 
-          <ContentRegister>
-            <FormRegister onSubmit={handleSubmit(onSubmit)}>
-                
-                  {step === 1 && 
-                  <Step1 
-                  control={control} 
-                  errors={errors} 
-                  nextStep={nextStep}
-                  verifyStepValid={verifyStepValid}
-                  />}
 
-                  {step === 2 && 
-                  <Step2
-                  control={control} 
-                  errors={errors} 
-                  nextStep={nextStep} 
-                  previousStep={previousStep} 
-                  verifyStepValid={verifyStepValid}
-                  />}
-                  {step === 3 && 
-                  <Step3 
-                  control={control} 
-                  errors={errors} 
-                  onSubmit={onSubmit} 
-                  previousStep={previousStep} 
-                  verifyStepValid={verifyStepValid}
-                  />}
+            </S.Form>
+          </S.Content>
+        </S.Container>
 
-              <LoginLink>
-                Já tem uma conta? <Link to="/login">Entre aqui</Link>
-              </LoginLink>
-            </FormRegister>
 
+<<<<<<< HEAD
+
+      </motion.div>
+=======
             <ContainerInformations className="reveal-fade">
               <Flex>
                 <img src="/borabico_logo.png" width="50px" height="50px" />
@@ -176,6 +217,7 @@ function Register() {
           <ScrollRevealComponent />
         </ContainerRegister>
       </FormProvider>
+>>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
 
     </>
   );
