@@ -1,0 +1,14 @@
+# Variáveis de ambiente
+.env
+*.local
+
+# Diretórios e arquivos de editores e OS
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

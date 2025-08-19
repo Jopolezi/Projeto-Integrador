@@ -1,102 +1,106 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import LoginToaster from '../../components/Toasters/Login/LoginToaster';
-import * as S from './styledLogin';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Buttons/button';
-import { motion } from 'framer-motion';
+
+import styledComponentsLogin from './styledLogin';
+import './login.css'
+import '../../styles/cssGlobal.css'
+import ScrollRevealComponent from '../../styles/scrollReveal';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const {
+  ContainerLogin, ContentLogin, Logo, LogoImage,
+  FormLogin, FormTitle,
+  InputContainer, InputLabel,
+  Input, InputCheck, InputCheckLabel,
+  SubmitAdditional, SubmitCheck, SubmitButton,
+  ForgotPassword,
+  RegisterLink,
+  ContainerInformations, Informations, InformationLabel,
+  Flex,
+  SuccessAlert, ErrorAlert
+} = styledComponentsLogin;
 
 
 function Login() {
-
   useEffect(() => {
-    document.title = "Entrar";
+    document.title = "Login | BoraBico";
   }, []);
-
-  const [isLoading, setIsLoading] = useState(false)
-  const { register, handleSubmit, formState: { errors } } = useForm(
-    { mode: 'onChange' }
-  );
-
 
   const navigate = useNavigate();
 
-  const onSubmit = async (data) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [LoginSucesso, setLoginSucesso] = React.useState(false);
+  const [LoginErro, setLoginErro] = React.useState(false);
 
-    setIsLoading(true)
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+  
+    const userData = {
+      email: email,
+      password: password,
+      rememberMe: rememberMe
+    };
+  
     try {
-
-      const userData = {
-        identificator: data.user,
-        password: data.password,
-      }
-
-      const response = await axios.post('http://localhost:3000/api/auth/login', userData)
-
-      const { token } = response.data
-
-      toast.success('Bem-vindo de volta!', {
-        position: "top-right",
-        autoClose: 2000
-      })
-
-      localStorage.setItem('token', token)
-
-      setTimeout(() => {
-        navigate('/')
-      }, 2500)
-
-    } catch (error) {
-      if (error.response) {
-        let errorMessage = 'Não foi possível realizar o login.';
-
-        if (error.response.status === 401) {
-          errorMessage = 'Email ou senha incorretos.';
-        } else if (error.response.status === 429) {
-          errorMessage = 'Muitas tentativas. Aguarde alguns minutos.';
-        } else if (error.response.status === 500) {
-          errorMessage = 'Erro interno do servidor. Tente novamente.';
-        }
-
-        toast.error(errorMessage, {
-          position: "top-right",
-          autoClose: 4000
-        });
-
-        console.error('Erro do servidor:', error.response.data.message)
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+      });
+  
+      const responseData = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(responseData.message || 'Erro ao fazer o login');
       } else {
-        toast.error('Erro de conexão. Tente novamente.', {
-          position: "top-right",
-          autoClose: 4000
-        });
-
-        console.error('Erro de rede:', error.message)
+        // Sucesso no login
+        setLoginSucesso(true);
+        
+        setTimeout(() => {
+          navigate('/')
+        }, 3000);
       }
+    } catch (error) {
+      setError(error.message);
+      setLoginErro(true);
+  
+      setTimeout(() => {
+        setLoginErro(false);
+      }, 3000);
     } finally {
-      setIsLoading(false)
+      setLoading(false);
     }
   };
 
   return (
     <>
-      <LoginToaster />
+      {LoginSucesso && (
+        <SuccessAlert>
+        Login realizado com sucesso, redirecionando para a página inicial.
+        </SuccessAlert>
+      )}
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        exit={{ duration: 1 }}
-      >
-        <S.Header>
-          <S.ContainerLogo to="/">
-            <S.Logo src="/BORABICO.png" alt="Logo" />
-            <S.LogoText>BORABICO</S.LogoText>
-          </S.ContainerLogo>
-        </S.Header>
+      {LoginErro && (
+        <ErrorAlert>
+        Erro ao efetuar o login, tente novamente.
+        </ErrorAlert>
+      )}
 
+<<<<<<< HEAD
         <S.Container>
           <S.Content>
             <S.Form onSubmit={handleSubmit(onSubmit)}>
@@ -116,63 +120,79 @@ function Login() {
                 type="text"
                 placeholder="Email ou CPF"
                 name="user"
-              />
-              {errors.user && <S.InputError>{errors.user.message}</S.InputError>}
+=======
 
-              <S.InputTitle>Senha</S.InputTitle>
+      <ScrollRevealComponent />
+
+      <ContainerLogin>
+        <Logo className="revealFade">
+          <LogoImage src="/borabico_logo.png" alt="Logo" />
+        </Logo>
+
+        <ContentLogin className="revealFade">
+          <FormLogin onSubmit={handleSubmit}>
+            <FormTitle>Acesse sua conta</FormTitle>
+                      
+            <InputContainer>
+              <InputLabel>E-mail, CPF ou CNPJ</InputLabel>
+              <Input 
+                type="text" 
+                placeholder="Digite seu e-mail, CPF ou CNPJ" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+>>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
+              />
+            </InputContainer>
+            
+            <InputContainer>
+              <InputLabel>Senha</InputLabel>
               <Input
-                {...register("password", {
-                  required: "Este campo é obrigatório",
-                  minLength: {
-                    value: 6,
-                    message: "Senha deve ter pelo menos 6 caracteres."
-                  }
-                })}
-                type="password"
-                placeholder="Senha"
-                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Digite sua senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
-              {errors.password && <S.InputError>{errors.password.message}</S.InputError>}
+              <FontAwesomeIcon
+                icon={showPassword ? faEyeSlash : faEye}
+                className="openEye"
+                onClick={togglePasswordVisibility}
+              />
+            </InputContainer>
 
-              <S.LoginButton type="submit" disabled={isLoading}>
-                {isLoading ? "Entrando..." : "Entrar"}
-              </S.LoginButton>
+            <SubmitAdditional>
+              <SubmitCheck>
+                <InputCheck 
+                  type="checkbox" 
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <InputCheckLabel>Lembrar-me</InputCheckLabel>
+              </SubmitCheck>
+              <ForgotPassword href="#">Esqueceu a senha?</ForgotPassword>
+            </SubmitAdditional>
 
-              <S.MoreOptionsContainer>
-                <S.RememberContainer>
-                  <S.RememberCheckbox type="checkbox" />
-                  <S.RememberCheckboxText>Lembrar senha</S.RememberCheckboxText>
-                </S.RememberContainer>
+            <SubmitButton type="submit" disabled={loading}>
+              {loading ? 'Processando...' : 'Entrar'}
+            </SubmitButton>
 
-                <S.ForgotPassword to="/">Esqueceu a senha?</S.ForgotPassword>
-              </S.MoreOptionsContainer>
+            <RegisterLink>
+              Não tem uma conta? <Link to="/register">Cadastre-se</Link>
+            </RegisterLink>
+          </FormLogin>
 
-              <S.AndContainer>
-                <S.Line />
-                <S.AndText>ou</S.AndText>
-                <S.Line />
-              </S.AndContainer>
-
-              <S.RegisterContainer>
-                <S.RegisterTitle>
-                  Não possui uma conta? &nbsp;
-                  <S.Register to="/register">Cadastre-se agora</S.Register>
-                </S.RegisterTitle>
-              </S.RegisterContainer>
-            </S.Form>
-          </S.Content>
-        </S.Container>
-
-        <S.Footer>
-          <S.FooterText>
-            &#169; 2025 BORABICO. Todos os direitos reservados.
-          </S.FooterText>
-          <S.FooterLinks>
-            <Link to="/">Política de Privacidade</Link>
-            <Link to="/">Termos de Serviço</Link>
-          </S.FooterLinks>
-        </S.Footer>
-      </motion.div>
+          <ContainerInformations className="reveal-fade">
+            <Flex>
+              <img src="/borabico_logo.png" width="50px" height="50px" alt="Logo" />
+              <InformationLabel>© Copyright 2025</InformationLabel>
+            </Flex>
+            <Informations> <Link to="/register">Política de Privacidade</Link> </Informations>
+            <Informations> <Link to="/register">Termos e Condições</Link> </Informations>
+            <Informations> <Link to="/register">Política de Cookies</Link> </Informations>
+          </ContainerInformations>
+        </ContentLogin>
+      </ContainerLogin>
     </>
   );
 }

@@ -1,33 +1,23 @@
-require('dotenv').config();
+require('dotenv').config(); // Carrega as variáveis do .env
 require('reflect-metadata'); // Necessário para TypeORM
 const { AppDataSource } = require('./src/config/db'); // Conexão TypeORM
-const cors = require("cors"); // Importação do cors
+
 const express = require("express");
-
 const app = express();
-
-// Não precisa mais destas duplicatas aqui:
-// require('dotenv').config();
-// require('reflect-metadata');
-// const bodyParser = require('body-parser'); // bodyParser não está sendo usado, pode remover
-// const { AppDataSource } = require('./src/config/db');
+const cors = require("cors");
 
 app.use(cors());
-app.use(express.json()); // Já lida com JSON payloads
-app.use(express.urlencoded({ extended: true })); // Para dados de formulário URL-encoded
+app.use(express.json());
 
-// As linhas comentadas do bodyParser estão corretas (não são necessárias)
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
+// Importando as rotas
 const testRoutes = require("./src/routes/testRoute");
 const authRoute = require("./src/routes/authRoute");
-const postRoute = require("./src/routes/postRoute");
 
+// Usando as rotas
 app.use("/", testRoutes);
 app.use("/api/auth", authRoute);
-app.use("/api/post", postRoute);
 
+// Inicializa a conexão com o banco de dados e só depois sobe o servidor
 AppDataSource.initialize()
   .then(() => {
     console.log("📦 Banco de dados conectado com sucesso!");
