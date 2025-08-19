@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
-import * as C from '../../styles/colors'
-import * as S from '../../styles/styledComponents'
-import '../../assets/fonts/fonts.css'
-import Button from '../../components/Buttons/button'
-=======
 import styled from 'styled-components';
->>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
 
 // This object contains fonts imported for login.css --
 const fonts = {
@@ -27,11 +18,6 @@ const colors = {
   gray: '#666666',
 };
 
-<<<<<<< HEAD
-&:hover {
- background: ${props => props.disabled ? C.colors.gray : C.colors.darkRed} !important;
-}
-=======
 // Breakpoints for responsive design --
 const breakpoints = {
   xs: '320px',
@@ -46,7 +32,6 @@ export const Flex = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;  
->>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
 `;
 
 export const ContainerLogin = styled.div`
@@ -406,9 +391,6 @@ export const SuccessAlert = styled.div`
       transform: translateY(0);
     }
   }
-<<<<<<< HEAD
-`;
-=======
 `;
 
 export const ErrorAlert = styled.div` 
@@ -464,4 +446,3 @@ const styledComponentsLogin = {
 };
 
 export default styledComponentsLogin;
->>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505

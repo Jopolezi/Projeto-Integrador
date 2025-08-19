@@ -100,27 +100,6 @@ function Login() {
         </ErrorAlert>
       )}
 
-<<<<<<< HEAD
-        <S.Container>
-          <S.Content>
-            <S.Form onSubmit={handleSubmit(onSubmit)}>
-              <S.Title>Entrar</S.Title>
-              <S.InputTitle>Email ou CPF</S.InputTitle>
-              <Input
-                {...register("user", {
-                  required: "Este campo é obrigatório.",
-                  pattern: {
-                    message: "Email ou CPF inválido."
-                  },
-                  maxLength: {
-                    value: 100,
-                    message: "Email não pode ter mais de 100 caracteres."
-                  }
-                })}
-                type="text"
-                placeholder="Email ou CPF"
-                name="user"
-=======
 
       <ScrollRevealComponent />
 
@@ -141,7 +120,6 @@ function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
->>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
               />
             </InputContainer>
             
