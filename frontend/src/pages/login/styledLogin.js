@@ -396,6 +396,7 @@ export const SuccessAlert = styled.div`
 export const ErrorAlert = styled.div` 
   position: absolute;
   top: 0;
+  
   right: 0;
   margin: 12px;
   padding: 12px;
