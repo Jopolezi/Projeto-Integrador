@@ -17,6 +17,9 @@ function useRegister() {
             setLoading(true);
             
             const response = await axios.post('http://localhost:3000/api/auth/register', data);
+            
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('userId', response.data.user.id);
 
             toast.success('Cadastro realizado com sucesso!', {
                 position: "top-right",
@@ -24,7 +27,7 @@ function useRegister() {
             });
 
             setTimeout(() => {
-                navigate('/entrar');
+                navigate('/perfil');
                 
             }, 2500);
 
