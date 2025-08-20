@@ -1,39 +1,49 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Toaster from '../../components/Toasters/Toaster';
-import * as S from './styledRegister';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Buttons/button';
+<<<<<<< HEAD
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useForm, FormProvider, Controller } from 'react-hook-form'
+import * as S from './styledRegister'
 import { motion } from 'framer-motion';
-import { PatternFormat } from 'react-number-format';
-import { Controller } from 'react-hook-form';
+import Input from '../../components/Input/Input';
+=======
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm, FormProvider, Controller } from 'react-hook-form';
+import styledComponentsRegister from './styledRegister';
+import './register.css';
+import '../../styles/cssGlobal.css';
+import ScrollRevealComponent from '../../styles/scrollReveal';
+import { Step1, Step2, Step3 } from './steps';
 
-import useRegister from '../../utils/useRegister';
+const {
+  Flex,
+  ContainerRegister, ContentRegister,
+  Logo, LogoImage,
+  FormRegister,
+  LoginLink,
+  ContainerInformations, InformationLabel, Informations,
+  SuccessAlert, ErrorAlert,
+} = styledComponentsRegister;
+>>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
 
 function Register() {
   useEffect(() => {
-    document.title = "Cadastrar";
+    document.title = "Cadastro | BoraBico";
   }, []);
 
-  const {
-    register,
-    handleSubmit,
-    errors,
-    control,
-    onSubmit,
-    loading
-  } = useRegister();
+  // const [isLoading, setIsLoading] = useState(false)
+
+<<<<<<< HEAD
 
   return (
     <>
-      <Toaster />
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
         exit={{ duration: 1 }}
       >
+
         <S.Header>
           <S.ContainerLogo to="/">
             <S.Logo src="/BORABICO.png" alt="Logo" />
@@ -43,169 +53,172 @@ function Register() {
 
         <S.Container>
           <S.Content>
-            <S.Form onSubmit={handleSubmit(onSubmit)}>
+            <S.Form>
               <S.Title>Cadastrar</S.Title>
 
-              <S.InputContainer>
-                <S.InputContent>
-                  <S.InputTitle>Nome</S.InputTitle>
-                  <Input
-                    {...register("firstName", {
-                      required: "Este campo é obrigatório.",
-                      minLength: {
-                        value: 2,
-                        message: "Nome deve ter pelo menos 2 caracteres."
-                      },
-                      maxLength: {
-                        value: 50,
-                        message: "Nome não pode ter mais de 50 caracteres."
-                      }
-                    })}
-                    type="text"
-                    placeholder="Nome"
-                    name="firstName"
-                  />
-                  {errors.firstName && <S.InputError>{errors.firstName.message}</S.InputError>}
-                </S.InputContent>
+              <S.FieldsGroup>
+                <S.InputContainer>
+                  <S.InputTitle>Nome <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
 
-                <S.InputContent>
-                  <S.InputTitle>Sobrenome</S.InputTitle>
-                  <Input
-                    {...register("lastName", {
-                      required: "Este campo é obrigatório.",
-                      minLength: {
-                        value: 2,
-                        message: "Sobrenome deve ter pelo menos 2 caracteres."
-                      },
-                      maxLength: {
-                        value: 50,
-                        message: "Sobrenome não pode ter mais de 50 caracteres."
-                      }
-                    })}
-                    type="text"
-                    placeholder="Sobrenome"
-                    name="lastName"
-                  />
-                  {errors.lastName && <S.InputError>{errors.lastName.message}</S.InputError>}
-                </S.InputContent>
+                <S.InputContainer>
+                  <S.InputTitle>Sobrenome <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
 
-                <S.InputContent>
-                  <S.InputTitle>Email</S.InputTitle>
-                  <Input
-                    {...register("email", {
-                      required: "Este campo é obrigatório.",
-                      pattern: {
-                        value: /^[A-Za-z0-9._-]+@[A-Za-z]+(\.[A-Za-z]+)+$/,
-                        message: "Email inválido."
-                      },
-                      maxLength: {
-                        value: 100,
-                        message: "Email não pode ter mais de 100 caracteres."
-                      }
-                    })}
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                  />
-                  {errors.email && <S.InputError>{errors.email.message}</S.InputError>}
-                </S.InputContent>
+                <S.InputContainer>
+                  <S.InputTitle>Endereço de email (válido) <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
 
-                <S.InputContent>
-                  <S.InputTitle>Senha</S.InputTitle>
-                  <Input
-                    {...register("password", {
-                      required: "Este campo é obrigatório",
-                      minLength: {
-                        value: 6,
-                        message: "Senha deve ter pelo menos 6 caracteres."
-                      }
-                    })}
-                    type="password"
-                    placeholder="Senha"
-                    name="password"
-                  />
-                  {errors.password && <S.InputError>{errors.password.message}</S.InputError>}
-                </S.InputContent>
+                <S.InputContainer>
+                  <S.InputTitle>CPF <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
 
-                <S.InputContent>
-                  <S.InputTitle>CPF</S.InputTitle>
-                  <Controller
-                    name="cpf"
-                    control={control}
-                    rules={{
-                      required: "Este campo é obrigatório.",
-                      pattern: {
-                        value: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
-                        message: "CPF inválido."
-                      }
-                    }}
-                    render={({ field }) => (
-                      <PatternFormat
-                        {...field}
-                        format="###.###.###-##"
-                        placeholder="000.000.000-00"
-                        customInput={Input}
-                      />
-                    )}
-                  />
-                  {errors.cpf && <S.InputError>{errors.cpf.message}</S.InputError>}
-                </S.InputContent>
+                <S.InputContainer>
+                  <S.InputTitle>Senha <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
 
-                <S.InputContent>
-                  <S.InputTitle>Telefone</S.InputTitle>
-                  <Controller
-                    name="phone"
-                    control={control}
-                    rules={{
-                      required: "Este campo é obrigatório.",
-                      pattern: {
-                        value: /^\(\d{2}\) \d{5}-\d{4}$/,
-                        message: "Número de telefone inválido."
-                      }
-                    }}
-                    render={({ field }) => (
-                      <PatternFormat
-                        {...field}
-                        format="(##) #####-####"
-                        placeholder="(00) 00000-0000"
-                        customInput={Input}
-                      />
-                    )}
-                  />
-                  {errors.phone && <S.InputError>{errors.phone.message}</S.InputError>}
-                </S.InputContent>
-              </S.InputContainer>
+                <S.InputContainer>
+                  <S.InputTitle>Confirmar Senha <span>*</span></S.InputTitle>
+                  <Input></Input>
+                </S.InputContainer>
+              </S.FieldsGroup>
 
-              <Button type="submit" onSubmit={handleSubmit(onSubmit)} loading={loading}>
-                {loading ? "Cadastrando..." : "Cadastrar"}
-              </Button>
+              <S.RegisterButton type="submit">
+                Cadastrar
+              </S.RegisterButton>
+=======
+  const [step, setStep] = React.useState(1);
+  const [CadastroSucesso, setCadastroSucesso] = React.useState(false);
+  const [CadastroErro, setCadastroErro] = React.useState(false);
+  const [userName, setUserName] = React.useState('');
 
-              <S.AndContainer>
-                <S.Line />
-                <S.AndText>ou</S.AndText>
-                <S.Line />
-              </S.AndContainer>
+  const methods = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+      senha: '',
+      nome: '',
+      sobrenome: '',
+      cpf: '',
+      telefone: '',
+    }
+  });
 
-              <S.LoginContainer>
-                <S.LoginTitle>
-                  Já possui uma conta? &nbsp;
-                  <S.Login to="/entrar">Entre agora</S.Login>
-                </S.LoginTitle>
-              </S.LoginContainer>
+  const { control, handleSubmit, formState: { errors, isValid } } = methods;
+
+  const verifyStepValid = () => {
+    switch (step) {
+      case 1:
+        return !errors.email && !errors.senha && methods.getValues('email') && methods.getValues('senha');
+      case 2:
+        return !errors.nome && !errors.sobrenome && methods.getValues('nome') && methods.getValues('sobrenome');
+      case 3:
+        return !errors.cpf && !errors.telefone && methods.getValues('cpf') && methods.getValues('telefone');
+      default:
+        return false;
+    }
+  };
+
+  const nextStep = () => {
+    if (verifyStepValid()) {
+      setStep(step + 1);
+    }
+  };
+
+  const previousStep = () => setStep(step - 1);
+
+  const onSubmit = async (data) => {
+
+    try {
+
+      const userData = {
+        name: data.nome,
+        sobrenome: data.sobrenome,
+        email: data.email,
+        cpf: data.cpf.replace(/\D/g, ''),
+        telefone: data.telefone,
+        password: data.senha
+      }
+
+      const response = await fetch('http://localhost:3000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.message || 'Erro ao cadastrar usuário');
+      }
+
+      setCadastroSucesso(true);
+      setUserName(data.nome);
+
+      setTimeout(() => {
+        navigate('/login')
+      }, 3000);
+
+    } catch (error) {
+      setUserName(data.nome);
+      setCadastroErro(true);
+
+      setTimeout(() => {
+        setCadastroErro(false);
+      }, 3000);
+    }
+  };
+
+  return (
+    <>
+      {CadastroSucesso && (
+        <SuccessAlert>
+          Parabéns, {userName}, seu cadastro foi realizado com sucesso.
+        </SuccessAlert>
+      )}
+
+      {CadastroErro && (
+        <ErrorAlert>
+          Erro ao cadastrar o seu usuário, tente novamente.
+        </ErrorAlert>
+      )}
+>>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
+
+
+
+
             </S.Form>
           </S.Content>
         </S.Container>
 
-        <S.Footer>
-          <S.FooterText>
-            &#169; 2025 BORABICO. Todos os direitos reservados.
-          </S.FooterText>
-          <S.FooterLinks>
-            <Link to="/">Política de Privacidade</Link>
-            <Link to="/">Termos de Serviço</Link>
-          </S.FooterLinks>
-        </S.Footer>
+
+<<<<<<< HEAD
+
       </motion.div>
+=======
+            <ContainerInformations className="reveal-fade">
+              <Flex>
+                <img src="/borabico_logo.png" width="50px" height="50px" />
+                <InformationLabel>© Copyright 2025</InformationLabel>
+              </Flex>
+              <Informations> <Link to="/register">Política de Privacidade</Link> </Informations>
+              <Informations> <Link to="/register">Termos e Condições</Link> </Informations>
+              <Informations> <Link to="/register">Política de Cookies</Link> </Informations>
+            </ContainerInformations>
+          </ContentRegister>
+
+          <ScrollRevealComponent />
+        </ContainerRegister>
+      </FormProvider>
+>>>>>>> 54550e0369353a1a8ec15a7724f1035535beb505
+
     </>
   );
 }

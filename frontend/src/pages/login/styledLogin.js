@@ -1,326 +1,448 @@
-import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
-import * as D from '../../styles/styledComponents'
-import * as C from '../../styles/colors'
-import * as S from '../../styles/styledComponents'
-import '../../assets/fonts/fonts.css'
-import Button from '../../components/Buttons/button'
+import styled from 'styled-components';
 
+// This object contains fonts imported for login.css --
+const fonts = {
+  family: {
+    poppins: "'Poppins', sans-serif",
+    boldonse: "'Boldonse', sans-serif",
+  }
+};
 
-export const OpenEye = css`
-    width: 30px;
-    height: 30px;
-    color: ${C.colors.gray};
-    position: absolute;
-    right: 0;
-    padding: 12px;
-    cursor: pointer;
-`
+// Colors used in the application --
+const colors = {
+  red: '#FF3030',
+  darkred: '#CC0000',
+  white: '#FFFFFF',
+  offwhite: '#F7F7F7',
+  dark: '#333333',
+  gray: '#666666',
+};
 
-export const LoginButton = styled(Button)`
-background: ${props => props.disabled ? C.colors.gray : C.colors.red} !important;
+// Breakpoints for responsive design --
+const breakpoints = {
+  xs: '320px',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  xxl: '1400px'
+};
 
-&:hover {
- background: ${props => props.disabled ? C.colors.gray : C.colors.darkRed} !important;
-}
-
+export const Flex = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;  
 `;
 
-export const Container = styled.div`
+export const ContainerLogin = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100dvh;
-  max-height: 100dvh;
   width: 100%;
-  background: ${C.colors.offwhite};
-  overflow: hidden; 
 `;
 
-export const Header = styled.header`
-  width: 100%;
-  max-width: 100%;
-  padding: 0 4%;
-  background: ${C.colors.offwhite};
-  flex-shrink: 0; 
-  
-  @media ${S.device.mobile} {
-    padding: 4px 4%;
-  }
-`;
-
-export const ContainerLogo = styled(Link)`
+export const Logo = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
-  color: ${C.colors.dark};
-  text-decoration: none;
-`;
-
-export const Logo = styled.img`
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
+  justify-content: center;
+  height: 20dvh;
+  width: 100%;
+  overflow: hidden;
   
-  @media ${S.device.mobile} {
-    width: 56px;
-    height: 56px;
+  @media (max-width: ${breakpoints.sm}) {
+    height: 15dvh;
   }
 `;
 
-export const LogoText = styled.h2`
-  font-family: 'Poppins', sans-serif;
+export const LogoImage = styled.img`
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  transform: scale(2);
+  
+  @media (max-width: ${breakpoints.xl}) {
+    transform: scale(1.75);
+  }
+  
+  @media (max-width: ${breakpoints.lg}) {
+    transform: scale(1.5);
+    max-width: 400px;
+  }
+  
+  @media (max-width: ${breakpoints.md}) {
+    transform: scale(1.25);
+    max-width: 350px;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    transform: scale(1);
+    max-width: 280px;
+  }
+  
+  @media (max-width: ${breakpoints.xs}) {
+    transform: scale(0.9);
+    max-width: 240px;
+  }
+`;
+
+export const ContentLogin = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80dvh;
+  color: ${colors.white};
+  z-index: 1;
+  padding: 0 1rem;
+  
+  @media (max-width: ${breakpoints.sm}) {
+    height: 85dvh;
+    padding: 0 0.5rem;
+  }
+`;
+
+export const FormLogin = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  min-height: 500px;
+  padding: 2rem;
+  border: none;
+  border-radius: 12px;
+
+  -webkit-box-shadow: 0px 3px 10px -3px rgba(0,0,0,0.65);
+  -moz-box-shadow: 0px 3px 10px -3px rgba(0,0,0,0.65);
+  box-shadow: 0px 3px 10px -3px rgba(0,0,0,0.65);
+  
+  @media (max-width: ${breakpoints.lg}) {
+    max-width: 450px;
+    padding: 1.75rem;
+  }
+  
+  @media (max-width: ${breakpoints.md}) {
+    max-width: 400px;
+    padding: 1.5rem;
+    min-height: 450px;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    max-width: 100%;
+    padding: 2rem;
+    min-height: 400px;
+  }
+  
+  @media (max-width: ${breakpoints.xs}) {
+    padding: 1rem;
+    min-height: 350px;
+  }
+`;
+
+export const FormTitle = styled.label`
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 2.5rem;
   font-weight: 800;
-  font-size: 1.1rem;
-  color: ${C.colors.dark};
-  margin: 0;
-  pointer-events: none;
-  user-select: none;
+  text-align: center;
+  text-transform: uppercase;
   
-  @media ${S.device.mobile} {
+  @media (max-width: ${breakpoints.lg}) {
+    font-size: 2.25rem;
+  }
+  
+  @media (max-width: ${breakpoints.md}) {
     font-size: 2rem;
   }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    font-size: 1.75rem;
+  }
+  
+  @media (max-width: ${breakpoints.xs}) {
+    font-size: 1.5rem;
+  }
 `;
 
-export const Content = styled.div`
-  ${S.flexCenter};
-  flex-direction: column;
+export const InputContainer = styled.div`
+  position: relative;
   width: 100%;
-  max-width: 100%;
-  padding: 0 4%;
-  flex: 1; 
-  min-height: 0;   
-  justify-content: center;
-`;
-
-export const Title = styled.h1`    
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 1.8rem;
-  color: ${C.colors.darkGray};
-  margin: 0 0 0.5rem 0;
+  margin-bottom: 1.25rem;
   
-  @media ${S.device.tablet} {
-    font-size: 1.6rem;
-  }
-  
-  @media ${S.device.mobile} {
-    font-size: 2rem;
+  @media (max-width: ${breakpoints.sm}) {
+    margin-bottom: 1rem;
   }
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
+export const InputLabel = styled.label`
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.875rem;
+  
+  @media (max-width: ${breakpoints.sm}) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const Input = styled.input`
   width: 100%;
-  max-width: 400px;
-  background: ${C.colors.white};
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  gap: 0.5rem; 
-
-  @media ${S.device.tablet} {
-    padding: 0.875rem;
-    max-width: 90%;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-family: ${fonts.family.poppins};
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  
+  &:focus {
+    outline: none;
+    border-color: ${colors.red};
   }
   
-  @media ${S.device.mobile} {
-    padding: 0.75rem;
-    gap: 0.375rem;
+  @media (max-width: ${breakpoints.md}) {
+    padding: 0.7rem;
   }
-`;
-
-export const InputTitle = styled.label`
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 0.85rem;
-  color: ${C.colors.dark};
-  margin-bottom: 0.125rem;
   
-  @media ${S.device.mobile} {
-    font-size: 1rem;
+  @media (max-width: ${breakpoints.sm}) {
+    padding: 0.65rem;
+    font-size: 0.9rem;
   }
 `;
 
-export const InputError = styled.p`
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 0.75rem;
-  color: ${C.colors.red};
-  margin: 0.1rem 0 0 0;
-  
-  @media ${S.device.mobile} {
-    font-size: 0.7rem;
-  }
+export const SubmitAdditional = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+    
+    @media (max-width: ${breakpoints.sm}) {
+      
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
 `;
 
-export const MoreOptionsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 0.25rem;
-
-  @media ${S.device.mobile} {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-`;
-
-export const RememberContainer = styled.div`
+export const SubmitCheck = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
-`;
-
-export const RememberCheckbox = styled.input`
-  ${S.flexCenter};
-  width: 18px;
-  height: 18px;
-  accent-color: ${C.colors.red};
-
-  @media ${S.device.mobile} {
-    width: 20px;
-    height: 20px;
+  
+  @media (max-width: ${breakpoints.sm}) {
+    width: 100%;
+    justify-content: flex-start;
   }
 `;
 
-export const RememberCheckboxText = styled.p`
-  color: ${C.colors.gray};
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
+export const InputCheck = styled.input`
+  width: 15px;
+  height: 15px;
+  accent-color: ${colors.darkred};
+  
+  @media (max-width: ${breakpoints.xs}) {
+    width: 14px;
+    height: 14px;
+  }
+`;
+
+export const InputCheckLabel = styled.p`
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.875rem;
   text-decoration: none;
-  margin: 0;
   
-  @media ${S.device.mobile} {
+  @media (max-width: ${breakpoints.sm}) {
     font-size: 0.8rem;
   }
 `;
 
-export const ForgotPassword = styled(Link)`
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 0.85rem;
-  color: ${C.colors.red};
-  text-decoration: underline;
+export const SubmitButton = styled.button`
+  width: 100%;
+  background: ${colors.red};
+  color: white;
+  font-family: ${fonts.family.poppins};
+  font-weight: 600;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
   
-  @media ${S.device.mobile} {
+  &:hover {
+    background: ${colors.darkred};
+  }
+  
+  @media (max-width: ${breakpoints.md}) {
+    padding: 0.7rem;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    padding: 0.65rem;
+    margin-top: 0.75rem;
+  }
+`;
+
+export const ForgotPassword = styled.a`
+  color: ${colors.red};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
     font-size: 0.8rem;
+    width: 100%;
+    text-align: right;
   }
 `;
 
-export const AndContainer = styled.div`
-  display: flex; 
-  align-items: center; 
-  text-align: center; 
-  margin: 0.5rem 0; 
-  color: ${C.colors.gray}; 
-  font-size: 0.75rem; 
-  gap: 8px;
-  
-  @media ${S.device.mobile} {
-    margin: 0.375rem 0;
-    font-size: 0.7rem;
-  }
-`;
-
-export const Line = styled.div`
-  flex-grow: 1;
-  height: 1.5px;
-  background: ${C.colors.lightgray};
-`;
-
-export const AndText = styled.span`
-  white-space: nowrap; 
-`;
-
-export const RegisterContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0.25rem;
-`;
-
-export const RegisterTitle = styled.p`
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 0.8rem;
-  color: ${C.colors.dark};
-  margin: 0;
+export const RegisterLink = styled.div`
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
   text-align: center;
   
-  @media ${S.device.mobile} {
-    font-size: 0.75rem;
-  }
-`;
-
-export const Register = styled(Link)`
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  color: ${C.colors.red};
-  text-decoration: underline;
-`;
-
-export const Footer = styled.footer`
-  width: 100%;
-  min-height: 40px;
-  max-width: 100%;
-  padding: 8px 4%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: ${C.colors.offwhite};
-  color: ${C.colors.gray};
-  flex-shrink: 0; 
-  
-  @media ${S.device.tablet} {
-    flex-direction: column;
-    gap: 4px;
-    text-align: center;
-    padding: 6px 4%;
-    min-height: 35px;
-  }
-  
-  @media ${S.device.mobile} {
-    padding: 4px 4%;
-    min-height: 30px;
-  }
-`;
-
-export const FooterText = styled.p`
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 0.65rem; 
-  pointer-events: none;
-  user-select: none;
-  margin: 0;
-  
-  @media ${S.device.mobile} {
-    font-size: 0.6rem;
-  }
-`;
-
-export const FooterLinks = styled.div`
-  font-size: 0.65rem;
-  display: flex;
-  gap: 12px;
-
-  @media ${S.device.mobile} {
-    gap: 8px;
-    font-size: 0.6rem;
-  }
-
   a {
-    color: ${C.colors.gray};
+    color: ${colors.red};
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    transition: color 0.55s ease;
-
+    font-weight: 600;
+    
     &:hover {
-      color: ${C.colors.dark};
+      text-decoration: underline;
+    }
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    font-size: 0.8rem;
+    margin-top: 1.25rem;
+  }
+`;
+
+export const ContainerInformations = styled.div`
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: ${colors.dark};
+  font-family: ${fonts.family.poppins};
+  font-size: 0.75rem;
+  font-weight: 500;
+  
+  @media (max-width: ${breakpoints.md}) {
+    gap: 10px;
+  }
+  
+  @media (max-width: ${breakpoints.sm}) {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.7rem;
+  }
+`;
+
+export const InformationLabel = styled.p`
+  cursor: default;
+  font-weight: 600;
+`;
+
+export const Informations = styled.div`
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const SuccessAlert = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 12px;
+  padding: 12px;
+  background-color: ${colors.green};
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: ${fonts.family.poppins};
+  z-index: 100;
+  animation: fadeIn 0.3s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 `;
+
+export const ErrorAlert = styled.div` 
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 12px;
+  padding: 12px;
+  background-color: ${colors.red};
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: ${fonts.family.poppins};
+  z-index: 100;
+  animation: fadeIn 0.3s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+const styledComponentsLogin = {
+  ContainerLogin,
+  ContentLogin,
+  Logo,
+  LogoImage,
+  FormLogin,
+  FormTitle,
+  InputContainer,
+  InputLabel,
+  Input,
+  SubmitAdditional,
+  InputCheck,
+  SubmitCheck,
+  InputCheckLabel,
+  SubmitButton,
+  ForgotPassword,
+  RegisterLink,
+  ContainerInformations,
+  Informations,
+  InformationLabel,
+  Flex,
+  SuccessAlert, ErrorAlert
+};
+
+export default styledComponentsLogin;

@@ -1,22 +1,21 @@
 const { AppDataSource } = require("../config/db")
 const bcrypt = require("bcrypt");
-const { generateToken } = require("../middlewares/authJWT");
+const { generateToken } = require("../middlewares/authMiddleware");
 const User = require("../entity/User");
 
 class userController {
-  async createUser(req, res) {
+  async criarUser(req, res) {
     try {
-      const { name, surname, email, cpf, number, password } = req.body;
+      const { name, sobrenome, email, cpf, telefone, password } = req.body;
 
-      if (!(email||cpf) || !password) {
+      if (!name || !sobrenome || !email || !cpf || !telefone || !password) {
         return res.status(400).json({
           success: false,
           message: "Campos obrigatórios não fornecidos",
         });
       }
 
-      const userRepository = AppDataSource.getRepository(User);
-
+      const userRepository = AppDataSource.getRepository("User");
 
       const existingUser = await userRepository.findOneBy({ email });
       if (existingUser) {
@@ -26,18 +25,18 @@ class userController {
         });
       }
 
-      const completeName = `${name} ${surname}`;
+      const nomeCompleto = `${name} ${sobrenome}`;
       const senhaCriptografada = await bcrypt.hash(password, 10);
 
-      const newUser = userRepository.create({
-        name: completeName,
+      const novoUsuario = userRepository.create({
+        name: nomeCompleto,
         email,
         cpf,
-        number,
+        telefone,
         password: senhaCriptografada,
       });
 
-      await userRepository.save(newUser);
+      await userRepository.save(novoUsuario);
 
       return res.status(201).json({
         success: true,
@@ -52,12 +51,11 @@ class userController {
     }
   }
 
-  async loginUser(req, res) {
+  async logarUser(req, res) {
     try {
-      const { identificator, password } = req.body;
+      const { email, cpf, cnpj, password } = req.body;
 
-
-      if (!identificator || !password) {
+      if (!(email || cpf || cnpj) || !password) {
         return res.status(400).json({
           success: false,
           message: "Campos obrigatórios não fornecidos",
@@ -65,14 +63,12 @@ class userController {
       }
 
       const userRepository = AppDataSource.getRepository("User");
-      let user;
 
-      // Se contém "@" é um e-mail, senão tenta como CPF
-      if (identificator.includes("@")) {
-        user = await userRepository.findOneBy({ email: identificator });
-      } else {
-        user = await userRepository.findOneBy({ cpf: identificator });
-      }
+      let user;
+      if (email) user = await userRepository.findOneBy({ email });
+      else if (cpf) user = await userRepository.findOneBy({ cpf });
+      else if (cnpj) user = await userRepository.findOneBy({ cnpj });
+
       if (!user) {
         return res.status(400).json({
           success: false,

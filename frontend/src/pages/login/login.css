@@ -1,0 +1,9 @@
+.openEye{
+    width: 30px;
+    height: 30px;
+    color: #666666;
+    position: absolute;
+    right: 0;
+    padding: 12px;
+    cursor: pointer;
+}
